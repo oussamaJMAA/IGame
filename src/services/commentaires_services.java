@@ -19,8 +19,10 @@ public class commentaires_services {
     public commentaires_services () {
     }
 
-    public void ajoutercommentaire(Commentaires c) {
-        String sql = "INSERT INTO `commentaires`(`id`, `nom`, `prenom`) VALUES ('" + c.getId_com() + "','" + c.getDescription_com() + "')";
+   // public void ajoutercommentaire(Publications c ) {
+        public void ajoutercommentaire() {
+      //  String sql = "INSERT INTO `commentaires`(`id_com`, `description_com`) VALUES ('" + c.getId_com() + "','" + c.getDescription_com() + "')";
+        String sql = "INSERT INTO `commentaires`(`id_com`, `description_com`) VALUES ('2','kkkkk')";
 
         try {
             Statement ste = this.cnx.createStatement();
@@ -67,4 +69,38 @@ public class commentaires_services {
 
         return Commentaires;
     }
+
+    public void supprimercommentaire(){
+
+        String sql = "DELETE FROM commentaires WHERE id_com ='1';";
+
+        try {
+            PreparedStatement ste = this.cnx.prepareStatement(sql);
+
+          //  ste.setInt(1, c.getId_com());
+            ste.executeUpdate();
+            System.out.println("Commentaire supprime");
+        } catch (SQLException var4) {
+            System.out.println(var4.getMessage());
+        }
+
+    }
+
+
+    public void modifiercommentaire(){
+
+        String sql = "UPDATE commentaires SET description_com = 'new comment' WHERE id_com = 2;";
+
+        try {
+            PreparedStatement ste = this.cnx.prepareStatement(sql);
+
+            //  ste.setInt(1, c.getId_com());
+            ste.executeUpdate();
+            System.out.println("Commentaire modifie");
+        } catch (SQLException var4) {
+            System.out.println(var4.getMessage());
+        }
+
+    }
+
 }

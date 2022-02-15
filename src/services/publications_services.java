@@ -15,7 +15,7 @@ public class publications_services {
 
 
     public void ajouterpublication(Publications p) {
-        String sql = "INSERT INTO `Personne`(`id_pub `, `titre_pub`, `desciption_pub`) VALUES ('" + p.getId_pub() + "','" + p.getTitre_pub() + "','" + p.getDesciption_pub() + "')";
+        String sql = "INSERT INTO `publications`(`id_pub `, `titre_pub`, `desciption_pub`) VALUES ('" + p.getId_pub() + "','" + p.getTitre_pub() + "','" + p.getDesciption_pub() + "')";
         try {
             Statement ste = this.cnx.createStatement();
             ste.executeUpdate(sql);

@@ -1,4 +1,5 @@
 package com.company;
+
 import entities.Commentaires;
 import entities.Publications;
 
@@ -22,6 +23,13 @@ public class Main {
         Scanner s = new Scanner(System.in);
         int ch;
 
+        Maconnexion mc = Maconnexion.getInstance();
+        commentaires_services cs = new commentaires_services();
+        publications_services pb = new publications_services();
+
+        System.out.println(cs.afficherCommentaire());
+
+
         do {
             System.out.println("1.INSERT");
             System.out.println("2.UPDATE");
@@ -31,25 +39,46 @@ public class Main {
             System.out.println("0.EXIT");
             System.out.println("Make your choice : ");
             ch = s.nextInt();
-        }while(ch != 0);
 
         switch (ch){
 
-            case 1:;
+            case 1:
+
+                cs.ajoutercommentaire();
+
+            break;
+
+            case 2:
+
+                cs.modifiercommentaire();
+                break;
+
+
+            case 3:
+
+                cs.supprimercommentaire();
+                break;
+
+
+            case 4:
+
+                System.out.println(cs.afficherCommentaire());
+                break;
+
+            case 5:
+                break;
 
 
         }
 
 
 
-        Maconnexion mc = Maconnexion.getInstance();
-        commentaires_services ps = new commentaires_services();
-        System.out.println(ps.afficherCommentaire());
 
-
-    }
+    }while(ch != 0);
 
 
 
-}
+
+    }}
+
 
