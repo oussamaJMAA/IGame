@@ -1,7 +1,7 @@
 package com.company;
 import entities.Commentaires;
 import entities.Publications;
-import lib.*;
+
 import services.commentaires_services;
 import services.publications_services;
 import tools.Maconnexion;
