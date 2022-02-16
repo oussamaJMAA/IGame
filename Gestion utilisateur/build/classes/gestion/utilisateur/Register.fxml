@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="868.0" xmlns="http://javafx.com/javafx/8.0.301" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion.utilisateur.RegisterController">
+   <children>
+      <AnchorPane prefHeight="147.0" prefWidth="868.0" style="-fx-background-color: #ffffe0;">
+         <children>
+            <FontAwesomeIconView fill="#b284be" glyphName="LOCK" layoutX="294.0" layoutY="84.0" size="45" />
+            <Label layoutX="347.0" layoutY="49.0" text="User Registration" textFill="#b284be">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label fx:id="messagelabel" contentDisplay="CENTER" layoutX="273.0" layoutY="107.0" prefHeight="18.0" prefWidth="375.0">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+         </children>
+      </AnchorPane>
+      <Label layoutX="258.0" layoutY="153.0" text="Firstname" textFill="#b284be">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="firstnametf" layoutX="278.0" layoutY="175.0" prefHeight="25.0" prefWidth="336.0" promptText="Firstname" style="-fx-border-color: #b284be; -fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px;" />
+      <Label layoutX="260.0" layoutY="201.0" text="Lastname" textFill="#b284be">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="lastnametf" layoutX="278.0" layoutY="228.0" prefHeight="25.0" prefWidth="336.0" promptText="Lastname" style="-fx-background-color: transparent; -fx-border-color: #b284be; -fx-border-width: 0px 0px 2px 0px;" />
+      <TextField fx:id="usernametf" layoutX="280.0" layoutY="281.0" prefHeight="25.0" prefWidth="336.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: #b284be; -fx-border-width: 0px 0px 2px 0px;" />
+      <TextField fx:id="emailtf" layoutX="282.0" layoutY="333.0" prefHeight="25.0" prefWidth="336.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #b284be; -fx-border-width: 0px 0px 2px 0px;" />
+      <Label layoutX="255.0" layoutY="311.0" text="Email" textFill="#b284be">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="253.0" layoutY="366.0" text="Password" textFill="#b284be">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="256.0" layoutY="260.0" text="Username" textFill="#b284be">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="femaler" layoutX="416.0" layoutY="497.0" mnemonicParsing="false" text="Female" />
+      <RadioButton fx:id="maler" layoutX="332.0" layoutY="497.0" mnemonicParsing="false" text="Male" />
+      <Label layoutX="252.0" layoutY="472.0" prefHeight="27.0" prefWidth="69.0" text="Gender" textFill="#b284be">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="addresstf" layoutX="277.0" layoutY="438.0" prefHeight="25.0" prefWidth="336.0" promptText="Address" style="-fx-background-color: transparent; -fx-border-color: #b284be; -fx-border-width: 0px 0px 2px 0px;" />
+      <Label layoutX="251.0" layoutY="414.0" prefHeight="18.0" prefWidth="75.0" text="Address" textFill="#b284be">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnr" layoutX="280.0" layoutY="525.0" mnemonicParsing="false" onAction="#ButtonRegister" prefHeight="26.0" prefWidth="336.0" style="-fx-background-color: #b284be;" text="Register" />
+      <PasswordField fx:id="passwordtf" layoutX="280.0" layoutY="384.0" prefHeight="25.0" prefWidth="336.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #b284be; -fx-border-width: 0px 0px 2px 0px;" />
+      <AnchorPane layoutY="142.0" prefHeight="460.0" prefWidth="250.0" />
+      <AnchorPane layoutX="624.0" layoutY="147.0" prefHeight="453.0" prefWidth="245.0" />
+      <Hyperlink layoutX="384.0" layoutY="557.0" onAction="#LoginLink" text="You have an account ?" textFill="#b284be" />
+   </children>
+</AnchorPane>

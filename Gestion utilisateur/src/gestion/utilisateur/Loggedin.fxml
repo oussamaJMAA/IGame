@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="868.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion.utilisateur.LoggedinController">
+   <children>
+      <Label fx:id="welcomelabel" layoutX="151.0" layoutY="59.0" text="Welcome">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Label>
+      <FontAwesomeIconView fill="#e70606" glyphName="SIGN_OUT" layoutX="789.0" layoutY="64.0" onMouseClicked="#getLogout" size="45" styleClass="btn" />
+      <FontAwesomeIconView fill="#455a64" glyphName="COG" layoutX="678.0" layoutY="64.0" onMouseClicked="#getSettings" size="45" styleClass="btn" text="" />
+      <Label layoutX="54.0" layoutY="59.0" text="Welcome" textFill="#ff0f0f">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
