@@ -6,6 +6,7 @@ import entities.Publications;
 import services.commentaires_services;
 
 import tools.Maconnexion;
+import com.company.Main;
 
 
 import java.sql.*;
@@ -20,9 +21,9 @@ public class commentaires_services {
     }
 
    // public void ajoutercommentaire(Publications c ) {
-        public void ajoutercommentaire() {
+        public void ajoutercommentaire(String description_com) {
       //  String sql = "INSERT INTO `commentaires`(`id_com`, `description_com`) VALUES ('" + c.getId_com() + "','" + c.getDescription_com() + "')";
-        String sql = "INSERT INTO `commentaires`(`id_com`, `description_com`) VALUES ('2','kkkkk')";
+        String sql = "INSERT INTO `commentaires`(`description_com`) VALUES ('" +description_com+"')";
 
         try {
             Statement ste = this.cnx.createStatement();
@@ -34,20 +35,7 @@ public class commentaires_services {
 
     }
 
-    public void ajouterCommentaire2(Commentaires c) {
-        String sql = "insert into esprit3a26(nom,prenom) values('hi','ha')";
 
-        try {
-            PreparedStatement ste = this.cnx.prepareStatement(sql);
-
-            ste.setString(2, c.getDescription_com());
-            ste.executeUpdate();
-            System.out.println("Commentaire Ajoutée");
-        } catch (SQLException var4) {
-            System.out.println(var4.getMessage());
-        }
-
-    }
 
     public List<Commentaires> afficherCommentaire() {
         List<Commentaires> Commentaires = new ArrayList();
@@ -70,9 +58,10 @@ public class commentaires_services {
         return Commentaires;
     }
 
-    public void supprimercommentaire(){
+    public void supprimercommentaire(int id_com){
 
-        String sql = "DELETE FROM commentaires WHERE id_com ='1';";
+
+        String sql = "DELETE FROM commentaires WHERE id_com ='"+id_com+"';";
 
         try {
             PreparedStatement ste = this.cnx.prepareStatement(sql);
@@ -87,9 +76,9 @@ public class commentaires_services {
     }
 
 
-    public void modifiercommentaire(){
+    public void modifiercommentaire(int id_com,String description_com){
 
-        String sql = "UPDATE commentaires SET description_com = 'new comment' WHERE id_com = 2;";
+        String sql = "UPDATE commentaires SET description_com = '"+description_com+"' WHERE id_com = '"+id_com+"';";
 
         try {
             PreparedStatement ste = this.cnx.prepareStatement(sql);
