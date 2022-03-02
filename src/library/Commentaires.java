@@ -1,6 +1,4 @@
-package entities;
-
-
+package library;
 
 
 public class Commentaires {
@@ -8,9 +6,9 @@ public class Commentaires {
     private String description_com;
 
 
-    public Commentaires() {
-        this.id_com = id_com;
-        this. description_com= description_com;
+    public Commentaires(int id_com, String description_com) {
+        this.id_com = this.id_com;
+        this. description_com= this.description_com;
 
 
     }
@@ -36,6 +34,6 @@ public class Commentaires {
 
 
     public String toString() {
-        return "Commentaire{id=" + this.id_com + ",Description=" + this.description_com + '}';
+        return "Commentaire{Description=" + this.description_com + '}';
     }
 }

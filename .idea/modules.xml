@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BLOG.iml" filepath="$PROJECT_DIR$/BLOG.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javafx-mysql-crud.iml" filepath="$PROJECT_DIR$/javafx-mysql-crud.iml" />
     </modules>
   </component>
 </project>

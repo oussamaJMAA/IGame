@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<TabPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+   <tabs>
+      <Tab text="Publications">
+         <content>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="265.0" prefWidth="671.0">
+               <children>
+                  <VBox layoutX="26.0" layoutY="22.0" spacing="15.0">
+                     <children>
+                        <Label text="ID">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label text="Titre">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label text="Contenu">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="87.0" layoutY="22.0" prefHeight="130.0" prefWidth="129.0" spacing="10.0">
+                     <children>
+                        <TextField fx:id="idField" />
+                        <TextField fx:id="titleField" />
+                        <TextField fx:id="authorField" />
+                       
+                                             </children>
+                  </VBox>
+                  <HBox layoutX="26.0" layoutY="202.0" spacing="10.0">
+                     <children>
+                        <Button fx:id="insertButton" mnemonicParsing="false" onAction="#insertButton" prefHeight="30.0" prefWidth="60.0" text="Insert" />
+                        <Button fx:id="updateButton" mnemonicParsing="false" onAction="#updateButton" prefHeight="30.0" prefWidth="60.0" text="Update" />
+                        <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteButton" prefHeight="30.0" prefWidth="60.0" text="Delete" />
+                     </children>
+                  </HBox>
+                  <TableView fx:id="TableView" layoutX="238.0" layoutY="22.0" prefHeight="210.0" prefWidth="400.0">
+                    <columns>
+                      <TableColumn fx:id="idColumn" prefWidth="35.0" text="ID" />
+                      <TableColumn fx:id="titleColumn" prefWidth="120.0" text="Titre" />
+                        <TableColumn fx:id="authorColumn" prefWidth="120.0" text="Contenu" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Commentaires">
+         <content>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="265.0" prefWidth="671.0">
+               <children>
+                  <VBox layoutX="26.0" layoutY="22.0" spacing="15.0">
+                     <children>
+                        <Label text="ID">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label text="Contenu">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="87.0" layoutY="22.0" prefHeight="130.0" prefWidth="129.0" spacing="10.0">
+                     <children>
+                        <TextField fx:id="yearField" text="1" />
+                        <TextField fx:id="pagesField" text="d" />
+                     </children>
+                  </VBox>
+                  <HBox layoutX="26.0" layoutY="202.0" spacing="10.0">
+                     <children>
+                        <Button fx:id="insertButton1" mnemonicParsing="false" onAction="#insertButton" prefHeight="30.0" prefWidth="60.0" text="Insert" />
+                        <Button fx:id="updateButton1" mnemonicParsing="false" onAction="#updateButton" prefHeight="30.0" prefWidth="60.0" text="Update" />
+                        <Button fx:id="deleteButton1" mnemonicParsing="false" onAction="#deleteButton" prefHeight="30.0" prefWidth="60.0" text="Delete" />
+                     </children>
+                  </HBox>
+                  <TableView fx:id="TableView1" layoutX="238.0" layoutY="22.0" prefHeight="210.0" prefWidth="400.0">
+                     <columns>
+                        <TableColumn fx:id="idColumn1" prefWidth="35.0" text="ID" />
+                        <TableColumn fx:id="titleColumn1" prefWidth="120.0" text="Contenu" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+   </tabs>
+</TabPane>
