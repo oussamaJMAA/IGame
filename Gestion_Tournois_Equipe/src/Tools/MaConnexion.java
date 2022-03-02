@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  * @author rouka
  */
 public class MaConnexion {
-    public String url  ="jdbc:mysql://localhost:3306/gestion_tournois";
+    public String url  ="jdbc:mysql://localhost:3306/projet_java";
     public String user  ="root";
     public String password ="";
     private Connection cnx;

@@ -25,8 +25,8 @@ public class Equipes {
     }
 
 
-    public Equipes(String nom_equipe, int membres, int pts_xp, int tournois_gagne) {
-    
+    public Equipes(int id,String nom_equipe, int membres, int pts_xp, int tournois_gagne) {
+    this.id=id;
         this.nom_equipe = nom_equipe;
         this.membres = membres;
         this.pts_xp = pts_xp;

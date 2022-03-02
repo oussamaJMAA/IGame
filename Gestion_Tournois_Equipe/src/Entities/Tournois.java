@@ -32,7 +32,7 @@ String recompense;
         hash = 97 * hash + Objects.hashCode(this.date);
         hash = 97 * hash + this.capacite;
         hash = 97 * hash + Objects.hashCode(this.platforme);
-     
+        
         hash = 97 * hash + Objects.hashCode(this.recompense);
         return hash;
     }
@@ -55,7 +55,7 @@ String recompense;
         if (this.capacite != other.capacite) {
             return false;
         }
-      
+    
         if (!Objects.equals(this.nom_tournois, other.nom_tournois)) {
             return false;
         }
@@ -96,7 +96,6 @@ String recompense;
         this.platforme = platforme;
     }
 
- 
     public void setRecompense(String recompense) {
         this.recompense = recompense;
     }
@@ -125,13 +124,14 @@ String recompense;
     public Tournois() {
     }
 
-    public Tournois(String nom_tournois, java.sql.Date date, int capacite, String platforme, String recompense) {
-      
+    public Tournois(int id, String nom_tournois, java.sql.Date date, int capacite, String platforme, String recompense) {
+        this.id = id;
         this.nom_tournois = nom_tournois;
         this.date = date;
         this.capacite = capacite;
         this.platforme = platforme;
-     this.recompense = recompense;
+
+        this.recompense = recompense;
     }
 
 
