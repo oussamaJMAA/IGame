@@ -7,8 +7,8 @@ public class Commentaires {
 
 
     public Commentaires(int id_com, String description_com) {
-        this.id_com = this.id_com;
-        this. description_com= this.description_com;
+        this.id_com = id_com;
+        this. description_com= description_com;
 
 
     }
@@ -16,24 +16,13 @@ public class Commentaires {
 
 
     public int getId_com() {
-        return this.id_com;
+        return id_com;
     }
 
     public String getDescription_com() {
-        return this.description_com;
+        return description_com;
     }
 
 
-    public void setId_com(int id_com) {
-        this.id_com = id_com;
-    }
 
-    public void setDescription_com(String description_com) {
-        this.description_com = description_com;
-    }
-
-
-    public String toString() {
-        return "Commentaire{Description=" + this.description_com + '}';
-    }
 }

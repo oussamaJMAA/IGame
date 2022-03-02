@@ -10,17 +10,15 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-
 import java.util.ResourceBundle;
 
 
-
+import java.lang.*;
 
 
 public class MainController implements Initializable {
@@ -64,7 +62,10 @@ public class MainController implements Initializable {
     private TableView<Publications> TableView;
 
     @FXML
-    private javafx.scene.control.TableView<Commentaires> TableView1;
+    private TableView<Commentaires> TableView1;
+
+  //  @FXML
+    //private javafx.scene.control.TableView<Publications> TableView;
 
 
     @FXML
@@ -87,6 +88,7 @@ public class MainController implements Initializable {
         String query = "insert into Publications values("+idField.getText()+",'"+titleField.getText()+"','"+authorField.getText()+"')";
         executeQuery(query);
         showPublication();
+
     }
 
     @FXML
@@ -138,24 +140,29 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         showPublication();
+        showCommentaires();
     }
 
     public Connection getConnection() {
+
         Connection conn;
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/blog","root","");
+
             return conn;
+
         }
         catch (Exception e){
             e.printStackTrace();
             return null;
+
         }
     }
 
     public ObservableList<Publications> getPublicationsList(){
-        ObservableList<Publications> PublicationsList = FXCollections.observableArrayList();
+        ObservableList<Publications> PublicationList = FXCollections.observableArrayList();
         Connection connection = getConnection();
-        String query = "SELECT * FROM Publications ";
+        String query = "SELECT * FROM Publications";
         Statement st;
         ResultSet rs;
 
@@ -165,12 +172,12 @@ public class MainController implements Initializable {
             Publications Publications;
             while(rs.next()) {
                 Publications = new Publications(rs.getInt("id_pub"),rs.getString("titre_pub"),rs.getString("description_pub"));
-                PublicationsList.add(Publications);
+                PublicationList.add(Publications);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return PublicationsList;
+        return PublicationList;
     }
 
 
@@ -180,7 +187,9 @@ public class MainController implements Initializable {
     public void showPublication() {
         ObservableList<Publications> list = getPublicationsList();
 
-        idColumn.setCellValueFactory(new PropertyValueFactory<Publications,Integer>("id_pub"));
+        idColumn.setCellValueFactory(new PropertyValueFactory<Publications, Integer>("id_pub"));
+        //idColumn.setCellValueFactory(cellData -> cellData.getValue().getId_pub());
+       // titleColumn.setCellValueFactory(cellData -> cellData.getValue().getId_pub());
         titleColumn.setCellValueFactory(new PropertyValueFactory<Publications,String>("titre_pub"));
         authorColumn.setCellValueFactory(new PropertyValueFactory<Publications,String>("description_pub"));
 
@@ -188,7 +197,7 @@ public class MainController implements Initializable {
     }
 
     public ObservableList<Commentaires> getCommentairesList(){
-        ObservableList<Commentaires> CommentairesList = FXCollections.observableArrayList();
+        ObservableList<Commentaires> CommentaireList = FXCollections.observableArrayList();
         Connection connection = getConnection();
         String query = "SELECT * FROM Commentaires ";
         Statement st;
@@ -200,19 +209,19 @@ public class MainController implements Initializable {
             Commentaires Commentaires;
             while(rs.next()) {
                 Commentaires = new Commentaires(rs.getInt("id_com"),rs.getString("description_com"));
-               CommentairesList.add(Commentaires);
+               CommentaireList.add(Commentaires);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return CommentairesList;
+        return CommentaireList;
     }
 
     public void showCommentaires() {
         ObservableList<Commentaires> list = getCommentairesList();
 
 
-        yearColumn.setCellValueFactory(new PropertyValueFactory<Commentaires,Integer>("id_com"));
+      yearColumn.setCellValueFactory(new PropertyValueFactory<Commentaires,Integer>("id_com"));
         pagesColumn.setCellValueFactory(new PropertyValueFactory<Commentaires,String>("description_com"));
 
         TableView1.setItems(list);
