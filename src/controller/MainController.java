@@ -86,7 +86,13 @@ public class MainController implements Initializable {
     @FXML
     private void insertButton() {
         String query = "insert into Publications values("+idField.getText()+",'"+titleField.getText()+"','"+authorField.getText()+"')";
+        String query2 = "insert into Publications values('"+idField.getText()+"','***','"+authorField.getText()+"')";
+        if (titleField.getText().matches("lee")){
+            executeQuery(query2);
+            }else
+
         executeQuery(query);
+
         showPublication();
 
     }
@@ -94,6 +100,10 @@ public class MainController implements Initializable {
     @FXML
     private void insertButton1() {
         String query = "insert into Commentaires values("+pagesField.getText()+",'"+yearField.getText()+"')";
+        String query3 = "insert into Commentaires values("+pagesField.getText()+",'***')";
+        if (yearField.getText().matches("lee")){
+            executeQuery(query3);
+        }else
         executeQuery(query);
         showCommentaires();
     }
@@ -102,6 +112,10 @@ public class MainController implements Initializable {
     @FXML
     private void updateButton() {
         String query = "UPDATE Publications SET titre_pub ='"+titleField.getText()+"',description_pub='"+authorField.getText()+"' WHERE id_pub='"+idField.getText()+"';";
+        String query2 = "UPDATE Publications SET titre_pub ='***',description_pub='"+authorField.getText()+"' WHERE id_pub='"+idField.getText()+"';";
+        if (titleField.getText().matches("lee")){
+            executeQuery(query2);
+        }else
         executeQuery(query);
         showPublication();
     }
@@ -109,6 +123,10 @@ public class MainController implements Initializable {
     @FXML
     private void updateButton1() {
         String query = "UPDATE commentaires SET description_com = '"+yearField.getText()+"' WHERE id_com = '"+pagesField.getText()+"';";
+        String query2 = "UPDATE commentaires SET description_com = '***' WHERE id_com = '"+pagesField.getText()+"';";
+        if (yearField.getText().matches("lee")){
+            executeQuery(query2);
+        }else
         executeQuery(query);
         showCommentaires();
     }
@@ -120,12 +138,15 @@ public class MainController implements Initializable {
         showPublication();
     }
 
+
+
     @FXML
     private void deleteButton1() {
         String query = "DELETE FROM Commentaires WHERE id_com="+pagesField.getText()+"";
         executeQuery(query);
         showCommentaires();
     }
+
 
     public void executeQuery(String query) {
         Connection conn = getConnection();
@@ -226,5 +247,7 @@ public class MainController implements Initializable {
 
         TableView1.setItems(list);
     }
+
+
 
 }
