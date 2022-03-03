@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion.utilisateur.LoggedinController">
+   <children>
+      <Label fx:id="welcomelabel" layoutX="167.0" layoutY="16.0" prefHeight="85.0" prefWidth="229.0">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Label>
+      <FontAwesomeIconView fill="#e70606" glyphName="SIGN_OUT" layoutX="1329.0" layoutY="64.0" onMouseClicked="#getLogout" size="45" styleClass="btn" />
+      <FontAwesomeIconView fill="#455a64" glyphName="COG" layoutX="1263.0" layoutY="64.0" onMouseClicked="#getSettings" size="45" styleClass="btn" text="" />
+      <Label layoutX="37.0" layoutY="36.0" text="Welcome" textFill="#ff0f0f">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="user_image" fitHeight="108.0" fitWidth="206.0" layoutX="1019.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>

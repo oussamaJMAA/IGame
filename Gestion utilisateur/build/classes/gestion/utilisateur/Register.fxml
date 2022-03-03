@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="868.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion.utilisateur.RegisterController">
+   <children>
+      <AnchorPane prefHeight="147.0" prefWidth="868.0" style="-fx-background-color: #ffffe0;">
+         <children>
+            <FontAwesomeIconView fill="#b284be" glyphName="LOCK" layoutX="294.0" layoutY="84.0" size="45" />
+            <Label layoutX="347.0" layoutY="49.0" text="User Registration" textFill="#b284be">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label fx:id="messagelabel" contentDisplay="CENTER" layoutX="273.0" layoutY="107.0" prefHeight="18.0" prefWidth="375.0">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+         </children>
+      </AnchorPane>
+      <Label layoutX="45.0" layoutY="149.0" text="Firstname" textFill="#b284be">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="firstnametf" layoutX="45.0" layoutY="175.0" prefHeight="25.0" prefWidth="336.0" promptText="Firstname" style="-fx-border-color: #b284be; -fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px;" />
+      <Label layoutX="36.0" layoutY="230.0" text="Lastname" textFill="#b284be">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="lastnametf" layoutX="36.0" layoutY="264.0" prefHeight="25.0" prefWidth="336.0" promptText="Lastname" style="-fx-background-color: transparent; -fx-border-color: #b284be; -fx-border-width: 0px 0px 2px 0px;" />
+      <TextField fx:id="usernametf" layoutX="28.0" layoutY="363.0" prefHeight="25.0" prefWidth="336.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: #b284be; -fx-border-width: 0px 0px 2px 0px;" />
+      <TextField fx:id="emailtf" layoutX="26.0" layoutY="472.0" prefHeight="25.0" prefWidth="336.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #b284be; -fx-border-width: 0px 0px 2px 0px;" />
+      <Label layoutX="26.0" layoutY="427.0" text="Email" textFill="#b284be">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="477.0" layoutY="149.0" text="Password" textFill="#b284be">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="34.0" layoutY="321.0" text="Username" textFill="#b284be">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="femaler" layoutX="598.0" layoutY="486.0" mnemonicParsing="false" text="Female" />
+      <RadioButton fx:id="maler" layoutX="505.0" layoutY="486.0" mnemonicParsing="false" text="Male" />
+      <Label layoutX="494.0" layoutY="453.0" prefHeight="27.0" prefWidth="69.0" text="Gender" textFill="#b284be">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="addresstf" layoutX="490.0" layoutY="264.0" prefHeight="25.0" prefWidth="336.0" promptText="Address" style="-fx-background-color: transparent; -fx-border-color: #b284be; -fx-border-width: 0px 0px 2px 0px;" />
+      <Label layoutX="477.0" layoutY="230.0" prefHeight="18.0" prefWidth="75.0" text="Address" textFill="#b284be">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnr" layoutX="621.0" layoutY="520.0" mnemonicParsing="false" onAction="#ButtonRegister" prefHeight="24.0" prefWidth="230.0" style="-fx-background-color: #b284be;" text="Register" />
+      <PasswordField fx:id="passwordtf" layoutX="490.0" layoutY="175.0" prefHeight="25.0" prefWidth="336.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #b284be; -fx-border-width: 0px 0px 2px 0px;" />
+      <Hyperlink layoutX="679.0" layoutY="563.0" onAction="#LoginLink" text="You have an account ?" textFill="#b284be" />
+      <ComboBox fx:id="nationalitycb" layoutX="553.0" layoutY="427.0" prefWidth="150.0" promptText="Select region" />
+      <Label layoutX="467.0" layoutY="400.0" prefHeight="26.0" prefWidth="87.0" text="Nationality" textFill="#b284be">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="phonetf" layoutX="496.0" layoutY="363.0" prefHeight="25.0" prefWidth="336.0" promptText=" Phone number" style="-fx-background-color: transparent; -fx-border-color: #b284be; -fx-border-width: 0px 0px 2px 0px;" />
+      <Label layoutX="482.0" layoutY="321.0" text="Phone" textFill="#b284be">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="imagebtn" layoutX="131.0" layoutY="521.0" mnemonicParsing="false" onAction="#on_click_import_image" text="Import image" />
+      <Label layoutX="36.0" layoutY="508.0" text="Add image" textFill="#b284be">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="imageview" fitHeight="75.0" fitWidth="100.0" layoutX="381.0" layoutY="508.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>
