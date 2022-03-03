@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="654.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ProduitController">
+   <children>
+      <FlowPane layoutX="68.0" layoutY="91.0" prefHeight="200.0" prefWidth="200.0" />
+      <AnchorPane id="AnchorPane" fx:id="recpane" layoutY="7.0" prefHeight="615.0" prefWidth="768.0">
+         <children>
+            <TextField fx:id="id_nom" layoutX="122.0" layoutY="182.0" />
+            <Label fx:id="nom" layoutX="14.0" layoutY="180.0" prefHeight="17.0" prefWidth="109.0" text="Nom" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="prix" layoutX="14.0" layoutY="223.0" prefHeight="17.0" prefWidth="109.0" text="Prix" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="id_prix" layoutX="122.0" layoutY="226.0" />
+            <Label fx:id="qte" layoutX="14.0" layoutY="271.0" prefHeight="17.0" prefWidth="109.0" text="Quantité" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="id_qte" layoutX="122.0" layoutY="271.0" />
+            <Button fx:id="ajouter" layoutX="20.0" layoutY="328.0" onAction="#ajoutproduit" style="-fx-background-color: #26d094;" text="ajouter" textFill="#f0fff9">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font></Button>
+            <TableView fx:id="viewProduit" layoutX="355.0" layoutY="89.0" onMouseClicked="#getSelected" prefHeight="280.0" prefWidth="367.0">
+               <columns>
+                  <TableColumn fx:id="id" prefWidth="52.0" text="id" />
+                  <TableColumn fx:id="d" prefWidth="117.0" text="nom" />
+                  <TableColumn fx:id="pr" prefWidth="84.0" text="prix" />
+                  <TableColumn fx:id="qt" prefWidth="113.0" text="qte" />
+               </columns>
+            </TableView>
+            <Button fx:id="supprimer" layoutX="122.0" layoutY="327.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="38.0" prefWidth="109.0" style="-fx-background-color: ff0000;" text="supprimer" textFill="#fff3f3">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Button>
+            <Button fx:id="update" layoutX="244.0" layoutY="327.0" mnemonicParsing="false" onAction="#Edit" prefHeight="38.0" prefWidth="100.0" style="-fx-background-color: #1a00e1;" text="update" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Button>
+            <Label fx:id="idd" layoutX="22.0" layoutY="140.0" prefHeight="30.0" prefWidth="76.0" text="ID" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Button layoutX="50.0" layoutY="414.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" text="chercher">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Button>
+            <TextField fx:id="id1" layoutX="122.0" layoutY="142.0" />
+            <Label layoutX="14.0" layoutY="20.0" prefHeight="69.0" prefWidth="348.0" text="Gestion des Produits">
+               <font>
+                  <Font name="System Bold Italic" size="35.0" />
+               </font>
+            </Label>
+            <Button fx:id="b1" layoutX="631.0" layoutY="449.0" mnemonicParsing="false" onAction="#back" prefHeight="35.0" prefWidth="100.0" text="back">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <TextField fx:id="filterField" layoutX="170.0" layoutY="419.0" onKeyTyped="#chercher" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
