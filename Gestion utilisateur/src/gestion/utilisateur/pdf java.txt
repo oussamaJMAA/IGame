@@ -1,0 +1,12 @@
+try {
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream("C:/Users/oussa/Desktop/test.pdf"));
+            document.open();
+            document.add(new Paragraph("Example"));
+            document.close();
+        } catch (DocumentException | FileNotFoundException e) {
+            System.out.println(e);
+            System.out.println("itext PDF program executed");
+
+        }
+    
