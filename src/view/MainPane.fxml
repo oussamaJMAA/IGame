@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <TabPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
    <tabs>
       <Tab text="Publications">
@@ -37,7 +36,6 @@
                      <children>
                         <TextField fx:id="idField" />
                         <TextField fx:id="titleField" />
-                        <TextField fx:id="authorField" />
                        
                      </children>
                   </VBox>
@@ -50,16 +48,12 @@
                   </HBox>
                   <TableView fx:id="TableView" layoutX="324.0" layoutY="27.0" prefHeight="210.0" prefWidth="400.0">
                     <columns>
-                      <TableColumn fx:id="idColumn" prefWidth="35.0" text="ID" />
-                      <TableColumn fx:id="titleColumn" prefWidth="178.39996337890625" text="Titre" />
-                        <TableColumn fx:id="authorColumn" prefWidth="84.800048828125" text="Contenu" />
+                      <TableColumn fx:id="idColumn" minWidth="0.0" prefWidth="0.0" text="ID" />
+                      <TableColumn fx:id="titleColumn" prefWidth="213.60003662109375" text="Titre" />
+                        <TableColumn fx:id="authorColumn" minWidth="0.0" prefWidth="0.0" text="Contenu" />
                     </columns>
                   </TableView>
-                  <Label layoutX="26.0" layoutY="100.0" text="Contenu">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
+                  <TextField fx:id="authorField" layoutX="2.0" layoutY="182.0" prefHeight="0.0" prefWidth="9.0" />
                </children>
             </AnchorPane>
          </content>
@@ -82,8 +76,8 @@
                   <TextField fx:id="pagesField" layoutX="77.0" layoutY="26.0" />
                   <TableView fx:id="TableView1" layoutX="305.0" layoutY="14.0" prefHeight="210.0" prefWidth="400.0">
                      <columns>
-                        <TableColumn fx:id="yearColumn" prefWidth="64.79998779296875" text="ID" />
-                        <TableColumn fx:id="pagesColumn" prefWidth="210.4000244140625" text="Contenu" />
+                        <TableColumn fx:id="yearColumn" minWidth="0.0" prefWidth="0.0" text="ID" />
+                        <TableColumn fx:id="pagesColumn" prefWidth="276.0" text="Contenu" />
                      </columns>
                   </TableView>
                   <Button fx:id="insertButton1" layoutX="13.0" layoutY="193.0" mnemonicParsing="false" onAction="#insertButton1" prefHeight="30.0" prefWidth="88.0" text="Insert" />
