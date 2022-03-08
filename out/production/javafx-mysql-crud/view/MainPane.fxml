@@ -87,5 +87,15 @@
             </AnchorPane>
         </content>
       </Tab>
+      <Tab text="Chat">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="serveurr" layoutX="215.0" layoutY="121.0" mnemonicParsing="false" onAction="#LoadChat1" text="Serveur" />
+                  <Button fx:id="clientt" layoutX="388.0" layoutY="121.0" mnemonicParsing="false" onAction="#LoadChat2" text="Client" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
    </tabs>
 </TabPane>

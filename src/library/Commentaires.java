@@ -2,8 +2,8 @@ package library;
 
 
 public class Commentaires {
-    private int id_com ;
-    private String description_com;
+    private final int id_com ;
+    private final String description_com;
 
 
     public Commentaires(int id_com, String description_com) {

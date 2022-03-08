@@ -2,9 +2,9 @@ package library;
 
 
 public class Publications {
-    private int id_pub;
-    private String titre_pub;
-    private String description_pub;
+    private final int id_pub;
+    private final String titre_pub;
+    private final String description_pub;
 
     public Publications(int id_pub, String titre_pub, String description_pub) {
         this.id_pub = id_pub;

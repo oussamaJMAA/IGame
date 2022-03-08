@@ -1,14 +1,18 @@
 package controller;
+import com.mysql.cj.admin.ServerController;
+import javafx.fxml.*;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import library.*;
+import library.serverController;
+import library.ClientController;
+import library.Server;
+import library.Client;
 import library.Commentaires;
 import library.Publications;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.sql.Connection;
@@ -16,9 +20,34 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+import java.io.IOException;
+import java.net.Socket;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
+
 
 
 import java.lang.*;
+
+import static java.lang.Thread.sleep;
 
 
 public class MainController implements Initializable {
@@ -37,7 +66,8 @@ public class MainController implements Initializable {
 
     @FXML
     private TextField pagesField;
-
+    @FXML
+    private Button serveurr;
     @FXML
     private Button insertButton;
 
@@ -57,6 +87,25 @@ public class MainController implements Initializable {
 
     @FXML
     private Button deleteButton1;
+
+
+
+    @FXML
+    private Button button_send;
+    @FXML
+    private TextField tf_message;
+    @FXML
+    private VBox vbox_messages;
+    @FXML
+    private ScrollPane sp_main;
+
+    @FXML
+    private Button clientt;
+
+
+
+    private Client client;
+
 
     @FXML
     private TableView<Publications> TableView;
@@ -82,6 +131,7 @@ public class MainController implements Initializable {
 
     @FXML
     private TableColumn<Commentaires, String> pagesColumn;
+
 
     @FXML
     private void insertButton() {
@@ -145,6 +195,39 @@ public class MainController implements Initializable {
         String query = "DELETE FROM Commentaires WHERE id_com="+pagesField.getText()+"";
         executeQuery(query);
         showCommentaires();
+    }
+
+
+    @FXML
+    private void LoadChat1(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller/server.fxml"));
+            Parent root = loader.load();
+            serverController sc1 = loader.getController();
+            serveurr.getScene().setRoot(root);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+
+
+        }
+
+    }
+    @FXML
+    private void LoadChat2(ActionEvent event) {
+        Parent root;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller/client.fxml"));
+             root = loader.load();
+            ClientController cc = loader.getController();
+            clientt.getScene().setRoot(root);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+
+
+
+
+        }
+
     }
 
 
@@ -247,6 +330,9 @@ public class MainController implements Initializable {
 
         TableView1.setItems(list);
     }
+
+
+
 
 
 
