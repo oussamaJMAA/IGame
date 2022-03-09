@@ -5,6 +5,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
@@ -14,67 +15,99 @@
       <FlowPane layoutX="68.0" layoutY="91.0" prefHeight="200.0" prefWidth="200.0" />
       <AnchorPane id="AnchorPane" fx:id="recpane" layoutY="7.0" prefHeight="615.0" prefWidth="768.0">
          <children>
-            <TextField fx:id="id_nom" layoutX="122.0" layoutY="182.0" />
+            <TextField fx:id="id_nom" layoutX="146.0" layoutY="185.0" />
             <Label fx:id="nom" layoutX="14.0" layoutY="180.0" prefHeight="17.0" prefWidth="109.0" text="Nom" textFill="RED">
                <font>
-                  <Font name="System Bold" size="20.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
             </Label>
             <Label fx:id="prix" layoutX="14.0" layoutY="223.0" prefHeight="17.0" prefWidth="109.0" text="Prix" textFill="RED">
                <font>
-                  <Font name="System Bold" size="20.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="id_prix" layoutX="122.0" layoutY="226.0" />
+            <TextField fx:id="id_prix" layoutX="140.0" layoutY="228.0" />
             <Label fx:id="qte" layoutX="14.0" layoutY="271.0" prefHeight="17.0" prefWidth="109.0" text="Quantité" textFill="RED">
                <font>
-                  <Font name="System Bold" size="20.0" />
+                  <Font name="System Bold" size="23.0" />
                </font>
             </Label>
-            <TextField fx:id="id_qte" layoutX="122.0" layoutY="271.0" />
-            <Button fx:id="ajouter" layoutX="20.0" layoutY="328.0" onAction="#ajoutproduit" style="-fx-background-color: #26d094;" text="ajouter" textFill="#f0fff9">
+            <TextField fx:id="id_qte" layoutX="140.0" layoutY="276.0" />
+            <Button fx:id="ajouter" layoutX="14.0" layoutY="432.0" onAction="#ajoutproduit" style="-fx-background-color: #26d094;" text="ajouter" textFill="#f0fff9">
                <font>
                   <Font name="System Bold" size="17.0" />
-               </font></Button>
-            <TableView fx:id="viewProduit" layoutX="355.0" layoutY="89.0" onMouseClicked="#getSelected" prefHeight="280.0" prefWidth="367.0">
+               </font>
+            </Button>
+            <TableView fx:id="viewProduit" layoutX="310.0" layoutY="91.0" onMouseClicked="#getSelected" prefHeight="325.0" prefWidth="445.0">
                <columns>
-                  <TableColumn fx:id="id" prefWidth="52.0" text="id" />
-                  <TableColumn fx:id="d" prefWidth="117.0" text="nom" />
-                  <TableColumn fx:id="pr" prefWidth="84.0" text="prix" />
-                  <TableColumn fx:id="qt" prefWidth="113.0" text="qte" />
+                  <TableColumn fx:id="id" minWidth="0.0" prefWidth="46.0" text="id" visible="false" />
+                  <TableColumn fx:id="d" prefWidth="83.0" text="nom" />
+                  <TableColumn fx:id="pr" prefWidth="72.0" text="prix" />
+                  <TableColumn fx:id="qt" prefWidth="76.0" text="qte" />
+                  <TableColumn fx:id="re" prefWidth="111.0" text="reference" />
+                  <TableColumn fx:id="eimage" prefWidth="105.0" text="image" />
                </columns>
             </TableView>
-            <Button fx:id="supprimer" layoutX="122.0" layoutY="327.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="38.0" prefWidth="109.0" style="-fx-background-color: ff0000;" text="supprimer" textFill="#fff3f3">
+            <Button fx:id="supprimer" layoutX="106.0" layoutY="432.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="38.0" prefWidth="109.0" style="-fx-background-color: ff0000;" text="supprimer" textFill="#fff3f3">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
             </Button>
-            <Button fx:id="update" layoutX="244.0" layoutY="327.0" mnemonicParsing="false" onAction="#Edit" prefHeight="38.0" prefWidth="100.0" style="-fx-background-color: #1a00e1;" text="update" textFill="WHITE">
+            <Button fx:id="update" layoutX="221.0" layoutY="432.0" mnemonicParsing="false" onAction="#Edit" prefHeight="38.0" prefWidth="100.0" style="-fx-background-color: #1a00e1;" text="update" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
             </Button>
-            <Label fx:id="idd" layoutX="22.0" layoutY="140.0" prefHeight="30.0" prefWidth="76.0" text="ID" textFill="RED">
+            <Label fx:id="idd" layoutX="22.0" layoutY="140.0" prefHeight="30.0" prefWidth="76.0" text="ID" textFill="RED" visible="false">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Button layoutX="50.0" layoutY="414.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" text="chercher">
+            <Button layoutX="22.0" layoutY="484.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" text="chercher">
                <font>
                   <Font name="System Bold" size="16.0" />
-               </font></Button>
-            <TextField fx:id="id1" layoutX="122.0" layoutY="142.0" />
+               </font>
+            </Button>
+            <TextField fx:id="id1" layoutX="122.0" layoutY="142.0" visible="false" />
             <Label layoutX="14.0" layoutY="20.0" prefHeight="69.0" prefWidth="348.0" text="Gestion des Produits">
                <font>
                   <Font name="System Bold Italic" size="35.0" />
                </font>
             </Label>
-            <Button fx:id="b1" layoutX="631.0" layoutY="449.0" mnemonicParsing="false" onAction="#back" prefHeight="35.0" prefWidth="100.0" text="back">
+            <Button fx:id="b1" layoutX="631.0" layoutY="514.0" mnemonicParsing="false" onAction="#back" prefHeight="35.0" prefWidth="100.0" text="back">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Button>
-            <TextField fx:id="filterField" layoutX="170.0" layoutY="419.0" onKeyTyped="#chercher" />
+            <TextField fx:id="filterField" layoutX="146.0" layoutY="489.0" onKeyTyped="#chercher" />
+            <Label fx:id="reference" layoutX="9.0" layoutY="126.0" prefHeight="17.0" prefWidth="119.0" text="Référence" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Label>
+            <TextField fx:id="id_ref" layoutX="140.0" layoutY="130.0" />
+            <Button fx:id="insert_image" layoutX="19.0" layoutY="337.0" mnemonicParsing="false" onAction="#insertImage" prefHeight="40.0" prefWidth="100.0" text="image" textFill="#ff0101">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="ftMail" layoutX="336.0" layoutY="434.0" mnemonicParsing="false" onAction="#mailing" prefHeight="40.0" prefWidth="92.0" text="Mail">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <ImageView fx:id="image_view" fitHeight="100.0" fitWidth="138.0" layoutX="140.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="file_path" alignment="CENTER" layoutX="375.0" layoutY="526.0" prefHeight="23.0" prefWidth="182.0" />
+            <Button fx:id="st" layoutX="449.0" layoutY="437.0" mnemonicParsing="false" onAction="#stat" prefHeight="38.0" prefWidth="119.0" text="Statistique">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="v1" layoutX="605.0" layoutY="435.0" mnemonicParsing="false" onAction="#viewlist" prefHeight="40.0" prefWidth="100.0" text="viewlist">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </children>

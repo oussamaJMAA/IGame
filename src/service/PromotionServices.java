@@ -29,7 +29,7 @@ public class PromotionServices {
         cnx=MaConnexion.getInstance().getCnx();
     }
     public void ajouterPromotion(Promotion r){
-        String sql="INSERT INTO `Promotion`(`id`, `nom`, `date`,`prixPro`) VALUES ('"+r.getId()+"','"+r.getNom()+"','"+r.getDate()+"','"+r.getPrixPro()+"')";
+        String sql="INSERT INTO `Promotion`(`id`, `nom`, `date`,`prixPro`,`datef`) VALUES ('"+r.getId()+"','"+r.getNom()+"','"+r.getDate()+"','"+r.getPrixPro()+"','"+r.getDatef()+"')";
         try {
             Statement ste= cnx.createStatement();
             ste.executeUpdate(sql);
@@ -54,12 +54,13 @@ public class PromotionServices {
         return i;
     }
     public void ajouterPromotion2(Promotion r){
-        String sql="insert into promotion(nom,date,prixPro) values(?,?,?)";
+        String sql="insert into promotion(nom,date,prixPro,datef) values(?,?,?,?)";
         try {
             PreparedStatement ste= cnx.prepareStatement(sql);
             ste.setString(1, r.getNom());
             ste.setString(2, r.getDate());
             ste.setInt(3, r.getPrixPro());
+             ste.setString(4, r.getDatef());
             ste.executeUpdate();
             System.out.println("promotion Ajoutée");
         } catch (SQLException ex) {
@@ -79,6 +80,7 @@ public class PromotionServices {
                 r.setNom(rs.getString("nom"));
                 r.setDate(rs.getString("date"));
                 r.setPrixPro(rs.getInt("prixPro"));
+                 r.setDatef(rs.getString("datef"));
                 promotions.add(r);
                 
             }
@@ -102,12 +104,12 @@ public class PromotionServices {
     }
 public void modifierPromotion(Promotion r) {
       try {
-            String sql = "UPDATE promotion SET nom=?, date=? ,prixPro=?  WHERE `id`=?";
+            String sql = "UPDATE promotion SET nom=?, date=? ,prixPro=?,datef=?  WHERE `id`=?";
             PreparedStatement pre = cnx.prepareStatement(sql);
             pre.setString(1, r.getNom());
             pre.setString(2, r.getDate());
             pre.setInt(3, r.getPrixPro());
-         
+          pre.setString(5, r.getDatef());
             pre.setInt(4, r.getId());
              
             pre.executeUpdate();

@@ -7,24 +7,39 @@ package entities;
 
 public class Produit {
         private int id,qte,prix;
-    private String nom;
+    private String nom,reference,image;
 public Produit() {
     }
    
 
-    public Produit(int id, String nom, int prix,int qte) {
+    public Produit(int id, String nom, int prix,int qte, String reference,String image) {
         this.id = id;
         this.nom = nom;
         this.prix = prix;
         this.qte=qte;
+         this.reference = reference;
+         this.image = image;
+         
     }
 
     
-    public Produit( String nom, int prix, int qte) {
+    public Produit(int id, String nom, int prix,int qte, String reference) {
+        this.id = id;
+        this.nom = nom;
+        this.prix = prix;
+        this.qte=qte;
+         this.reference = reference;
+       
+         
+    }
+
+    public Produit( String nom, int prix, int qte,String reference, String image) {
        
         this.nom = nom;
         this.prix = prix;
         this.qte=qte;
+           this.reference = reference;
+            this.image = image;
     }
 
     
@@ -43,6 +58,9 @@ public Produit() {
     public String getNom() {
         return nom;
     }
+     public String getImage() {
+        return image;
+    }
 
     public int getPrix() {
         return prix;
@@ -50,13 +68,18 @@ public Produit() {
  public int getQte() {
         return qte;
     }
-
+ public String getReference() {
+        return reference;
+    }
     public void setId(int id) {
         this.id = id;
     }
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+     public void setImage(String image) {
+        this.image = image;
     }
 public void setPrix(int prix) {
         this.prix = prix;
@@ -65,9 +88,12 @@ public void setPrix(int prix) {
     public void setQte(int qte) {
         this.qte = qte;
     }
+     public void setReference(String reference) {
+        this.reference = reference;
+    }
     @Override
     public String toString() {
-        return "Produit{" + "id=" + id + ", nom=" + nom + ",prix="+ prix +", qte=" + qte + '}';
+        return "Produit{" + "id=" + id + ", nom=" + nom + ",prix="+ prix +",qte="+ qte +",reference="+ reference +", image=" + image+ '}';
     }
     
     

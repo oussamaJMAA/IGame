@@ -4,7 +4,7 @@
  */
 package tests;
 
-
+import javafx.scene.image.Image;
 import entities.Produit;
 import entities.Promotion;
 import static javafx.application.Application.launch;
