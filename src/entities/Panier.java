@@ -7,28 +7,39 @@ package entities;
 
 /**
  *
- * @author pc hp core i3
+ * @author Magui
  */
 public class Panier {
-    int idProduit;
-    String nomProduit,image,prix;
-
+    private Long idP;
+    private String nomProduit;
+    private int prix;
+    private String image;
+    private Long idProduit;
+private int idClient;
     public Panier() {
     }
 
-    public Panier(int idProduit, String nomProduit, String image, String prix) {
-        this.idProduit = idProduit;
+    public Panier(Long idP, String nomProduit, int prix, String image, Long idProduit) {
+        this.idP = idP;
         this.nomProduit = nomProduit;
-        this.image = image;
         this.prix = prix;
-    }
-
-    public int getIdProduit() {
-        return idProduit;
-    }
-
-    public void setIdProduit(int idProduit) {
+        this.image = image;
         this.idProduit = idProduit;
+    }
+
+    public Panier(String nomProduit, int prix, String image, Long idProduit) {
+        this.nomProduit = nomProduit;
+        this.prix = prix;
+        this.image = image;
+        this.idProduit = idProduit;
+    }
+
+    public Long getIdP() {
+        return idP;
+    }
+
+    public void setIdP(Long idP) {
+        this.idP = idP;
     }
 
     public String getNomProduit() {
@@ -39,6 +50,14 @@ public class Panier {
         this.nomProduit = nomProduit;
     }
 
+    public int getPrix() {
+        return prix;
+    }
+
+    public void setPrix(int prix) {
+        this.prix = prix;
+    }
+
     public String getImage() {
         return image;
     }
@@ -47,17 +66,26 @@ public class Panier {
         this.image = image;
     }
 
-    public String getPrix() {
-        return prix;
+    public Long getIdProduit() {
+        return idProduit;
     }
 
-    public void setPrix(String prix) {
-        this.prix = prix;
+    public void setIdProduit(Long idProduit) {
+        this.idProduit = idProduit;
     }
+
+    public int getIdClient() {
+        return idClient;
+    }
+
+    public void setIdClient(int idClient) {
+        this.idClient = idClient;
+    }
+    
 
     @Override
     public String toString() {
-        return "Panier{" + "idProduit=" + idProduit + ", nomProduit=" + nomProduit + ", image=" + image + ", prix=" + prix + '}';
+        return "Panier  {  \n nomProduit=" + nomProduit + ",\n prix=" + prix + ",\n image=" + image +  '}';
     }
     
     

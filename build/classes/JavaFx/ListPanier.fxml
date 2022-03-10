@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="842.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFx.ListPanierController">
+   <children>
+      <Text layoutX="277.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List panier">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Text>
+      <Button fx:id="btn_ajouter" layoutX="87.0" layoutY="473.0" mnemonicParsing="false" onAction="#Ajouter" text="Ajouter" />
+      <Button fx:id="btn_update" layoutX="362.0" layoutY="473.0" mnemonicParsing="false" onAction="#update" text="Mise à jour" />
+      <Button fx:id="btn_supprimer" layoutX="672.0" layoutY="473.0" mnemonicParsing="false" onAction="#supp" text="supprimer" />
+      <ListView fx:id="listview" layoutX="260.0" layoutY="131.0" onMouseClicked="#charger" prefHeight="295.0" prefWidth="531.0" />
+      <Pane fx:id="pan" layoutX="15.0" layoutY="170.0" prefHeight="119.0" prefWidth="197.0">
+         <children>
+            <ComboBox fx:id="comboProduit" layoutX="6.0" layoutY="21.0" prefWidth="150.0" />
+         </children>
+      </Pane>
+      <Pane fx:id="pan2" disable="true" layoutX="19.0" layoutY="324.0" prefHeight="141.0" prefWidth="189.0">
+         <children>
+            <Text layoutX="14.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Totale Panier" />
+            <TextField fx:id="totaleP" editable="false" layoutX="9.0" layoutY="53.0" />
+            <TextField fx:id="reduction" editable="false" layoutX="9.0" layoutY="102.0" />
+            <Text layoutX="9.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix après réduction" />
+         </children>
+      </Pane>
+      <Button fx:id="totalePanier" layoutX="539.0" layoutY="473.0" mnemonicParsing="false" onAction="#totale" text="Totale Panier" />
+      <Button fx:id="pdf" layoutX="225.0" layoutY="473.0" mnemonicParsing="false" onAction="#pdf" prefHeight="25.0" prefWidth="48.0" text="pdf" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" onMouseClicked="#test" prefHeight="642.0" prefWidth="978.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFx.ListCommandeController">
+   <children>
+      <Text layoutX="308.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List commande">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Text>
+      <Button fx:id="btn_ajouter" layoutX="281.0" layoutY="564.0" mnemonicParsing="false" onAction="#ajouter" text="Ajouter" />
+      <Button fx:id="btn_supprimer" layoutX="694.0" layoutY="564.0" mnemonicParsing="false" onAction="#supp" text="Supprimer" />
+      <ListView fx:id="listview" layoutX="192.0" layoutY="188.0" onMouseClicked="#charger" prefHeight="321.0" prefWidth="656.0" />
+   </children>
+</AnchorPane>
