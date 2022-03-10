@@ -15,17 +15,20 @@ import java.util.ArrayList;
 import java.util.List;
 import Tools.MaConnexion;
 
+import java.sql.Date;
+
 public class CategoryService {
     
       Connection cnx;
 /**************************************************************/
-/*********ajouter categorie***************/     
+/*********************ajouter categorie***********************/     
     public CategoryService() {
         cnx=MaConnexion.getInstance().getCnx();
     }
-    public void AddCategory(Category c){
-        String sql="INSERT INTO category(category_id,category_name,category_imgUrl,category_addDate) VALUES ( '"+c.getCategory_id()+"','"+c.getCategory_name()+"','"+c.getCategory_imgUrl()+"','"+c.getCategory_addDate()+"')";
-        try {
+  /* public void AddCategory(Category c){
+      String sql="INSERT INTO category(category_name,category_addDate) VALUES ('"+c.getCategory_name()+"','"+c.getCategory_addDate()+"')";
+           
+      try {
             Statement ste = cnx.createStatement();
             ste.executeUpdate(sql);
             System.out.println("categorie Ajoutee");
@@ -34,11 +37,28 @@ public class CategoryService {
         }
         
         
+    }*/
+    public void AddCategory(Category c){
+        String sql="insert into category(category_name , discription ) values('"+c.getCategory_name()+"','"+c.getDiscription()+"')";
+        try {
+             Statement stm =cnx.createStatement();
+        
+        stm.executeUpdate(sql);
+              System.out.println("categorie Ajoutee");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        
+        
+         
+        
+        
     }
-
-    /******************************************************/
+  
+ /****************************************************/
     /************* afficher liste categoriex **********************/
-    public List<Category> afficher(){
+   public List<Category> ReadC(){
         List<Category> Categorys = new ArrayList<>();
         String query="select * from Category";
         try {
@@ -46,10 +66,8 @@ public class CategoryService {
             ResultSet rs= ste.executeQuery();
             while(rs.next()){
                 Category c = new Category();
-                c.setCategory_id(rs.getInt("category_id"));
                 c.setCategory_name(rs.getString("category_name"));
-                c.setCategory_imgUrl(rs.getString("category_imgUrl"));
-                c.setCategory_addDate(rs.getString("category_addDate"));
+              //  c.setCategory_addDate(rs.getDate("category_addDate"));
                 Categorys.add(c);
                 
             }
@@ -61,10 +79,10 @@ public class CategoryService {
         
     }
     /***********************************************************/
-     /*********** supprimer categorie****************/
-     public void DeletCategory(int Category_id) {
+     /*********** delete category****************/
+     public void DeletC(int Category_name) {
         try {
-            String req = "DELETE FROM Category where Category_id=" + Category_id ;
+            String req = "DELETE FROM Category where Category_name=" + Category_name ;
             Statement st =cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("categorie supprimée");
@@ -73,13 +91,13 @@ public class CategoryService {
         }
     }
      /********************************************/
-     /********* modefier d'un categorie*************/
+     /********* modify category*************/
      
-   public void modifiercategorie(Category c) {
+  public void ModifyC(Category c) {
         try {
             
         
-             String req = "UPDATE Category SET Category_name ='" + c.getCategory_name() +  "',category_imgUrl ='" + c.getCategory_imgUrl() + "', category_addDate ='" + c.getCategory_addDate() +  "' WHERE category_id=" + c.getCategory_id();
+             String req = "UPDATE Category SET Category_name ='" + c.getCategory_name() +   "' WHERE category_name=" + c.getCategory_name();
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("Le categorie est modifée !");
@@ -88,6 +106,5 @@ public class CategoryService {
         }
        
     }
-
     
 }

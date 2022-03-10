@@ -5,32 +5,28 @@
  */
 package Entities;
 
+import java.sql.Date;
 /**
  *
  * @author Malak
  */
 public class Category {
-    private int category_id;
-    private String category_name,category_addDate,category_imgUrl;
-    
+    private String category_name;
+        private String discription;
+
+
     public Category(){
     }
 
-    public Category(int category_id, String category_name, String category_addDate, String category_imgUrl) {
-        this.category_id = category_id;
+  
+    public Category(String category_name,String discription) {
         this.category_name = category_name;
-        this.category_imgUrl = category_imgUrl;
-        this.category_addDate = category_addDate;
-        
+         this.discription = discription;
+
     }
 
-    public int getCategory_id() {
-        return category_id;
-    }
-
-    public void setCategory_id(int category_id) {
-        this.category_id = category_id;
-    }
+   
+   
 
     public String getCategory_name() {
         return category_name;
@@ -39,27 +35,26 @@ public class Category {
     public void setCategory_name(String category_name) {
         this.category_name = category_name;
     }
-
-    public String getCategory_addDate() {
-        return category_addDate;
+    public String getDiscription() {
+        return discription;
     }
 
-    public void setCategory_addDate(String category_addDate) {
-        this.category_addDate = category_addDate;
+    public void setDiscription(String discription) {
+        this.discription = discription;
     }
-
-    public String getCategory_imgUrl() {
-        return category_imgUrl;
-    }
-
-    public void setCategory_imgUrl(String category_imgUrl) {
-        this.category_imgUrl = category_imgUrl;
-    }
-
     @Override
     public String toString() {
-        return "Category{" + "category_id=" + category_id + ", category_name=" + category_name + ", category_imgUrl=" + category_imgUrl + ", category_addDate=" + category_addDate + '}';
+        return "Category{" + "category_name=" + category_name + ", discription=" + discription + '}';
     }
+
+    
+
+    
+
+
+
+   
+    
     
     
 }

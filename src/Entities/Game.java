@@ -4,27 +4,32 @@
  * and open the template in the editor.
  */
 package Entities;
-
+//import java.time.LocalDateTime; 
+//import java.time.format.DateTimeFormatter;
+import java.sql.Date;
+//import java.sql.Time;
 /**
  *
- * @author Malak
  */
 public class Game {
     private int game_id;
-    private String game_name , game_vid , game_link , game_discreption ,game_addDate  ;
+    private String game_name , game_img , game_link ,game_description,category_name;
+    
     
     public Game(){
     }
     
-    public Game(int game_id,String game_name,String game_discreption,String game_vid ,String game_link , String game_addDate){
+  public Game(int game_id,String game_name,String category_name,String game_description,String game_img ,String game_link ){
     this.game_id = game_id ;
     this.game_name = game_name ;
-    this.game_discreption = game_discreption ;
+    this.category_name = category_name ;
+    this.game_description = game_description ;
     this.game_link = game_link ;
-    this.game_vid = game_vid ;
-    this.game_addDate = game_addDate ;
-    }
+    this.game_img = game_img ;
+   }
+    
 
+    
     public int getGame_id() {
         return game_id;
     }
@@ -33,28 +38,29 @@ public class Game {
         this.game_id = game_id;
     }
 
-    public String getGame_name() {
-        return game_name;
+    public String getCategory_name() {
+        return category_name;
     }
 
-    public Game(String game_name, String game_vid, String game_link, String game_discreption, String game_addDate) {
-        this.game_name = game_name;
-        this.game_vid = game_vid;
-        this.game_link = game_link;
-        this.game_discreption = game_discreption;
-        this.game_addDate = game_addDate;
+    public void setCategory_name(String category_name) {
+        this.category_name = category_name;
+    }
+
+     
+    public String getGame_name() {
+        return game_name;
     }
 
     public void setGame_name(String game_name) {
         this.game_name = game_name;
     }
 
-    public String getGame_vid() {
-        return game_vid;
+    public String getGame_img() {
+        return game_img;
     }
 
-    public void setGame_vid(String game_vid) {
-        this.game_vid = game_vid;
+    public void setGame_img(String game_img) {
+        this.game_img = game_img;
     }
 
     public String getGame_link() {
@@ -65,26 +71,27 @@ public class Game {
         this.game_link = game_link;
     }
 
-    public String getGame_description() {
-        return game_discreption;
+    public String getgame_description() {
+        return game_description;
     }
 
-    public void setGame_description(String game_discreption) {
-        this.game_discreption = game_discreption;
+    public void setgame_description(String game_discreption) {
+        this.game_description = game_discreption;
     }
 
-    public String getGame_addDate() {
-        return game_addDate;
-    }
-
-    public void setGame_addDate(String game_addDate) {
-        this.game_addDate = game_addDate;
-    }
-     @Override
-     public String toString() {
-        return "Game{" + "game id=" + game_id +", game name = "+game_name +",game vidlink = "+game_vid  +",game link = "+game_link +",game description="+game_discreption +",game addDate ="+game_addDate +'}';
-        
-    }
     
+
+    @Override
+    public String toString() {
+        return "Game{" + "game_name=" + game_name + "category_name=" + category_name+ ", game_img=" + game_img + ", game_link=" + game_link + ", game_discreption=" + game_description +  '}';
+    }
+
+    public void setCategory_addDate(Date date) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+     
+
+  
+   
     
 }

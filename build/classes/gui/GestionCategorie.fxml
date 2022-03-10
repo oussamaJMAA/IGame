@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GestionCategorieController">
+      
+   <children>
+      <VBox layoutX="32.0" layoutY="157.0" prefHeight="292.0" prefWidth="152.0" spacing="20.0">
+         <children>
+            
+             <Label text="category" textFill="#514a4a">
+               <font>
+                  <Font name="MS Reference Specialty" size="23.0" />
+               </font>
+               
+            </Label>
+            <Label text="description" textFill="#686464">
+               <font>
+                  <Font name="MS Reference Specialty" size="23.0" />
+               </font>
+            </Label>
+            <Label prefHeight="36.0" prefWidth="81.0" />
+            <Label />
+            
+         </children>
+      </VBox>
+      <VBox layoutX="238.0" layoutY="157.0" prefHeight="113.0" prefWidth="199.0" spacing="27.0">
+         <children>
+           
+            <TextField fx:id="tdCategory" />
+            <TextField fx:id="tddescreption" />
+            
+            
+         </children>
+      </VBox>
+      <Button fx:id="btn_addC" layoutX="32.0" layoutY="488.0" mnemonicParsing="false" onAction="#AddCategory" prefHeight="31.0" prefWidth="130.0" text="Ajouter Categorie" />
+      <TableView fx:id="tabCategory" layoutX="459.0" layoutY="157.0" onMouseClicked="#handleMouseAction" prefHeight="292.0" prefWidth="398.0">
+        <columns>
+          
+            <TableColumn fx:id="colCcat" prefWidth="207.0" text="Category" />
+            <TableColumn fx:id="colCdescreption" prefWidth="190.0" text="descreption" />
+           
+        </columns>
+      </TableView>
+      <Button fx:id="btn_updateC" layoutX="168.0" layoutY="488.0" mnemonicParsing="false" onAction="#updateCategory" prefHeight="31.0" prefWidth="130.0" text="Modifier Categorie" />
+      <Button fx:id="btn_deleteC" layoutX="306.0" layoutY="488.0" mnemonicParsing="false" onAction="#deleteCategory" prefHeight="31.0" prefWidth="130.0" text="Supprimer Categorie" />
+      <TextField fx:id="tdid" layoutX="242.0" layoutY="103.0" prefHeight="26.0" prefWidth="190.0" style="-fx-background-color: transparent; -fx-text-fill: transparent;">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </TextField>
+      <Button fx:id="annuler" layoutX="447.0" layoutY="489.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="31.0" prefWidth="130.0" text="Annuler" />
+      <TextField fx:id="keywordtextfield" layoutX="621.0" layoutY="89.0" prefHeight="26.0" prefWidth="252.0" promptText="Search...">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font></TextField>
+      <Label layoutX="468.0" layoutY="85.0" prefHeight="35.0" prefWidth="142.0" text="Chercher Categorie:" textFill="#545050">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="back" layoutX="44.0" layoutY="549.0" mnemonicParsing="false" onAction="#swtichToGame" prefHeight="26.0" prefWidth="176.0" text="&lt;-jeux" />
+      <Label fx:id="warning" layoutX="44.0" layoutY="33.0" prefHeight="69.0" prefWidth="335.0" text="gestion de Categorie " textFill="RED">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+    </children>
+
+</AnchorPane>
