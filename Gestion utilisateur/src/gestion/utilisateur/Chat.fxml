@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="gestion.utilisateur.ChatController">
+   <children>
+      <Button fx:id="serveurr" layoutX="159.0" layoutY="187.0" mnemonicParsing="false" onAction="#LoadChat1" text="Host" />
+      <Button fx:id="clientt" layoutX="332.0" layoutY="187.0" mnemonicParsing="false" onAction="#LoadChat2" text="Join" />
+   </children>
+</AnchorPane>

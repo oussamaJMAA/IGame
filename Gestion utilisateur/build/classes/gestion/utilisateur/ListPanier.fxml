@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion.utilisateur.ListPanierController">
+   <children>
+       <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0" style="-fx-background-color: #EBE8F9;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fx:id="admin_image" fitHeight="113.0" fitWidth="124.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                 <!-- <Image url="@images/jimmy-fallon.png" />-->
+               </image>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="50.0" />
+               </VBox.margin></ImageView>
+            <Label text="Jimmy Fallon" textFill="#e7e5e5">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="test" text="Label" />
+            <Button fx:id="btnOverview" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#on_click_dashboard_button" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Dashboard" textFill="#e7e5e5">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8_Home_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets top="100.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Messages">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8_Open_Envelope_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnCustomers" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#on_click_users_button" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Users">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8_Person_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnMenus" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#on_click_tournaments" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Tournaments">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8_Xbox_Menu_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#on_click_teams" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Teams">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8_Box_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnSettings1" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="552.0" mnemonicParsing="false" onAction="#on_clicki_products" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Products">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8_Slider__32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnSettings" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#on_click_paniers" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Les paniers">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8_Slider__32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnPackages1" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="509.0" mnemonicParsing="false" onAction="#on_click_commande" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Les commandes">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8_Box_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnSignout" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#on_click_sign_out" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Sign Out">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8_Sign_Out_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+         </children>
+      </VBox>
+      <Text layoutX="591.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List panier">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Text>
+      <Button fx:id="btn_ajouter" layoutX="564.0" layoutY="541.0" mnemonicParsing="false" onAction="#Ajouter" style="-fx-background-color: #b284be;" text="Ajouter" />
+      <Button fx:id="btn_update" layoutX="792.0" layoutY="541.0" mnemonicParsing="false" onAction="#update" style="-fx-background-color: #b284be;" text="Mise à jour" />
+      <Button fx:id="btn_supprimer" layoutX="1048.0" layoutY="541.0" mnemonicParsing="false" onAction="#supp" style="-fx-background-color: #b284be;" text="supprimer" />
+      <ListView fx:id="listview" layoutX="504.0" layoutY="176.0" onMouseClicked="#charger" prefHeight="295.0" prefWidth="531.0" />
+      <Pane fx:id="pan" layoutX="15.0" layoutY="170.0" prefHeight="119.0" prefWidth="197.0" />
+      <Pane fx:id="pan2" disable="true" layoutX="291.0" layoutY="342.0" prefHeight="141.0" prefWidth="189.0">
+         <children>
+            <Text layoutX="14.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Totale Panier" />
+            <TextField fx:id="totaleP" layoutX="9.0" layoutY="53.0" />
+            <TextField fx:id="reduction" layoutX="9.0" layoutY="102.0" />
+            <Text layoutX="9.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix après réduction" />
+         </children>
+      </Pane>
+      <Button fx:id="totalePanier" layoutX="917.0" layoutY="541.0" mnemonicParsing="false" onAction="#totale" style="-fx-background-color: #b284be;" text="Totale Panier" />
+      <Button layoutX="664.0" layoutY="541.0" mnemonicParsing="false" onAction="#on_click_valider" style="-fx-background-color: #b284be;" text="Valider" />
+      <ComboBox fx:id="comboProduit" layoutX="308.0" layoutY="261.0" prefWidth="150.0" style="-fx-background-color: #b284be;" />
+   </children>
+</AnchorPane>
