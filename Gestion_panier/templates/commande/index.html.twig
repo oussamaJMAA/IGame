@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Votre Commande {% endblock %}
+
+{% block body %}
+    <h1>Commande </h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdCmd</th>
+                <th>Date</th>
+                <th>Modepaiment</th>
+                <th>Livraison</th>
+                <th>Idproduit</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commande in commandes %}
+            <tr>
+                <td>{{ commande.idCmd }}</td>
+                <td>{{ commande.date ? commande.date|date('Y-m-d') : '' }}</td>
+                <td>{{ commande.modepaiment }}</td>
+                <td>{{ commande.livraison }}</td>
+
+                <td>{{ commande.idproduit }}</td>
+                <td>
+                    <a href="{{ path('app_commande_show', {'idCmd': commande.idCmd}) }}">consulter</a>
+                    <a href="{{ path('app_commande_edit', {'idCmd': commande.idCmd}) }}">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_commande_new') }}">Passer commande </a>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ajouter Panier{% endblock %}
+
+{% block body %}
+
+
+    <h1>ajouter Panier</h1>
+
+    <br>
+    <br>
+
+
+    {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+    {{ form_widget(form.quantite) }}
+    {{ form_errors(form.quantite) }}
+
+
+    {{ form_widget(form.nomproduit) }}
+    {{ form_errors(form.nomproduit) }}
+    <button type="submit" > {{ button_label|default('Ajouter') }}</button>
+
+    <a href="{{ path('app_panier_index') }}">retour a la liste</a>
+    {{ form_end(form) }}
+
+
+{% endblock %}
+
+

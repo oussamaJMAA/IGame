@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Commande{% endblock %}
+
+{% block body %}
+    <h1>passer Commande</h1>
+    {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+
+    {{ form_widget(form.date) }}
+    {{ form_errors(form.date) }}
+
+    {{ form_widget(form.livraison) }}
+    {{ form_errors(form.livraison) }}
+
+
+    {{ form_widget(form.modepaiment) }}
+    {{ form_errors(form.modepaiment) }}
+
+
+
+
+    {{ form_widget(form.livraison) }}
+    {{ form_errors(form.livraison) }}
+
+
+
+    {{ form_widget(form.idproduit) }}
+    {{ form_errors(form.idproduit) }}
+
+
+    <button type="submit" > {{ button_label|default('Ajouter') }}</button>
+{{ form_end(form) }}
+
+    <a href="{{ path('app_commande_index') }}">Retour</a>
+{% endblock %}
