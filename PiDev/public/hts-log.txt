@@ -1,0 +1,18 @@
+HTTrack3.49-2+htsswf+htsjava launched on Wed, 06 Apr 2022 20:51:28 at https://jobick.dexignlab.com/xhtml/index.html +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar +https://jobick.dexignlab.com/xhtml/index.html
+(winhttrack -qwC2%Ps2u1%s%uN0%I0p3DaK0H0%kf2A25000%f#f -F  -%F  -%l "en, *" https://jobick.dexignlab.com/xhtml/index.html -O1 "C:\My Web Sites\dashboard2" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar +https://jobick.dexignlab.com/xhtml/index.html )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+20:51:31	Warning: 	Found for https://jobick.dexignlab.com/robots.txt
+20:51:31	Warning: 	File has moved from https://jobick.dexignlab.com/robots.txt to https://jobick.dexignlab.com/xhtml/page-error-404.html
+20:53:42	Warning: 	Found for https://jobick.dexignlab.com/xhtml/Trident/
+20:53:42	Warning: 	File has moved from https://jobick.dexignlab.com/xhtml/Trident/ to https://jobick.dexignlab.com/xhtml/page-error-404.html
+20:53:42	Warning: 	Found for https://jobick.dexignlab.com/xhtml/Edge/
+20:53:42	Warning: 	File has moved from https://jobick.dexignlab.com/xhtml/Edge/ to https://jobick.dexignlab.com/xhtml/page-error-404.html
+20:53:54	Warning: 	Warning: store application/octet-stream without scan: C:/My Web Sites/dashboard2/jobick.dexignlab.com/xhtml/icons/icomoon/fonts/icomoon.svg
+
+HTTrack Website Copier/3.49-2 mirror complete in 2 minutes 26 seconds : 348 links scanned, 345 files written (28515393 bytes overall) [10608004 bytes received at 72657 bytes/sec], 24975227 bytes transferred using HTTP compression in 243 files, ratio 27%, 51.0 requests per connection
+(No errors, 7 warnings, 0 messages)

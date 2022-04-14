@@ -1,0 +1,37 @@
+{% extends 'base-back.html.twig' %}
+{% block title %}Game{% endblock %}
+
+{% block body %}
+    <h1>Game</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>GameId</th>
+                <td>{{ game.gameId }}</td>
+            </tr>
+            <tr>
+                <th>GameName</th>
+                <td>{{ game.gameName }}</td>
+            </tr>
+            <tr>
+                <th>GameDescription</th>
+                <td>{{ game.gameDescription }}</td>
+            </tr>
+            <tr>
+                <th>GameLink</th>
+                <td>{{ game.gameLink }}</td>
+            </tr>
+            <tr>
+                <th>GameImg</th>
+                <td>{{ game.gameImg }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_game_index') }}">back to list</a>
+
+    <a href="{{ path('app_game_edit', {'gameId': game.gameId}) }}">edit</a>
+
+    {{ include('game/_delete_form.html.twig') }}
+{% endblock %}
