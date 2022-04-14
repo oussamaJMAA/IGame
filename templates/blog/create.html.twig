@@ -1,0 +1,35 @@
+{% extends 'admin_template/base.html.twig' %}
+
+
+{% block stat %}
+
+<h1>Creation d'une publication</h1>
+
+{{ form_start(formPublication) }}
+
+
+
+{{ form_row(formPublication.titre, {'attr' : {'placeholder' : "Titre"}}) }}
+{{ form_row(formPublication.contenu, {'attr' : {'placeholder' : "Contenu"}}) }}
+{{ form_row(formPublication.image, {'attr' : {'placeholder' : "Image"}}) }}
+
+
+<button type="submt" class="btn btn-sucess">
+
+    {% if editMode %}
+
+Modifier la publication
+
+{% else %}
+
+Ajouter Publication
+
+{% endif %}
+
+ </button>
+
+
+{{ form_end(formPublication) }}
+
+
+{% endblock %}
