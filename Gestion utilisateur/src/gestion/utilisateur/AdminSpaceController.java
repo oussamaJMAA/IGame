@@ -244,26 +244,26 @@ String p = sourcePath.toString();
 PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(p));
                       
             document.open();
-            PdfPTable table = new PdfPTable(6);
+            PdfPTable table = new PdfPTable(5);
             table.addCell("Firstname");
             table.addCell("Lastname");
             table.addCell("Username");
             table.addCell("Role");
             table.addCell("Phone");
-            table.addCell("Join Date");
+           
             for (int i = 0; i < UserList.size(); i++) {
                 String fn = UserList.get(i).getFirstname();
                 String ln = UserList.get(i).getLastname();
                 String un = UserList.get(i).getUsername();
                 String r = UserList.get(i).getRole();
                 int phn = UserList.get(i).getPhone();
-                String creation_date = UserList.get(i).getCreated_at().toString();
+              
                 table.addCell(fn);
                 table.addCell(ln);
                 table.addCell(un);
                 table.addCell(r);
                 table.addCell(Integer.toString(phn));
-                table.addCell(creation_date);
+                
 
             }
             document.add(table);
@@ -327,7 +327,7 @@ PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(p));
         phonecol.setCellValueFactory(new PropertyValueFactory<>("phone"));
         nationalitycol.setCellValueFactory(new PropertyValueFactory<>("nationality"));
         //datecol.setCellValueFactory(new PropertyValueFactory<>("created_at"));
-
+           
         //add cell of button edit 
         Callback<TableColumn<User, String>, TableCell<User, String>> cellFoctory = (TableColumn<User, String> param) -> {
             // make cell containing buttons
@@ -431,27 +431,25 @@ PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(p));
                     return true;
                 }
                 String searchkeyword = newvalue.toLowerCase();
-                String user_firstname = t.getFirstname().toLowerCase();
-                String user_lastname = t.getFirstname().toLowerCase();
+                //String user_firstname = t.getFirstname().toLowerCase();
+                //String user_lastname = t.getFirstname().toLowerCase();
                 String user_username = t.getUsername().toLowerCase();
-                String user_role = t.getRole().toLowerCase();
-                String user_gender = t.getGender().toLowerCase();
-                String user_email = t.getEmail().toLowerCase();
-                String user_address = t.getAddress().toLowerCase();
-                String user_nationality = t.getNationality().toLowerCase();
-                int user_phone = t.getPhone();
-                String k = Integer.toString(user_phone);
-               String user_date = t.getCreated_at().toString();
-
+                //String user_role = t.getRole().toLowerCase();
+                //String user_gender = t.getGender().toLowerCase();
+                //String user_email = t.getEmail().toLowerCase();
+                //String user_address = t.getAddress().toLowerCase();
+               // String user_nationality = t.getNationality().toLowerCase();
+                //int user_phone = t.getPhone();
+                //String k = Integer.toString(user_phone);
+               //String user_date = t.getCreated_at().toString();
+/*
                 if (user_firstname.indexOf(searchkeyword) > -1) {
                     return true;
                 }
                 if (user_lastname.indexOf(searchkeyword) > -1) {
                     return true;
                 }
-                if (user_username.indexOf(searchkeyword) > -1) {
-                    return true;
-                }
+             
                 if (user_role.indexOf(searchkeyword) > -1) {
                     return true;
                 }
@@ -466,16 +464,20 @@ PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(p));
                 }
                 if (user_nationality.indexOf(searchkeyword) > -1) {
                     return true;
+                }*/
+               
+                  if (user_username.indexOf(searchkeyword) > -1) {
+                    return true;
                 }
                 /*
                 if (user_date.indexOf(searchkeyword) > -1) {
                     return true;
                 }
-*/
+
                 if (k.indexOf(searchkeyword) > -1) {
                     return true;
                 }
-
+*/
                 return false;
 
             });

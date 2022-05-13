@@ -5,6 +5,8 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion.utilisateur.ListCommandeAdminController">
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion.utilisateur.ListCommandeAdminController">
    <children>
         <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0" style="-fx-background-color: #EBE8F9;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -145,7 +147,7 @@
             </Button>
          </children>
       </VBox>
-      <ListView fx:id="listview" layoutX="506.0" layoutY="165.0" onMouseClicked="#charger" prefHeight="321.0" prefWidth="607.0" />
+      <ListView fx:id="listview" layoutX="506.0" layoutY="165.0" onMouseClicked="#charger" prefHeight="122.0" prefWidth="607.0" />
       <Button fx:id="btn_etat" layoutX="790.0" layoutY="556.0" mnemonicParsing="false" onAction="#setEtat" prefHeight="26.0" prefWidth="89.0" style="-fx-background-color: #b284be;" text="set Etat">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
@@ -161,5 +163,14 @@
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Button>
+      <TableView fx:id="tab" layoutX="613.0" layoutY="309.0" prefHeight="200.0" prefWidth="443.0">
+        <columns>
+          <TableColumn fx:id="col_nb_prod" prefWidth="75.0" text="Nb Produit" />
+          <TableColumn fx:id="col_date" prefWidth="75.0" text="Date" />
+            <TableColumn fx:id="col_meth" prefWidth="139.20001220703125" text="Methode de Paiement" />
+            <TableColumn fx:id="col_etat" prefWidth="65.60003662109375" text="Etat" />
+            <TableColumn fx:id="col_prix" prefWidth="85.60002441406249" text="PrixTotal" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

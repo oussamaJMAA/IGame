@@ -6,6 +6,7 @@
 package gestion.utilisateur.servicem;
 
 import gestion.utilisateur.entities.Commande;
+import gestion.utilisateur.retrievedata;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -36,23 +37,25 @@ public String getSeason( Date date ) {
 }
      
     public void ajouterCommande(Commande c){
+        
+         retrievedata a = retrievedata.getInstance("", "",0);
         java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
          Random rand = new Random();
         int n = rand.nextInt(50);
         n += 1;
         try {
-            String requete= "INSERT INTO commande(idProduit,idClient,date,modePaiment,livraison,etat,id_cmd,idPanier)"
-                    + "VALUES (?,?,?,?,?,?,?,?)";
+            String requete= "INSERT INTO commande(user_id,date,modePaiment,etat,id)"
+                    + "VALUES (?,?,?,?,?)";
             PreparedStatement pst = MyConnection.getInstance().getCnx()
                     .prepareStatement(requete);
-            pst.setLong(1, c.getIdProduit());
-            pst.setLong(2,c.getIdClient());
-            pst.setDate(3,date);
-            pst.setString(4,c.getModePaiment());
-            pst.setString(5,c.getLivraison());
-            pst.setString(6, "en attend");
-            pst.setInt(7, n);
-           pst.setInt(8, c.getIdPanier());
+         
+            pst.setLong(1,a.getId());
+            pst.setDate(2,date);
+            pst.setString(3,c.getModePaiment());
+     
+            pst.setString(4, "en attend");
+            pst.setInt(5, n);
+        
             pst.executeUpdate();
             System.out.println("Commande inserée");
             
@@ -64,7 +67,7 @@ public String getSeason( Date date ) {
     
     public void suppCommande(Commande c){
          try {
-            String requete = "DELETE FROM commande where id_cmd=?";
+            String requete = "DELETE FROM commande where id=?";
             PreparedStatement pst = MyConnection.getInstance().getCnx()
                     .prepareStatement(requete);
             pst.setLong(1, c.getId_cmd());
@@ -76,17 +79,18 @@ public String getSeason( Date date ) {
         
     }
     public void updateCommande(Commande c){
+         retrievedata a = retrievedata.getInstance("", "",0);
          try {
-            String requete = "UPDATE commande SET idProduit=?,idClient=?,date=?,modePaiment=?,livraison=?"
-                    + " WHERE id_cmd=?";
+            String requete = "UPDATE commande SET user_id=?,date=?,methodedepaiement=?"
+                    + " WHERE id=?";
             PreparedStatement pst = MyConnection.getInstance().getCnx()
                     .prepareStatement(requete);
-            pst.setDate(3, c.getDate());
-            pst.setLong(2, c.getIdClient());
-            pst.setLong(1, c.getIdProduit());
-            pst.setString(4, c.getModePaiment());
-            pst.setString(5, c.getLivraison());
-            pst.setLong(6, c.getId_cmd());
+            pst.setDate(2, c.getDate());
+            pst.setLong(1, a.getId());
+         
+            pst.setString(3, c.getModePaiment());
+            pst.setInt(4, c.getId_cmd());
+        
 
             pst.executeUpdate();
             System.out.println("Commande modifiée");
@@ -103,14 +107,16 @@ public String getSeason( Date date ) {
                     .createStatement();
             ResultSet rs =  st.executeQuery(requete);
             while(rs.next()){
+                //(idProduit,user_id,date,modePaiment,etat,id)
                 Commande c = new Commande();
-                c.setId_cmd(rs.getLong("id_cmd"));
-                c.setIdClient(rs.getInt("idClient"));
-                c.setIdProduit(rs.getInt("idProduit"));
+                c.setId_cmd(rs.getInt("id"));
+                c.setIdClient(rs.getInt("user_id"));
+              //  c.setIdProduit(rs.getInt("idProduit"));
                 c.setDate(rs.getDate("date"));
-                c.setLivraison(rs.getString("livraison"));
-                c.setModePaiment(rs.getString("modePaiment"));
+              c.setNbproduit(rs.getInt("nbproduit"));
+                c.setModePaiment(rs.getString("methodedepaiement"));
                  c.setEtat(rs.getString("etat"));
+                 c.setPrix_tot(rs.getDouble("prixtotale"));
                 list.add(c);
             }
         } catch (SQLException ex) {
@@ -121,18 +127,18 @@ public String getSeason( Date date ) {
     public List<Commande> getCommandeByClient(int idClient) {
          List<Commande> list = new ArrayList<>();
         try {
-            String requete = "SELECT * FROM commande where idClient="+idClient;
+            String requete = "SELECT * FROM commande where user_id="+idClient;
             Statement st = MyConnection.getInstance().getCnx()
                     .createStatement();
             ResultSet rs =  st.executeQuery(requete);
             while(rs.next()){
                 Commande c = new Commande();
-                c.setId_cmd(rs.getLong("id_cmd"));
-                c.setIdClient(rs.getInt("idClient"));
-                c.setIdProduit(rs.getInt("idProduit"));
+                c.setId_cmd(rs.getInt("id"));
+                c.setIdClient(rs.getInt("user_id"));
+            
                 c.setDate(rs.getDate("date"));
-                c.setLivraison(rs.getString("livraison"));
-                c.setModePaiment(rs.getString("modePaiment"));
+               c.setNbproduit(rs.getInt("nbproduit"));
+                c.setModePaiment(rs.getString("methodedepaiement"));
                 c.setEtat(rs.getString("etat"));
                 
                 list.add(c);
@@ -169,13 +175,13 @@ public String getSeason( Date date ) {
        public void setEtat(Commande c,String etat) throws SQLException {
        
             String requete = "UPDATE commande SET etat=?"
-                    + " WHERE id_cmd=?";
+                    + " WHERE id=?";
             
        
                 PreparedStatement pst = MyConnection.getInstance().getCnx()
                     .prepareStatement(requete);
             pst.setString(1, etat);
-            pst.setLong(2, c.getId_cmd());
+            pst.setInt(2, c.getId_cmd());
 
             pst.executeUpdate();
           //  System.out.println("Commande modifiée");

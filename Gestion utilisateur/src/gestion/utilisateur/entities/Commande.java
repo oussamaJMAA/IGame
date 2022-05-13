@@ -13,14 +13,55 @@ import java.sql.Date;
  */
 public class Commande {
 
-    private Long id_cmd;
+    private int id_cmd;
     private int idProduit;
-    private Date date;
+    private java.sql.Date date;
     private String modePaiment;
     private String livraison;
     private int idPanier;
     private int idClient;
     private String etat;
+private int nbproduit;
+private double prix_tot;
+
+    public double getPrix_tot() {
+        return prix_tot;
+    }
+
+    public void setPrix_tot(double prix_tot) {
+        this.prix_tot = prix_tot;
+    }
+
+    public Commande(int idProduit, Date date, String modePaiment, int idPanier, int idClient, String etat, int nbproduit, double prix_tot) {
+        this.idProduit = idProduit;
+        this.date = date;
+        this.modePaiment = modePaiment;
+        this.idPanier = idPanier;
+        this.idClient = idClient;
+        this.etat = etat;
+        this.nbproduit = nbproduit;
+        this.prix_tot = prix_tot;
+    }
+
+
+    public int getNbproduit() {
+        return nbproduit;
+    }
+
+    public void setNbproduit(int nbproduit) {
+        this.nbproduit = nbproduit;
+    }
+
+    public Commande(int idProduit, Date date, String modePaiment, int idPanier, int idClient, String etat, int nbproduit) {
+        this.idProduit = idProduit;
+        this.date = date;
+        this.modePaiment = modePaiment;
+        this.idPanier = idPanier;
+        this.idClient = idClient;
+        this.etat = etat;
+        this.nbproduit = nbproduit;
+    }
+
 
     public Commande() {
     }
@@ -48,7 +89,7 @@ public class Commande {
         this.idClient = idClient;
         this.idPanier= idPanier;
     }
-    public Commande(Long id_cmd, int idProduit, Date date, String modePaiment, String livraison, int idClient) {
+    public Commande(int id_cmd, int idProduit, Date date, String modePaiment, String livraison, int idClient) {
         this.id_cmd = id_cmd;
         this.idProduit = idProduit;
         this.date = date;
@@ -65,11 +106,11 @@ public class Commande {
         this.etat = etat;
     }
 
-    public Long getId_cmd() {
+    public int getId_cmd() {
         return id_cmd;
     }
 
-    public void setId_cmd(Long id_cmd) {
+    public void setId_cmd(int id_cmd) {
         this.id_cmd = id_cmd;
     }
 
@@ -81,11 +122,11 @@ public class Commande {
         this.idProduit = idProduit;
     }
 
-    public Date getDate() {
+    public java.sql.Date getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(java.sql.Date date) {
         this.date = date;
     }
 
@@ -115,9 +156,20 @@ public class Commande {
 
     @Override
     public String toString() {
-        return "Commande{" + "idProduit=" + idProduit + ", date=" + date + ", modePaiment=" + modePaiment + ", livraison=" + livraison + ", idClient=" + idClient + ", etat=" + etat + '}';
+        return "Commande{" + "idProduit=" + idProduit + ", date=" + date + ", modePaiment=" + modePaiment + ", idPanier=" + idPanier + ", idClient=" + idClient + ", etat=" + etat + ", nbproduit=" + nbproduit + ", prix_tot=" + prix_tot + '}';
     }
 
+    public Commande(int id_cmd, java.sql.Date date, String modePaiment, int idClient, String etat, int nbproduit, double prix_tot) {
+        this.id_cmd = id_cmd;
+        this.date = date;
+        this.modePaiment = modePaiment;
+        this.idClient = idClient;
+        this.etat = etat;
+        this.nbproduit = nbproduit;
+        this.prix_tot = prix_tot;
+    }
+
+   
     
    
 

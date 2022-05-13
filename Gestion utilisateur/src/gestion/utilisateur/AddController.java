@@ -198,7 +198,7 @@ combobox.getItems().addAll("Afghanistan", "Albania", "Algeria", "Andorra", "Ango
 
         if (update == false) {
 
-            query = "INSERT INTO user(firstname,lastname,username,email,password,gender,role,phone,address,nationality,image) values(?,?,?,?,?,?,?,?,?,?,?)";
+            query = "INSERT INTO user(firstname,lastname,username,email,password,gender,role,phone,address,nationality,image,java_password,roles,is_verified) values(?,?,?,?,?,?,?,?,?,?,?,?,?,0)";
 
         } else {
             query = "UPDATE `user` SET "
@@ -212,7 +212,11 @@ combobox.getItems().addAll("Afghanistan", "Albania", "Algeria", "Andorra", "Ango
                     + "`phone`=?,"
                     + "`address`=?,"
                     + "`nationality`=?,"
-                    + "`image`= ? WHERE username = '" + userId + "'";
+                    + "`image`= ?, "
+                    + "`java_password`= ? ,"
+                    + "`roles`= ? ,"
+                    + "`is_verified`= 0 "
+                    + "WHERE username = '" + userId + "'";
         }
 
     }
@@ -248,6 +252,8 @@ combobox.getItems().addAll("Afghanistan", "Albania", "Algeria", "Andorra", "Ango
             preparedStatement.setString(9, addresstf.getText());
             preparedStatement.setString(10, combobox.getValue());
             preparedStatement.setString(11, image_path);
+            preparedStatement.setString(12, passwordtf.getText());
+            preparedStatement.setString(13,"[\"ROLE_ADMIN\"]");
 
             preparedStatement.execute();
 
