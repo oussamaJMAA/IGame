@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="866.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion.utilisateur.UserSettingsController">
+   <children>
+      <Label layoutX="237.0" layoutY="56.0" text="Change your Settings">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="32.0" />
+         </font>
+      </Label>
+      <Label layoutX="252.0" layoutY="325.0" text="New Password : " />
+      <PasswordField fx:id="passwordtf" layoutX="364.0" layoutY="314.0" prefHeight="25.0" prefWidth="336.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #b284be; -fx-border-width: 0px 0px 2px 0px;" />
+      <PasswordField fx:id="confirmpasswordtf" layoutX="369.0" layoutY="362.0" prefHeight="25.0" prefWidth="336.0" promptText="Confirm Password" style="-fx-background-color: transparent; -fx-border-color: #b284be; -fx-border-width: 0px 0px 2px 0px;" />
+      <Label layoutX="222.0" layoutY="368.0" text="Confirm Password : " />
+      <FontAwesomeIconView glyphName="HOME" layoutX="30.0" layoutY="68.0" onMouseClicked="#GoToHomePage" size="48" text="" />
+      <Label layoutX="241.0" layoutY="419.0" text="New username : " />
+      <TextField fx:id="usernametf" layoutX="373.0" layoutY="408.0" prefHeight="25.0" prefWidth="336.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: #b284be; -fx-border-width: 0px 0px 2px 0px;" />
+      <TextField fx:id="emailtf" layoutX="369.0" layoutY="459.0" prefHeight="25.0" prefWidth="336.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #b284be; -fx-border-width: 0px 0px 2px 0px;" />
+      <Label layoutX="244.0" layoutY="469.0" text="New email : " />
+      <Button layoutX="351.0" layoutY="523.0" mnemonicParsing="false" onAction="#ModifyUser" prefHeight="26.0" prefWidth="336.0" style="-fx-background-color: #b284be;" text="Apply Changes" />
+      <Label fx:id="userlabel" layoutX="118.0" layoutY="460.0" style="-fx-background-color: transparent; -fx-text-fill: transparent;" text="Label" />
+      <TextField fx:id="lastnametf" layoutX="358.0" layoutY="167.0" prefHeight="25.0" prefWidth="336.0" promptText="Lastname" style="-fx-background-color: transparent; -fx-border-color: #b284be; -fx-border-width: 0px 0px 2px 0px;" />
+      <Label layoutX="277.0" layoutY="175.0" text="Lastname:" />
+      <TextField fx:id="firstnametf" layoutX="361.0" layoutY="125.0" prefHeight="25.0" prefWidth="336.0" promptText="Firstname" style="-fx-background-color: transparent; -fx-border-color: #b284be; -fx-border-width: 0px 0px 2px 0px;" />
+      <Label layoutX="276.0" layoutY="141.0" text="Firstname:" />
+      <Label layoutX="278.0" layoutY="224.0" text="Address : " />
+      <Label layoutX="281.0" layoutY="272.0" text="Phone :" />
+      <TextField fx:id="adresstf" layoutX="363.0" layoutY="210.0" prefHeight="25.0" prefWidth="336.0" promptText="Address" style="-fx-background-color: transparent; -fx-border-color: #b284be; -fx-border-width: 0px 0px 2px 0px;" />
+      <TextField fx:id="phonetf" layoutX="363.0" layoutY="259.0" prefHeight="25.0" prefWidth="336.0" promptText="Phone" style="-fx-background-color: transparent; -fx-border-color: #b284be; -fx-border-width: 0px 0px 2px 0px;" />
+   </children>
+</AnchorPane>
