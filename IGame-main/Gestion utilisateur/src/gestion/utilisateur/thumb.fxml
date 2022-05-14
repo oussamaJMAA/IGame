@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="287.0" prefWidth="295.0" style="-fx-border-radius: 35px;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion.utilisateur.ThumbController">
+   <children>
+      <ImageView fitHeight="174.0" fitWidth="341.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-radius: 10;">
+         <image>
+            <Image url="@tournoi.jpg" />
+         </image>
+      </ImageView>
+      <HBox prefHeight="0.0" prefWidth="302.0" />
+      <HBox prefHeight="56.0" prefWidth="500.0">
+         <children>
+            <Label fx:id="nomT" prefHeight="98.0" prefWidth="81.0" text="Label">
+               <font>
+                  <Font name="Broadway" size="13.0" />
+               </font></Label>
+            <Label fx:id="recomT" prefHeight="36.0" prefWidth="114.0" text="Label">
+               <font>
+                  <Font name="Broadway" size="13.0" />
+               </font></Label>
+            <Label fx:id="dateT" layoutX="94.0" layoutY="10.0" prefHeight="36.0" prefWidth="106.0" text="Label">
+               <font>
+                  <Font name="Broadway" size="16.0" />
+               </font></Label>
+         </children>
+      </HBox>
+      <Button fx:id="participate" mnemonicParsing="false" onAction="#participe" prefHeight="36.0" prefWidth="95.0" style="-fx-background-color: #b284be;" text="Participate" />
+      <Button fx:id="cancel" mnemonicParsing="false" onAction="#cancel" style="-fx-background-color: #b284be;" text="Cancel" />
+      <Label fx:id="id_t" prefHeight="18.0" prefWidth="195.0" text="Label" />
+   </children>
+</VBox>
