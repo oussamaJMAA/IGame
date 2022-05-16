@@ -362,7 +362,7 @@ String query = "delete from participation where id_equipe = '"+get_id_equipe()+"
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("jemaaoussama64@gmail.com", "sousourourou9899@");
+                return new PasswordAuthentication("jemaaoussama64@gmail.com", "");
             }
         });
         Message message = new MimeMessage(session);
