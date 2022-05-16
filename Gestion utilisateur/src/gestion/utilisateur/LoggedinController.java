@@ -6,9 +6,14 @@
 package gestion.utilisateur;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,35 +52,36 @@ public class LoggedinController implements Initializable {
     @FXML
     private Button btnOverview;
     @FXML
-    private Button btnOrders;
-    @FXML
-    private Button btnCustomers;
-    @FXML
     private Button btnMenus;
-    @FXML
-    private Button btnSettings;
     @FXML
     private Button btnPackages1;
     @FXML
     private Button btnSignout;
     @FXML
-    private Button btnPackages11;
+    private Button btnOverview1;
     @FXML
-    private Button btnPackages111;
+    private Button btnSettings1;
+    @FXML
+    private Button btn_blog;
   
 
   
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-     set();
+          try {
+              set();
+          } catch (FileNotFoundException ex) {
+              System.out.println(ex.getMessage());
+          }
     }
-    public void set(){
+    public void set() throws FileNotFoundException{
         retrievedata a = retrievedata.getInstance("", "",0);
          
          test.setText(a.getUsername());
          
-               int jj=a.getImage().lastIndexOf('\\');
-admin_image.setImage(new Image(LoggedinController.class.getResourceAsStream(a.getImage().substring(jj+1))));
+InputStream stream = new FileInputStream("C:\\Users\\oussa\\PhpstormProjects\\gaming_app\\public\\uploads\\photos\\"+a.getImage());
+      Image image4 = new Image(stream);
+      admin_image.setImage(image4);
     }
     /**
      *
@@ -129,13 +135,6 @@ admin_image.setImage(new Image(LoggedinController.class.getResourceAsStream(a.ge
     }
 
 
-    @FXML
-    private void handleClicks(ActionEvent event) {
-    }
-
-    @FXML
-    private void on_click_users_button(ActionEvent event) {
-    }
 
     @FXML
     private void on_click_tournaments(ActionEvent event) throws IOException {
@@ -163,7 +162,7 @@ admin_image.setImage(new Image(LoggedinController.class.getResourceAsStream(a.ge
 
     @FXML
     private void on_clicki_products(ActionEvent event) throws IOException {
-         root = FXMLLoader.load(getClass().getResource("viewclient.fxml"));  
+         root = FXMLLoader.load(getClass().getResource("Produit_Client.fxml"));  
               stage= (Stage)((Node)event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
@@ -171,7 +170,6 @@ admin_image.setImage(new Image(LoggedinController.class.getResourceAsStream(a.ge
                 stage.show(); 
     }
 
-    @FXML
     private void on_click_paniers(ActionEvent event) throws IOException {
         
         root = FXMLLoader.load(getClass().getResource("ListPanier.fxml"));  
@@ -194,19 +192,39 @@ admin_image.setImage(new Image(LoggedinController.class.getResourceAsStream(a.ge
                 stage.show(); 
     }
 
-    @FXML
-    private void on_click_accueil(ActionEvent event) {
-    }
 
-    @FXML
     private void on_click_blog(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("PubCom.fxml"));  
+        root = FXMLLoader.load(getClass().getResource("Publication_Client.fxml"));  
               stage= (Stage)((Node)event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
                 stage.setTitle("iGame");
                 stage.show(); 
         
+    }
+
+    @FXML
+    private void on_click_dashboard_button(ActionEvent event) {
+    }
+
+    @FXML
+    private void on_click_games(ActionEvent event) throws IOException {
+          root = FXMLLoader.load(getClass().getResource("Game_Client.fxml"));  
+              stage= (Stage)((Node)event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("iGame");
+                stage.show(); 
+    }
+
+    @FXML
+    private void on_click_blogs(ActionEvent event) throws IOException {
+          root = FXMLLoader.load(getClass().getResource("Publication_Client.fxml"));  
+              stage= (Stage)((Node)event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("iGame");
+                stage.show(); 
     }
  
                                                         

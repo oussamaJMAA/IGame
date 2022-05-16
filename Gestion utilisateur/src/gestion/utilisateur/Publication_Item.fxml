@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="1469.0" style="-fx-background-radius: 18 18 18 18; -fx-border-radius: 18 18 18 18; -fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion.utilisateur.Publication_ItemController">
+   <children>
+      <ImageView fx:id="image" fitHeight="302.0" fitWidth="815.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+         <image>
+            <Image url="@khazix.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="MOVE" />
+         </cursor>
+         <viewport>
+            <Rectangle2D minX="20.0" minY="20.0" />
+         </viewport></ImageView>
+      <Label fx:id="titre" prefHeight="33.0" prefWidth="216.0" text="Label" textFill="#0b0000">
+         <font>
+            <Font name="Berlin Sans FB Demi Bold" size="38.0" />
+         </font></Label>
+      <Label fx:id="contenu" prefHeight="100.0" prefWidth="820.0" text="Label" textFill="#130000">
+         <font>
+            <Font name="Arial" size="19.0" />
+         </font></Label>
+   </children>
+</VBox>

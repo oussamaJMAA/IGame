@@ -5,7 +5,9 @@
  */
 package gestion.utilisateur;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -62,19 +64,17 @@ public class Edit_team_clientController implements Initializable {
     @FXML
     private Button btnOverview;
     @FXML
-    private Button btnOrders;
-    @FXML
-    private Button btnCustomers;
-    @FXML
     private Button btnMenus;
     @FXML
     private Button btnSettings1;
     @FXML
-    private Button btnSettings;
-    @FXML
     private Button btnPackages1;
     @FXML
     private Button btnSignout;
+    @FXML
+    private Button btnOverview1;
+    @FXML
+    private Button btn_blog;
     /**
      * Initializes the controller class.
      */
@@ -83,10 +83,15 @@ public class Edit_team_clientController implements Initializable {
         // TODO
                 retrievedata a = retrievedata.getInstance("", "",0);
          
-         test.setText(a.getUsername());
-         
-               int jj=a.getImage().lastIndexOf('\\');
-admin_image.setImage(new Image(LoggedinController.class.getResourceAsStream(a.getImage().substring(jj+1))));
+        // test.setText(a.getUsername());
+   try{
+           InputStream stream = new FileInputStream("C:\\Users\\oussa\\PhpstormProjects\\gaming_app\\public\\uploads\\photos\\"+a.getImage());
+      Image image4 = new Image(stream);
+      admin_image.setImage(image4);   
+              
+          }catch(Exception ex){
+              System.out.println(ex);
+          }
        Affiche_equipe_clientController test = new Affiche_equipe_clientController();
        nom.setText(test.getEquipesList().get(0).getNom_equipe());
      id.setText(Integer.toString(test.getEquipesList().get(0).getId()));
@@ -192,16 +197,15 @@ admin_image.setImage(new Image(LoggedinController.class.getResourceAsStream(a.ge
     }
 
     @FXML
-    private void on_click_dashboard_button(ActionEvent event) {
+    private void on_click_dashboard_button(ActionEvent event) throws IOException {
+             root = FXMLLoader.load(getClass().getResource("Loggedin.fxml"));  
+              stage= (Stage)((Node)event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("iGame");
+                stage.show();
     }
 
-    @FXML
-    private void handleClicks(ActionEvent event) {
-    }
-
-    @FXML
-    private void on_click_users_button(ActionEvent event) {
-    }
 
        @FXML
     private void on_click_tournaments(ActionEvent event) throws IOException {
@@ -232,7 +236,6 @@ admin_image.setImage(new Image(LoggedinController.class.getResourceAsStream(a.ge
                 stage.setTitle("iGame");
                 stage.show(); 
     }
-@FXML
     private void on_click_paniers(ActionEvent event) throws IOException {
         
         root = FXMLLoader.load(getClass().getResource("ListPanier.fxml"));  
@@ -256,6 +259,26 @@ admin_image.setImage(new Image(LoggedinController.class.getResourceAsStream(a.ge
 
     @FXML
     private void on_click_sign_out(ActionEvent event) {
+    }
+
+    @FXML
+    private void on_click_games(ActionEvent event) throws IOException {
+             root = FXMLLoader.load(getClass().getResource("Game_Client.fxml"));  
+              stage= (Stage)((Node)event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("iGame");
+                stage.show(); 
+    }
+
+    @FXML
+    private void on_click_blogs(ActionEvent event) throws IOException {
+             root = FXMLLoader.load(getClass().getResource("Publication_Client.fxml"));  
+              stage= (Stage)((Node)event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("iGame");
+                stage.show();
     }
     
 }

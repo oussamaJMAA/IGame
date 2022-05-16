@@ -21,5 +21,6 @@
       <Button fx:id="add" layoutX="154.0" layoutY="305.0" mnemonicParsing="false" onAction="#ajout" prefHeight="26.0" prefWidth="106.0" style="-fx-background-color: #b284be;" text="Add Members" />
       <TextField fx:id="equipe" layoutX="260.0" layoutY="344.0" />
       <Button fx:id="cancel" layoutX="281.0" layoutY="305.0" mnemonicParsing="false" onAction="#cancel" prefHeight="26.0" prefWidth="106.0" style="-fx-background-color: #b284be;" text="Cancel" />
+      <Label fx:id="not_in" layoutX="417.0" layoutY="87.0" prefHeight="42.0" prefWidth="170.0" text="Label" />
    </children>
 </AnchorPane>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="159.0" prefWidth="232.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="gestion.utilisateur.Game_ItemController">
+   <children>
+      <VBox layoutX="81.0" layoutY="-20.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fx:id="image" fitHeight="99.0" fitWidth="183.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@fiora.png" />
+               </image>
+            </ImageView>
+            <HBox prefHeight="53.0" prefWidth="232.0">
+               <children>
+                  <Label fx:id="name" prefHeight="18.0" prefWidth="78.0" text="Label" />
+                  <Label fx:id="desc" prefHeight="18.0" prefWidth="70.0" text="Label" />
+                  <Label fx:id="link" prefHeight="18.0" prefWidth="79.0" text="Label" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

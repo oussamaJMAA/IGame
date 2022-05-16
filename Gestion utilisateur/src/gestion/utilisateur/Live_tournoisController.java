@@ -7,7 +7,9 @@ package gestion.utilisateur;
 
 import gestion.utilisateur.entities.Equipes;
 import gestion.utilisateur.entities.Participation;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -97,9 +99,14 @@ public class Live_tournoisController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
       retrievedata a = retrievedata.getInstance("", "",0);
-        test.setText(a.getUsername());
-        int jj = a.getImage().lastIndexOf('\\');
-        admin_image.setImage(new Image(DashboardController.class.getResourceAsStream(a.getImage().substring(jj + 1))));
+       // test.setText(a.getUsername());
+      try{
+        InputStream stream = new FileInputStream("C:\\Users\\oussa\\PhpstormProjects\\gaming_app\\public\\uploads\\photos\\"+a.getImage());
+      Image image4 = new Image(stream);
+      admin_image.setImage(image4);
+      }catch(Exception e){
+          System.out.println(e);
+      }
         try {
 
             int equipe1 = getParticipationList().get(0).getId_equipe();

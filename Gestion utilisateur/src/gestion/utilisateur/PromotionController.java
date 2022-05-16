@@ -66,8 +66,7 @@ public class PromotionController implements Initializable {
     private Scene scene;
     private Parent root;
     ObservableList<Promotion> list = FXCollections.observableArrayList();
-@FXML
-    private ComboBox<String> id_nom;
+   
 @FXML
     private TextField id_promo;
 @FXML
@@ -111,8 +110,6 @@ private Button ajouter ;
     @FXML
     private ImageView admin_image;
     @FXML
-    private Label test;
-    @FXML
     private Button btnOverview;
     @FXML
     private Button btnOrders;
@@ -123,9 +120,25 @@ private Button ajouter ;
     @FXML
     private Button btnSettings;
     @FXML
-    private Button btnPackages1;
-    @FXML
     private Button btnSignout;
+    @FXML
+    private TextField nom_promotion;
+    @FXML
+    private Label nshalah;
+    @FXML
+    private Button btnCustomers1;
+    @FXML
+    private Button btnCustomers11;
+    @FXML
+    private Button btnPackages;
+    @FXML
+    private Button btnOrders1;
+    @FXML
+    private Button btn_promotion;
+    @FXML
+    private Button btnMenus1;
+    @FXML
+    private Button btnMenus11;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try { 
@@ -158,7 +171,7 @@ int p = JOptionPane.showConfirmDialog(null,"Do you really want to add","add",JOp
                   String date = id_date.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 String datef = id_datef.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 int r = Integer.parseInt(id_promo.getText());
-                rs.ajouterPromotion(new Promotion(id_nom.getValue(),date,r,datef));
+                rs.ajouterPromotion(new Promotion(nom_promotion.getText(),date,r,datef));
             }else{
                   JOptionPane.showMessageDialog(null, "les dates ne sont pas en ordre ");
             }
@@ -166,34 +179,26 @@ int r = Integer.parseInt(id_promo.getText());
 
 list.clear();
 
-id_nom.getItems().clear();
 
 initialiserlist();
 Afficher();
 }}
 private boolean controleDeSaisi() {  
 
-        if (id_promo.getText().isEmpty() || id_nom.getValue().isEmpty()
+        if (id_promo.getText().isEmpty()
                 ) {
           JOptionPane.showMessageDialog(null, "verifier les champs");
             return false;
         } else {
 
-           
-
-           if (!Pattern.matches("[A-z]*", id_nom.getValue())) {
-                  JOptionPane.showMessageDialog(null, "verifier le nom");
-                id_nom.requestFocus();
-                
-                return false;
-            }
+           /*
             if (!Pattern.matches("[0-9]*", id_promo.getText())) {
                
                   JOptionPane.showMessageDialog(null, "verifier les promotions");
                   id_promo.requestFocus();
                 id_promo.selectEnd();
                 return false;
-            }
+            }*/
         
            
         }
@@ -218,12 +223,12 @@ public void Afficher(){
             Logger.getLogger(PromotionController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-              Connection cnx = MaConnexion.getInstance().getCnx();
+           /*   Connection cnx = MaConnexion.getInstance().getCnx();
         ResultSet rs = cnx.createStatement().executeQuery("SELECT nom FROM produit");
            while(rs.next())
 
             
-                id_nom.getItems().addAll(rs.getString("nom"));
+                id_nom.getItems().addAll(rs.getString("nom"));*/
            
         } 
  
@@ -246,14 +251,14 @@ Optional<ButtonType> result = alert.showAndWait();
 if (result.get() == ButtonType.OK){ try {
             cnx = MaConnexion.getInstance().getCnx();
             String value0 = iddd.getText();
-            String value2 = id_nom.getValue();
+          
             
             String value3 = id_promo.getText();
             
             String value4 = id_date.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             String value5 = id_datef.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             
-            String sql = "update promotion set nom= '"+value2+"',date= '"+value4+"',datef= '"+value5+"',prixPro= '"+
+            String sql = "update promotion set nom= '"+nom_promotion.getText()+"',date= '"+value4+"',datef= '"+value5+"',prix_pro= '"+
                     value3+"' where id='"+value0+"' ";
             pst= cnx.prepareStatement(sql);
             pst.execute();
@@ -264,7 +269,7 @@ if (result.get() == ButtonType.OK){ try {
            
     iddd.setText("");
 
-    id_nom.setValue("");
+  
     id_promo.setText("");  
       
     
@@ -279,7 +284,6 @@ if (result.get() == ButtonType.OK){ try {
 
 list.clear();
 
-id_nom.getItems().clear();
 
 initialiserlist();
 Afficher();
@@ -298,7 +302,7 @@ Afficher();
      //ResultSet rsd =null ;
      Promotion p =  viewPromotion.getSelectionModel().getSelectedItem();
     iddd.setText(id.getCellData(index).toString());
-    id_nom.setValue(n.getCellData(index).toString());
+  
     id_promo.setText(pro.getCellData(index).toString()); 
     // id_date.setDate(dt.getCellData(index).toString()); 
     
@@ -343,13 +347,12 @@ if (result.get() == ButtonType.OK){
                 
                iddd.setText("");
 
-    id_nom.setValue("");
+   
     id_promo.setText("");
     
    
             }list.clear();
 
-id_nom.getItems().clear();
 
 initialiserlist();
 Afficher();
@@ -369,17 +372,17 @@ Afficher();
     
        }
 
-   @FXML
     private void on_click_dashboard_button(ActionEvent event) throws IOException {
-      root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
+ 
+    }
+
+    @FXML
+    private void handleClicks(ActionEvent event) throws IOException {
+             root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-    }
-
-    @FXML
-    private void handleClicks(ActionEvent event) {
     }
 
     @FXML
@@ -427,6 +430,94 @@ Afficher();
             stage.show(); 
     }
 
+ 
+    
+    
+    
+    
+     
+ @FXML
+    private void on_click_messages(ActionEvent event) throws IOException {
+        /*
+           root = FXMLLoader.load(getClass().getResource("Chat.fxml")); 
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show(); */
+        root = FXMLLoader.load(getClass().getResource("Chat.fxml"));
+
+        stage = new Stage();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Chat");
+        stage.show();
+    }
+
+   @FXML
+    private void on_click_blog(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Publication.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void on_click_products(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Produit.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    @FXML
+    private void on_click_commande(ActionEvent event) throws IOException {
+
+        root = FXMLLoader.load(getClass().getResource("ListCommandeAdmin.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+ 
+
+    @FXML
+    private void on_click_games(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Game_Admin.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show(); 
+    }
+
+    @FXML
+    private void on_click_categories(ActionEvent event) throws IOException {
+         root = FXMLLoader.load(getClass().getResource("Categorie.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show(); 
+    }
+
+    @FXML
+    private void on_click_participation(ActionEvent event) throws IOException {
+         root = FXMLLoader.load(getClass().getResource("participation.fxml"));  
+            stage = new Stage();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("Participations");
+                stage.show(); 
+    }
+
+    @FXML
+    private void on_click_promotion(ActionEvent event) {
+    }
+    
+    
+    
        
     }
     

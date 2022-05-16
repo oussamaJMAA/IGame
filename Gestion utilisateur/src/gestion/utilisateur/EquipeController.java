@@ -6,7 +6,9 @@
 package gestion.utilisateur;
 
 import gestion.utilisateur.entities.Equipes;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -91,7 +93,6 @@ public class EquipeController implements Initializable {
     @FXML
     private TextField keywordfield;
     private Button back;
-    @FXML
     private Label test;
     @FXML
     private Button btnOverview;
@@ -104,8 +105,6 @@ public class EquipeController implements Initializable {
     @FXML
     private Button btnSettings;
     @FXML
-    private Button btnPackages1;
-    @FXML
     private Button btnSignout;
     @FXML
     private ImageView admin_image;
@@ -113,6 +112,22 @@ public class EquipeController implements Initializable {
     private Label warning;
     @FXML
     private Button btnmodif1;
+    @FXML
+    private Label nshalah;
+    @FXML
+    private Button btnCustomers1;
+    @FXML
+    private Button btnCustomers11;
+    @FXML
+    private Button btnPackages;
+    @FXML
+    private Button btnOrders1;
+    @FXML
+    private Button btn_promotion;
+    @FXML
+    private Button btnMenus1;
+    @FXML
+    private Button btnMenus11;
 
     /**
      * Initializes the controller class.
@@ -121,12 +136,19 @@ public class EquipeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         showEquipes();
+        warning.setVisible(false);
         tfid.setVisible(false);
         colid.setVisible(false);
               retrievedata a = retrievedata.getInstance("", "",0);
-        test.setText(a.getUsername());
-        int jj = a.getImage().lastIndexOf('\\');
-        admin_image.setImage(new Image(DashboardController.class.getResourceAsStream(a.getImage().substring(jj + 1))));
+//        test.setText(a.getUsername());
+   try{
+           InputStream stream = new FileInputStream("C:\\Users\\oussa\\PhpstormProjects\\gaming_app\\public\\uploads\\photos\\"+a.getImage());
+      Image image4 = new Image(stream);
+      admin_image.setImage(image4);   
+              
+          }catch(Exception ex){
+              System.out.println(ex);
+          }
     }
 
     public void mail(String to) throws MessagingException {
@@ -294,20 +316,24 @@ public class EquipeController implements Initializable {
         return true;
     }
  public boolean verif_capacite(String s ){
-        Pattern p = Pattern.compile("^\\d{2}$");
-        Matcher m = p.matcher(s);
-        return (m.matches());
+      if (!Pattern.matches("[0-9]*", s)) {
+               
+               
+            
+                return false;
+            }
+      return true;
     }
+
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
         if (event.getSource() == btnmodif) {
-           if(verif(tfptsxp.getText())==false || verif(tftg.getText())==false){
-           warning.setText("Verifier Vos Informations");
-           }else if(!verif_capacite(tfptsxp.getText())){
-           warning.setText("Verifier les Points XP");
-           }else if(!verif_capacite(tftg.getText())){
-           warning.setText("Verifier les Tournois Gagné");
+         if(!verif_capacite(tftg.getText())||!verif_capacite(tfptsxp.getText())||verif(tfptsxp.getText())==false || verif(tftg.getText())==false){
+           Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setContentText("Verifier Vos Champs");
+            alert.show();
            }
            else{
             
@@ -343,9 +369,6 @@ public class EquipeController implements Initializable {
 
     }
 
-     @FXML
-    private void handleClicks(ActionEvent event) throws IOException{
-    }
 
     @FXML
     private void on_click_users_button(ActionEvent event)throws IOException {
@@ -393,10 +416,9 @@ public class EquipeController implements Initializable {
     
     
     }
-
-    @FXML
+@FXML
     private void on_click_dashboard_button(ActionEvent event) throws IOException {
-          root = FXMLLoader.load(getClass().getResource("dashboard.fxml")); //khali hedhi pour le moment
+          root = FXMLLoader.load(getClass().getResource("dashboard.fxml")); 
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -410,6 +432,92 @@ public class EquipeController implements Initializable {
         tfnom.setText("");
         tfmembres.setText("");
         warning.setVisible(false);
+    }
+
+ @FXML
+    private void on_click_messages(ActionEvent event) throws IOException {
+        /*
+           root = FXMLLoader.load(getClass().getResource("Chat.fxml")); 
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show(); */
+        root = FXMLLoader.load(getClass().getResource("Chat.fxml"));
+
+        stage = new Stage();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Chat");
+        stage.show();
+    }
+
+   
+    @FXML
+    private void on_click_games(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Game_Admin.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show(); 
+    }
+
+    @FXML
+    private void on_click_categories(ActionEvent event) throws IOException {
+         root = FXMLLoader.load(getClass().getResource("Categorie.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show(); 
+    }
+
+    @FXML
+    private void on_click_participation(ActionEvent event) throws IOException {
+         root = FXMLLoader.load(getClass().getResource("participation.fxml"));  
+            stage = new Stage();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("Participations");
+                stage.show(); 
+    }
+
+  
+
+     @FXML
+    private void on_click_commande(ActionEvent event) throws IOException {
+
+        root = FXMLLoader.load(getClass().getResource("ListCommandeAdmin.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void on_click_promotion(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Promotion.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+  @FXML
+    private void on_click_blog(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Publication.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void on_click_products(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Produit.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
     }
 
 }

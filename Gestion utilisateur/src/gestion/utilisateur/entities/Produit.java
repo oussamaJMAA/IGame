@@ -6,9 +6,34 @@ package gestion.utilisateur.entities;
 
 
 public class Produit {
-        private int id,qte,prix;
+        private int id,qte,prix,reduction;
     private String nom,reference,image;
 public Produit() {
+    }
+
+    public int getReduction() {
+        return reduction;
+    }
+
+    public void setReduction(int reduction) {
+        this.reduction = reduction;
+    }
+ public Produit(int qte, int prix, int reduction, String nom, String image) {
+        this.id = id;
+        this.qte = qte;
+        this.prix = prix;
+        this.reduction = reduction;
+        this.nom = nom;
+        this.image = image;
+    }
+   
+    public Produit(int id, int qte, int prix, int reduction, String nom, String image) {
+        this.id = id;
+        this.qte = qte;
+        this.prix = prix;
+        this.reduction = reduction;
+        this.nom = nom;
+        this.image = image;
     }
    
 

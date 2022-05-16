@@ -44,7 +44,7 @@ import tools.Connexion;
  * @author oussa
  */
 public class AddController implements Initializable {
-
+String imageName="";
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -251,7 +251,7 @@ combobox.getItems().addAll("Afghanistan", "Albania", "Algeria", "Andorra", "Ango
             preparedStatement.setInt(8, Integer.parseInt(phonetf.getText()));
             preparedStatement.setString(9, addresstf.getText());
             preparedStatement.setString(10, combobox.getValue());
-            preparedStatement.setString(11, image_path);
+            preparedStatement.setString(11, imageName);
             preparedStatement.setString(12, passwordtf.getText());
             preparedStatement.setString(13,"[\"ROLE_ADMIN\"]");
 
@@ -293,12 +293,12 @@ combobox.getItems().addAll("Afghanistan", "Albania", "Algeria", "Andorra", "Ango
     @FXML
     private void on_click_import_image(ActionEvent event) {
         fc.setTitle("Choose an image");
-        fc.setInitialDirectory(new File(System.getProperty("user.home")));
+       fc.setInitialDirectory(new File("C:\\Users\\oussa\\PhpstormProjects\\gaming_app\\public\\uploads\\photos"));
         fc.getExtensionFilters().clear();
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
         File file = fc.showOpenDialog(null);
         if (file != null) {
-            //image_path= file.getName();
+            imageName= file.getName();
             image_path = file.getAbsolutePath();
             imageview.setImage(new Image(file.toURI().toString()));
 

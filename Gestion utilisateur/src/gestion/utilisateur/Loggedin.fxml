@@ -12,6 +12,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion.utilisateur.LoggedinController">
    <children>
+       
       <Label fx:id="welcomelabel" layoutX="384.0" layoutY="16.0" prefHeight="85.0" prefWidth="229.0">
          <font>
             <Font name="Arial Rounded MT Bold" size="18.0" />
@@ -19,7 +20,49 @@
       </Label>
       <FontAwesomeIconView fill="#e70606" glyphName="SIGN_OUT" layoutX="1329.0" layoutY="64.0" onMouseClicked="#getLogout" size="45" styleClass="btn" />
       <FontAwesomeIconView fill="#455a64" glyphName="COG" layoutX="1263.0" layoutY="64.0" onMouseClicked="#getSettings" size="45" styleClass="btn" text="" />
- <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0" style="-fx-background-color: #EBE8F9;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+ 
+        <ImageView fitHeight="192.0" fitWidth="257.0" layoutX="347.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@627d060276ab8.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="264.0" layoutX="713.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@627b86dc7a61e.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="307.0" layoutX="1131.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@episode_thumb04.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="659.0" layoutY="118.0" prefHeight="52.0" prefWidth="420.0" text="Our favorite Games">
+         <font>
+            <Font name="Berlin Sans FB" size="38.0" />
+         </font>
+      </Label>
+      <Label layoutX="574.0" layoutY="447.0" prefHeight="42.0" prefWidth="523.0" text="We provide the best products">
+         <font>
+            <Font name="Berlin Sans FB" size="38.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="150.0" fitWidth="245.0" layoutX="347.0" layoutY="551.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@38ff9fd97ca18a6a290db76061ee3b3b.jpeg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="157.0" fitWidth="234.0" layoutX="734.0" layoutY="557.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@product-3-260x200.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="215.0" layoutX="1123.0" layoutY="563.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@product-1280x820.jpg" />
+         </image>
+      </ImageView>
+      
+        <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0" style="-fx-background-color: #EBE8F9;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fx:id="admin_image" fitHeight="113.0" fitWidth="124.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -28,12 +71,13 @@
                <VBox.margin>
                   <Insets bottom="10.0" top="50.0" />
                </VBox.margin></ImageView>
-          
-            <Label fx:id="test" text="Label" textFill="#ff0f0f">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
-            <Button fx:id="btnOverview" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#on_click_accueil" prefHeight="42.0" prefWidth="259.0" stylesheets="@style2.css" text="Accueil" textFill="#e7e5e5">
+            <Label text="Jimmy Fallon" textFill="#e7e5e5">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="test" text="Label" />
+            <Button fx:id="btnOverview" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#on_click_dashboard_button" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Menu" textFill="#e7e5e5">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -51,31 +95,22 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" stylesheets="@style2.css" text="Messages">
+            <Button fx:id="btnOverview1" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="340.0" mnemonicParsing="false" onAction="#on_click_games" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Games" textFill="#e7e5e5">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/icons8_Open_Envelope_32px.png" />
+                        <Image url="@images/icons8_Home_32px.png" />
                      </image>
                   </ImageView>
                </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
                <padding>
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnCustomers" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#on_click_users_button" prefHeight="42.0" prefWidth="259.0" stylesheets="@style2.css" text="Users">
-               <graphic>
-                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/icons8_Person_32px.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="50.0" />
-               </padding>
-            </Button>
-            <Button fx:id="btnMenus" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#on_click_tournaments" prefHeight="42.0" prefWidth="259.0" stylesheets="@style2.css" text="Tournaments">
+            <Button fx:id="btnMenus" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#on_click_tournaments" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Tournaments">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -87,7 +122,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#on_click_teams" prefHeight="42.0" prefWidth="259.0" stylesheets="@style2.css" text="Teams">
+            <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#on_click_teams" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Teams">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -99,7 +134,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnSettings" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#on_clicki_products" prefHeight="42.0" prefWidth="259.0" stylesheets="@style2.css" text="Products">
+            <Button fx:id="btnSettings1" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="552.0" mnemonicParsing="false" onAction="#on_clicki_products" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Products">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -111,7 +146,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnPackages1" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="509.0" mnemonicParsing="false" onAction="#on_click_paniers" prefHeight="42.0" prefWidth="259.0" stylesheets="@style2.css" text="Paniers">
+            <Button fx:id="btnPackages1" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="509.0" mnemonicParsing="false" onAction="#on_click_commande" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Orders">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -123,7 +158,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnPackages11" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="559.0" mnemonicParsing="false" onAction="#on_click_commande" prefHeight="42.0" prefWidth="259.0" stylesheets="@style2.css" text="Les commandes">
+            <Button fx:id="btn_blog" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="552.0" mnemonicParsing="false" onAction="#on_click_blogs" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Blogs">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -135,19 +170,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnPackages111" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="601.0" mnemonicParsing="false" onAction="#on_click_blog" prefHeight="42.0" prefWidth="259.0" stylesheets="@style2.css" text="Blog">
-               <graphic>
-                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/icons8_Box_32px.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="50.0" />
-               </padding>
-            </Button>
-            <Button fx:id="btnSignout" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#on_click_sign_out" prefHeight="42.0" prefWidth="259.0" stylesheets="@style2.css" text="Sign Out">
+            <Button fx:id="btnSignout" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#on_click_sign_out" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Sign Out">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -161,6 +184,10 @@
             </Button>
          </children>
       </VBox>
+      
+      
+      
+      
       <ImageView fx:id="user_image" fitHeight="72.0" fitWidth="127.0" layoutX="1120.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" />
       <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="1277.0" layoutY="725.0" mnemonicParsing="false" onAction="#on_click_message_button" prefHeight="56.0" prefWidth="0.0" stylesheets="@style2.css" textFill="#e7e5e5">
          <graphic>

@@ -24,7 +24,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -54,16 +56,23 @@ public class Edit_memberController implements Initializable {
     private Scene scene;
     @FXML
     private Button cancel;
+       boolean u2 = false;
+   boolean u3 = false;
+   boolean u4 = false;
+   boolean u5 = false;
+    @FXML
+    private Label not_in;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-      
+      not_in.setVisible(false);
         Affiche_equipe_clientController test = new Affiche_equipe_clientController();
       equipe.setText(test.getEquipesList().get(0).getNom_equipe());
    equipe.setVisible(false);
+
         try {
             if(test().size()==1){
                 username1.setVisible(true);
@@ -71,15 +80,23 @@ public class Edit_memberController implements Initializable {
                
                 username1.setText(test().get(0));
                 username1.setDisable(true);
+                u2 = true;
+                u3 = true;
+                u4 = true;
+                u5 = true;
             }else if(test().size()==2){
                 username1.setVisible(true);
                 username2.setVisible(true);
                 
             username1.setText(test().get(0));
             username2.setText(test().get(1));
+            
              username1.setDisable(true);
             username2.setDisable(true);
             
+           u3 = true;
+                u4 = true;
+                u5 = true;
             }else if(test().size()==3){
               username1.setVisible(true);
                 username2.setVisible(true);
@@ -90,6 +107,9 @@ public class Edit_memberController implements Initializable {
             username1.setText(test().get(0));
             username2.setText(test().get(1));
             username3.setText(test().get(2));
+           
+                u4 = true;
+                u5 = true;
             }else if(test().size()==4){
              username1.setVisible(true);
                 username2.setVisible(true);
@@ -103,6 +123,7 @@ public class Edit_memberController implements Initializable {
             username2.setText(test().get(1));
             username3.setText(test().get(2));
              username4.setText(test().get(3));
+             u5 = true;
             }else{
              username1.setVisible(true);
                 username2.setVisible(true);
@@ -177,39 +198,161 @@ return a;
         String query = "update user set equipe = (select id from equipe where nom_equipe = '" + equipe.getText() + "') where username = '" + n + "'";
         executeQuery(query);
     }
+  
+     public int already_in_team(String u ) throws SQLException {
+       retrievedata a= retrievedata.getInstance("testtt","",0);
+      // int idT = Integer.parseInt(id_t.getText());
+        String query = "select equipe from user where username = '"+u+"'";
+Connection conn = getConnection();
+
+      Statement st;
+        st = conn.createStatement();
+   ResultSet rs= st.executeQuery(query);
+    int max = 0;
+      if(rs.next()){
+          max=rs.getInt(1);
+      }
+  
+        
+return  max;
+    }
+   
+     
+    public String verif_finale() throws SQLException{
+      String name = "";
+      
+      if(!u2){
+   if(already_in_team(username2.getText())!=0){
+   name = username2.getText();
+   }
+    if(already_in_team(username3.getText())!=0){
+   name = username3.getText();
+   }
+     if(already_in_team(username4.getText())!=0){
+   name = username4.getText();
+   }
+      if(already_in_team(username5.getText())!=0){
+   name = username5.getText();
+   }
+      }
+      else if(!u3){
+           if(already_in_team(username3.getText())!=0){
+   name = username3.getText();
+   } if(already_in_team(username4.getText())!=0){
+   name = username4.getText();
+   }
+      if(already_in_team(username5.getText())!=0){
+   name = username5.getText();
+   }
+           
+      }
+      else if(!u4){
+      
+     if(already_in_team(username4.getText())!=0){
+   name = username4.getText();
+   }
+      if(already_in_team(username5.getText())!=0){
+   name = username5.getText();
+   }
+      }
+      
+      else if(!u5){
+    if(already_in_team(username5.getText())!=0){
+  name = username5.getText();
+   }
+      }
+   
+    return name;
+    }
+    
+  
+     public boolean not_found(String u ) throws SQLException {
+       retrievedata a= retrievedata.getInstance("testtt","",0);
+      // int idT = Integer.parseInt(id_t.getText());
+        String query = "select email from user where username = '"+u+"'";
+Connection conn = getConnection();
+boolean test;
+      Statement st;
+        st = conn.createStatement();
+   ResultSet rs= st.executeQuery(query);
+    String max ="";
+      if(rs.next()){
+          max=rs.getString(1);
+          test = true;
+          
+      }
+  
+        test = false;
+return  test;
+    }
+  
+  
     @FXML
-    private void ajout(ActionEvent event) {
-       if(!username1.getText().isEmpty()){
-       add_equipe_toUser(username1.getText());
-        try {
-                root = FXMLLoader.load(getClass().getResource("edit_team_client.fxml"));
-            } catch (IOException ex) {
-                Logger.getLogger(Affiche_equipe_clientController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    private void ajout(ActionEvent event) throws SQLException {
+      if(verif_finale()!=""){
        
-       }if(!username2.getText().isEmpty()){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setHeaderText(null);
+                alert.setContentText(verif_finale()+"   is already in a team !");
+                alert.showAndWait();
+       }else
+        if(!username1.getText().isEmpty()&&not_found(username1.getText())&&username2.getText().isEmpty()&&username3.getText().isEmpty()&&username4.getText().isEmpty()&&username5.getText().isEmpty()){
+       add_equipe_toUser(username1.getText());
+       }else{
+       not_in.setText("A MEMBRE NOT FOUND");
+                 Stage stage = (Stage) cancel.getScene().getWindow();
+    // do what you have to do
+   
+    stage.close();
+        }
+  
+        if(!username2.getText().isEmpty()&&not_found(username2.getText())&&username3.getText().isEmpty()&&username4.getText().isEmpty()&&username5.getText().isEmpty()){
        add_equipe_toUser(username2.getText());
-       }if(!username3.getText().isEmpty()){
+       }else {
+        not_in.setText("A MEMBRE NOT FOUND");
+                 Stage stage = (Stage) cancel.getScene().getWindow();
+    // do what you have to do
+   
+    stage.close();
+        }
+        
+        if(!username3.getText().isEmpty()&&not_found(username3.getText())&&username4.getText().isEmpty()&&username5.getText().isEmpty()){
        add_equipe_toUser(username3.getText());
-       }if(!username4.getText().isEmpty()){
+       }else{
+        not_in.setText("A MEMBRE NOT FOUND");
+                 Stage stage = (Stage) cancel.getScene().getWindow();
+    // do what you have to do
+   
+    stage.close();
+        }
+        
+        if(!username4.getText().isEmpty()&&not_found(username4.getText())&&username5.getText().isEmpty()){
        add_equipe_toUser(username4.getText());
-       }if(!username5.getText().isEmpty()){
+       }else{
+       not_in.setText("A MEMBRE NOT FOUND");
+                 Stage stage = (Stage) cancel.getScene().getWindow();
+    // do what you have to do
+   
+    stage.close();
+        }
+        
+        if(!username5.getText().isEmpty()&&not_found(username5.getText())){
        add_equipe_toUser(username5.getText());
-       }
+       }else{
+      not_in.setText("A MEMBRE NOT FOUND");
+                 Stage stage = (Stage) cancel.getScene().getWindow();
+    // do what you have to do
+   
+    stage.close();
+        }
     }
 
     @FXML
     private void cancel(ActionEvent event) throws IOException {
-      root = FXMLLoader.load(getClass().getResource("affiche_equipe_client.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-
+       Stage stage = (Stage) cancel.getScene().getWindow();
+    // do what you have to do
+   
+    stage.close();
     }
     
     

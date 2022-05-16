@@ -12,9 +12,11 @@ import com.itextpdf.text.pdf.PdfWriter;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import gestion.utilisateur.entities.User;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -99,8 +101,6 @@ public class AdminSpaceController implements Initializable {
     @FXML
     private TextField searchtf;
     @FXML
-    private Label test;
-    @FXML
     private ImageView admin_image;
     @FXML
     private Button btnOverview;
@@ -134,7 +134,21 @@ public class AdminSpaceController implements Initializable {
     ObservableList<User> UserList = FXCollections.observableArrayList();
     User user = null;
     @FXML
-    private Button btnPackages1;
+    private Label nshalah;
+    @FXML
+    private Button btnPackages;
+    @FXML
+    private Button btnMenus1;
+    @FXML
+    private Button btnMenus11;
+    @FXML
+    private Button btnCustomers1;
+    @FXML
+    private Button btnCustomers11;
+    @FXML
+    private Button btnOrders1;
+    @FXML
+    private Button btn_promotion;
 
     public int all_users() throws SQLException {
         int count = 0;
@@ -204,9 +218,17 @@ public class AdminSpaceController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         retrievedata a = retrievedata.getInstance("", "",0);
-        test.setText(a.getUsername());
-        int jj = a.getImage().lastIndexOf('\\');
-        admin_image.setImage(new Image(DashboardController.class.getResourceAsStream(a.getImage().substring(jj + 1))));
+       // test.setText(a.getUsername());
+    
+       
+       try{
+           InputStream stream = new FileInputStream("C:\\Users\\oussa\\PhpstormProjects\\gaming_app\\public\\uploads\\photos\\"+a.getImage());
+      Image image4 = new Image(stream);
+      admin_image.setImage(image4);   
+              
+          }catch(Exception ex){
+              System.out.println(ex);
+          }
         loadDate();
         try {
             total_users.setText(Integer.toString(all_users()));
@@ -486,8 +508,7 @@ PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(p));
         s.comparatorProperty().bind(usersTable.comparatorProperty());
         usersTable.setItems(s);
     }
-
-    @FXML
+@FXML
     private void on_click_dashboard_button(ActionEvent event) throws IOException {
       root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -496,9 +517,6 @@ PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(p));
         stage.show();
     }
 
-    @FXML
-    private void handleClicks(ActionEvent event) {
-    }
 
     @FXML
     private void on_click_users_button(ActionEvent event) throws IOException {
@@ -543,6 +561,88 @@ PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(p));
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show(); 
+    }
+ @FXML
+    private void on_click_messages(ActionEvent event) throws IOException {
+        /*
+           root = FXMLLoader.load(getClass().getResource("Chat.fxml")); 
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show(); */
+        root = FXMLLoader.load(getClass().getResource("Chat.fxml"));
+
+        stage = new Stage();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Chat");
+        stage.show();
+    }
+
+    @FXML
+    private void on_click_blog(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Publication.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void on_click_products(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Produit.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    @FXML
+    private void on_click_commande(ActionEvent event) throws IOException {
+
+        root = FXMLLoader.load(getClass().getResource("ListCommandeAdmin.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void on_click_promotion(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Promotion.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void on_click_games(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Game_Admin.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show(); 
+    }
+
+    @FXML
+    private void on_click_categories(ActionEvent event) throws IOException {
+         root = FXMLLoader.load(getClass().getResource("Categorie.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show(); 
+    }
+
+    @FXML
+    private void on_click_participation(ActionEvent event) throws IOException {
+         root = FXMLLoader.load(getClass().getResource("participation.fxml"));  
+            stage = new Stage();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("Participations");
+                stage.show(); 
     }
 
 }

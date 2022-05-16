@@ -11,7 +11,9 @@ import com.itextpdf.text.Document;
 
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Path;
 import java.sql.Connection;
@@ -147,7 +149,6 @@ public class FXMLDocumentController implements Initializable {
     private ChoiceBox<String> time_choice;
     @FXML
     private ImageView admin_image;
-    @FXML
     private Label test;
     @FXML
     private Button btnOverview;
@@ -160,18 +161,42 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button btnSettings;
     @FXML
-    private Button btnPackages1;
-    @FXML
     private Button btnSignout;
     @FXML
     private Button participation;
+    @FXML
+    private Label nshalah;
+    @FXML
+    private Button btnCustomers1;
+    @FXML
+    private Button btnCustomers11;
+    @FXML
+    private Button btnPackages;
+    @FXML
+    private Button btnOrders1;
+    @FXML
+    private Button btn_promotion;
+    @FXML
+    private Button btnMenus1;
+    @FXML
+    private Button btnMenus11;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
               retrievedata a = retrievedata.getInstance("", "",0);
-        test.setText(a.getUsername());
-        int jj = a.getImage().lastIndexOf('\\');
-        admin_image.setImage(new Image(DashboardController.class.getResourceAsStream(a.getImage().substring(jj + 1))));
+      //  test.setText(a.getUsername());
+    
+        
+        
+        
+        try{
+           InputStream stream = new FileInputStream("C:\\Users\\oussa\\PhpstormProjects\\gaming_app\\public\\uploads\\photos\\"+a.getImage());
+      Image image4 = new Image(stream);
+      admin_image.setImage(image4);   
+              
+          }catch(Exception ex){
+              System.out.println(ex);
+          }
         // TODO
 
         //Connection conn = getConnection();
@@ -584,9 +609,6 @@ System.out.println(test.toString());
         stage.show();
     }
 
-    @FXML
-    private void handleClicks(ActionEvent event) throws IOException{
-    }
 
     @FXML
     private void on_click_users_button(ActionEvent event)throws IOException {
@@ -653,4 +675,79 @@ System.out.println(test.toString());
                 stage.setTitle("Participation");
                 stage.show();
     }
+ @FXML
+    private void on_click_messages(ActionEvent event) throws IOException {
+        /*
+           root = FXMLLoader.load(getClass().getResource("Chat.fxml")); 
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show(); */
+        root = FXMLLoader.load(getClass().getResource("Chat.fxml"));
+
+        stage = new Stage();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Chat");
+        stage.show();
+    }
+
+
+  
+   
+    @FXML
+    private void on_click_commande(ActionEvent event) throws IOException {
+
+        root = FXMLLoader.load(getClass().getResource("ListCommandeAdmin.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+ 
+
+    @FXML
+    private void on_click_games(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Game_Admin.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show(); 
+    }
+
+    @FXML
+    private void on_click_categories(ActionEvent event) throws IOException {
+         root = FXMLLoader.load(getClass().getResource("Categorie.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show(); 
+    }
+
+  
+    @FXML
+    private void on_click_promotion(ActionEvent event) {
+    }
+
+     @FXML
+    private void on_click_blog(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Publication.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void on_click_products(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Produit.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+  
 }

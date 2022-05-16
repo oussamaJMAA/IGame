@@ -6,8 +6,10 @@
 package gestion.utilisateur;
 
 import gestion.utilisateur.entities.Equipes;
+import java.io.FileInputStream;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -93,55 +95,94 @@ public class Affiche_equipe_clientController implements Initializable {
     @FXML
     private Button btnOverview;
     @FXML
-    private Button btnOrders;
-    @FXML
-    private Button btnCustomers;
-    @FXML
     private Button btnMenus;
     @FXML
     private Button btnSettings1;
     @FXML
-    private Button btnSettings;
-    @FXML
     private Button btnPackages1;
     @FXML
     private Button btnSignout;
+    @FXML
+    private Label not_in;
+    @FXML
+    private Button create;
+    @FXML
+    private Button btnOverview1;
+    @FXML
+    private Button btn_blog;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-       // showEquipes();
-               retrievedata a = retrievedata.getInstance("", "",0);
-         
-         test.setText(a.getUsername());
-         
-               int jj=a.getImage().lastIndexOf('\\');
-admin_image.setImage(new Image(LoggedinController.class.getResourceAsStream(a.getImage().substring(jj+1))));
-        tvequipe.setVisible(false);
-      nom.setText(getEquipesList().get(0).getNom_equipe());
-    
-      pts.setText(Integer.toString(getEquipesList().get(0).getPts_xp()));
-    tg.setText(Integer.toString(getEquipesList().get(0).getTournois_gagne()));
-    id.setText(Integer.toString(getEquipesList().get(0).getId()));
-id.setVisible(false);
-
+          out.setVisible(false);
         try {
-          String mm = "";
-            for(int i =0;i<test().size();i++){
-              //  nom_mem.getItems().add(test().get(i));
-           mm+="-> "+test().get(i)+"\n";
+            // TODO
+            // showEquipes();
+            retrievedata a = retrievedata.getInstance("", "",0);
+          try{
+           InputStream stream = new FileInputStream("C:\\Users\\oussa\\PhpstormProjects\\gaming_app\\public\\uploads\\photos\\"+a.getImage());
+      Image image4 = new Image(stream);
+      admin_image.setImage(image4);   
+              
+          }catch(Exception ex){
+              System.out.println(ex);
+          }
+                tvequipe.setVisible(false);
+                not_in.setVisible(false);
+            if(verif()!=0){
+           create.setVisible(false);
+                nom.setText(getEquipesList().get(0).getNom_equipe());
+                pts.setText(Integer.toString(getEquipesList().get(0).getPts_xp()));
+                tg.setText(Integer.toString(getEquipesList().get(0).getTournois_gagne()));
+                id.setText(Integer.toString(getEquipesList().get(0).getId()));
+                id.setVisible(false);
+                
+                try {
+                String mm = "";
+                for(int i =0;i<test().size();i++){
+                //  nom_mem.getItems().add(test().get(i));
+                mm+="-> "+test().get(i)+"\n";
+                }
+                l.setText(mm);
+                } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+                }
+                
+            }else{
+            nom.setVisible(false);
+            pts.setVisible(false);
+            tg.setVisible(false);
+            id.setVisible(false);
+            not_in.setVisible(true);
+            not_in.setText("YOU ARE NOT IN A TEAM");
             }
-            l.setText(mm);
-        } catch (SQLException ex) {
-          System.out.println(ex.getMessage());
+              
+                } catch (SQLException ex) {
+            Logger.getLogger(Affiche_equipe_clientController.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-      // nom_mem.setOnAction(this::tt);
  
     }
+    
+     public int verif() throws SQLException {
+       retrievedata a= retrievedata.getInstance("testtt","",0);
+      // int idT = Integer.parseInt(id_t.getText());
+        String query = "select equipe from user inner join equipe on equipe.id = user.equipe where user.id = "+a.getId()+"";
+Connection conn = getConnection();
+
+      Statement st;
+        st = conn.createStatement();
+   ResultSet rs= st.executeQuery(query);
+    int max = 0;
+      if(rs.next()){
+          max=rs.getInt(1);
+      }
+  
+        
+return  max;
+    }
+    
    public void tt(ActionEvent event) {
        
         String a = nom_mem.getValue();
@@ -239,12 +280,38 @@ private void out_of_team_equipe(){
         }
     }
     
-    
+      /***************************************************/
+     public int taille_team() throws SQLException {
+         //list.get(0).getId()
+       retrievedata a= retrievedata.getInstance("testtt","",0);
+      // int idT = Integer.parseInt(id_t.getText());
+       ObservableList<Equipes> list = getEquipesList();
+        String query = "select id from equipe where id = "+list.get(0).getId()+" and membres = 0";
+Connection conn = getConnection();
+
+      Statement st;
+        st = conn.createStatement();
+   ResultSet rs= st.executeQuery(query);
+    int max = 0;
+      if(rs.next()){
+          max=rs.getInt(1);
+      }
+  
+        
+return  max;
+    }
+     public void delete_team() throws SQLException{
+     ObservableList<Equipes> list = getEquipesList();
+ String query = "delete from equipe where id = "+ taille_team()+"";
+
+        executeQuery(query);
+     }
+     
  @FXML
-    private void handleButtonAction(ActionEvent event) throws IOException {
+    private void handleButtonAction(ActionEvent event) throws IOException, SQLException {
         if (event.getSource() == back) {
             try {
-                root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+                root = FXMLLoader.load(getClass().getResource("Loggedin.fxml"));
             } catch (IOException ex) {
                 Logger.getLogger(Affiche_equipe_clientController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -256,8 +323,11 @@ private void out_of_team_equipe(){
         }if (event.getSource() == out) {
       out_of_team_equipe();
       out_of_team_user();
+      if(taille_team()!=0){
+      delete_team();
+      }
  try {
-                root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+                root = FXMLLoader.load(getClass().getResource("Loggedin.fxml"));
             } catch (IOException ex) {
                 Logger.getLogger(Affiche_equipe_clientController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -301,13 +371,6 @@ if(event.getSource()==edit){
     private void on_click_dashboard_button(ActionEvent event) {
     }
 
-    @FXML
-    private void handleClicks(ActionEvent event) {
-    }
-
-    @FXML
-    private void on_click_users_button(ActionEvent event) {
-    }
 
       @FXML
     private void on_click_tournaments(ActionEvent event) throws IOException {
@@ -331,14 +394,13 @@ if(event.getSource()==edit){
 
 @FXML
     private void on_clicki_products(ActionEvent event) throws IOException {
-         root = FXMLLoader.load(getClass().getResource("viewclient.fxml"));  
+         root = FXMLLoader.load(getClass().getResource("Produit_Client.fxml"));  
               stage= (Stage)((Node)event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
                 stage.setTitle("iGame");
                 stage.show(); 
     }
-@FXML
     private void on_click_paniers(ActionEvent event) throws IOException {
         
         root = FXMLLoader.load(getClass().getResource("ListPanier.fxml"));  
@@ -362,5 +424,25 @@ if(event.getSource()==edit){
 
     @FXML
     private void on_click_sign_out(ActionEvent event) {
+    }
+
+    @FXML
+    private void on_click_games(ActionEvent event) throws IOException {
+         root = FXMLLoader.load(getClass().getResource("Game_Client.fxml"));  
+              stage= (Stage)((Node)event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("iGame");
+                stage.show(); 
+    }
+
+    @FXML
+    private void on_click_blogs(ActionEvent event) throws IOException {
+          root = FXMLLoader.load(getClass().getResource("Publication_Client.fxml"));  
+              stage= (Stage)((Node)event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("iGame");
+                stage.show();
     }
 }

@@ -28,7 +28,7 @@ public class ProduitServices {
         cnx=MaConnexion.getInstance().getCnx();
     }
     public void ajouterProduit(Produit p){
-        String sql="INSERT INTO `Produit`(`id`, `nom`, `prix`,`qte`,`reference`,`image`) VALUES ('"+p.getId()+"','"+p.getNom()+"','"+p.getPrix()+"','"+p.getQte()+"','"+p.getReference()+"','"+p.getImage()+"')";
+        String sql="INSERT INTO `Produit`(`id`, `nom`, `prix`,`quantite`,`reduction`,`image`) VALUES ('"+p.getId()+"','"+p.getNom()+"','"+p.getPrix()+"','"+p.getQte()+"','"+p.getReduction()+"','"+p.getImage()+"')";
         try {
             Statement ste = cnx.createStatement();
             ste.executeUpdate(sql);
@@ -53,8 +53,9 @@ public class ProduitServices {
                 p.setId(rs.getInt("id"));
                 p.setNom(rs.getString("nom"));
                 p.setPrix(rs.getInt("prix"));
-                p.setQte(rs.getInt("qte"));
-                 p.setReference(rs.getString("reference"));
+                p.setQte(rs.getInt("quantite"));
+                // p.setReference(rs.getString("reference"));
+                 p.setReduction(rs.getInt("reduction"));
                  p.setImage(rs.getString("image"));
                 produits.add(p);
                 
@@ -85,12 +86,12 @@ public int supprimerproduit(int id)throws SQLException {
 
  public void modifier(Produit p) {
       try {
-            String sql = "UPDATE produit SET nom=?, prix=? ,qte=?,reference=? ,image=? WHERE `id`=?";
+            String sql = "UPDATE produit SET nom=?, prix=? ,qte=?,reduction=? ,image=? WHERE `id`=?";
             PreparedStatement pre = cnx.prepareStatement(sql);
             pre.setString(1, p.getNom());
             pre.setInt(2, p.getPrix());
             pre.setInt(3, p.getQte());
-         pre.setString(5, p.getReference());
+         pre.setInt(5, p.getReduction());
           pre.setString(6, p.getImage());
             pre.setInt(4, p.getId());
              

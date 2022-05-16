@@ -34,7 +34,9 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import org.controlsfx.control.Notifications;
 import gestion.utilisateur.servicem.CommandeCRUD;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -50,6 +52,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import tools.Connexion;
 import java.sql.ResultSet;
+import java.util.Calendar;
 /**
  * FXML Controller class
  *
@@ -67,7 +70,7 @@ Stage stage ;
     private Button btn_ajouter;
     @FXML
     private Button btn_vider;
-    private ComboBox<String> produitt;
+    
    
     CommandeCRUD service = new CommandeCRUD();
     @FXML
@@ -76,7 +79,6 @@ Stage stage ;
     private CheckBox ck_chèq;
     @FXML
     private CheckBox ck_cartebancaire;
-    @FXML
     private ComboBox<String> combo;
     @FXML
     private TextField nom;
@@ -88,20 +90,26 @@ Stage stage ;
     @FXML
     private Button btnOverview;
     @FXML
-    private Button btnOrders;
-    @FXML
-    private Button btnCustomers;
-    @FXML
     private Button btnMenus;
-    @FXML
-    private Button btnSettings;
-    @FXML
-    private Button btnPackages11;
     @FXML
     private Button btnPackages1;
     @FXML
     private Button btnSignout;
   String email="";
+    @FXML
+    private Label id_prod;
+    @FXML
+    private TextField nbProd;
+    @FXML
+    private TextField prixTot;
+    @FXML
+    private Button tot;
+    @FXML
+    private Button btnOverview1;
+    @FXML
+    private Button btnSettings1;
+    @FXML
+    private Button btn_blog;
     /**
      * Initializes the controller class.
      */
@@ -109,19 +117,30 @@ Stage stage ;
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
              retrievedata a = retrievedata.getInstance("", "",0);
-         
+         prixTot.setVisible(false);
+         btn_ajouter.setVisible(false);
          test.setText(a.getUsername());
          
-               int jj=a.getImage().lastIndexOf('\\');
-admin_image.setImage(new Image(LoggedinController.class.getResourceAsStream(a.getImage().substring(jj+1))));
+      try{
+           InputStream stream = new FileInputStream("C:\\Users\\oussa\\PhpstormProjects\\gaming_app\\public\\uploads\\photos\\"+a.getImage());
+      Image image4 = new Image(stream);
+      admin_image.setImage(image4);   
+              
+          }catch(Exception ex){
+              System.out.println(ex);
+          }
         
         nom.setText(a.getUsername());
+        /*
       combo.getItems().add("rapide");
        combo.getItems().add("express");
         combo.getItems().add("gratuit");
+        */
     }    
 
-      
+      public void set_id_prod(int id){
+      id_prod.setText(""+id);
+      }
  public Connection getConnection() {
         Connection conn;
         try {
@@ -145,7 +164,7 @@ admin_image.setImage(new Image(LoggedinController.class.getResourceAsStream(a.ge
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-    }
+    }/*
       public int get_id_panier() throws SQLException {
           retrievedata a = retrievedata.getInstance("","",0);
         String query = "select p.idP from panier p inner join user u on p.idClient = u.id where u.id ="+a.getId()+" ";
@@ -161,70 +180,81 @@ Connection conn = getConnection();
   
         
 return  max;
-    }
-       public int get_id_produit() throws SQLException {
-          retrievedata a = retrievedata.getInstance("","",0);
-        String query = "select p.id from produit p inner join panier pa on pa.idProduit = p.id inner join user u on pa.idClient = u.id where u.id ="+a.getId()+" ";
+    }*/
+     
+   public double calcul_prix_tot_prod(int id,int nb) throws SQLException{
+  
+        String query = "select prix from produit where id = '"+id+"' ";
 Connection conn = getConnection();
 
       Statement st;
         st = conn.createStatement();
    ResultSet rs= st.executeQuery(query);
-     int max=0;
+     double prix=0;
+     double total=0;
       if(rs.next()){
-          max=rs.getInt(1);
+          prix+=rs.getDouble("prix");
       }
   
-        
-return  max;
+        total +=prix*nb;
+return  total;
+   }
+   @FXML
+    private void voir_total(ActionEvent event) throws SQLException {
+          int nbp = Integer.parseInt(nbProd.getText());
+       int id_p = Integer.parseInt(id_prod.getText());
+        double total = calcul_prix_tot_prod(id_p,nbp);
+        prixTot.setText(""+total);
+        prixTot.setVisible(true);
+        btn_ajouter.setVisible(true);
     }
     @FXML
     private void ajouter(ActionEvent event) throws Exception {
-        if(combo.getSelectionModel().isEmpty()&& ck_esp.isSelected()==false){
-            Alert a = new Alert(Alert.AlertType.ERROR, "champs vide", ButtonType.CLOSE);
-            a.show();
-        }
-        else {
-        Commande c = new Commande();
-
-      retrievedata d = retrievedata.getInstance("","",0);
-        c.setIdClient(d.getId());
-     
-        c.setIdProduit(get_id_produit());
-      c.setIdPanier(get_id_panier());
-      
-        c.setLivraison(combo.getSelectionModel().getSelectedItem());
-        if(ck_cartebancaire.isSelected()){
+       Commande c = new Commande();
+        int nbp = Integer.parseInt(nbProd.getText());
+       int id_p = Integer.parseInt(id_prod.getText());
+        double total = calcul_prix_tot_prod(id_p,nbp);
+      prixTot.setText(""+total);
+        // String methode = combo.getSelectionModel().getSelectedItem().toString();
+        String methode="";
+         if(ck_cartebancaire.isSelected()){
             
             c.setModePaiment(ck_cartebancaire.getText());
+            methode = ck_cartebancaire.getText();
         }
         else if(ck_chèq.isSelected()){
                
             c.setModePaiment(ck_chèq.getText());
+            methode = ck_chèq.getText();
         }
         else if(ck_esp.isSelected()){
             c.setModePaiment(ck_esp.getText());
+            methode = ck_esp.getText();
         }
-        service.ajouterCommande(c);
-       affnotif();
-        retrievedata a = retrievedata.getInstance("", "",0);
+         if(methode=="" || nbp==0 || total ==0||nbProd.getText()==""){
+             Alert alert = new Alert(Alert.AlertType.WARNING, "Veuillez remplir tout les champs !");
+        alert.show();
+         }else{
+          java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+      retrievedata d = retrievedata.getInstance("","",0);
+        c.setIdClient(d.getId());
+        c.setNbproduit(nbp);
+        c.setPrix_tot(total);
+        c.setEtat("en attente");
+        c.setModePaiment(methode);
+        c.setDate(date);
+       service.ajouterCommande(c);
+       service.Confirmer(id_p);
+       root = FXMLLoader.load(getClass().getResource("ListCommande.fxml"));  
+              stage= (Stage)((Node)event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("iGame");
+                stage.show(); 
        
-        Connection cnx = Connexion.getInstance().getCnx();
-         String sql = "SELECT  email FROM user WHERE username= '" + a.getUsername() + "'";
-                    Statement statement = cnx.createStatement();
- rs = statement.executeQuery(sql);
-
-                    if (rs.next()) {
-                      email = rs.getString(1);
-                   
-
-       
-                    }
-                             sendMail(email);
-        
-        
-    }
-    }
+         }
+          
+ }
   
     
     
@@ -233,7 +263,7 @@ return  max;
       ck_cartebancaire.setSelected(false);
       ck_chèq.setSelected(false);
       ck_esp.setSelected(false);
-      combo.getSelectionModel().clearSelection();
+      //combo.getSelectionModel().clearSelection();
       nom.setText("");
       prenom.setText("");
       
@@ -282,10 +312,13 @@ return  max;
     }
 
     private static Message prepareMessage(Session session, String myAccountEmail, String recepient) {
+        retrievedata a = new retrievedata("","",0);
         try {
+           
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(myAccountEmail));
-            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
+            
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress("roukaia.khelifi@esprit.tn"));
             message.setSubject("Bande commande");
             String htmlCode = " <h2>Bonjour Votre Commande est passé avec succé</h2>";
             message.setContent(htmlCode, "text/html");
@@ -324,16 +357,15 @@ return  max;
     }
 
     @FXML
-    private void on_click_dashboard_button(ActionEvent event) {
+    private void on_click_dashboard_button(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Loggedin.fxml"));  
+             stage= (Stage)((Node)event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("tournois clients");
+                stage.show(); 
     }
 
-    @FXML
-    private void handleClicks(ActionEvent event) {
-    }
-
-    @FXML
-    private void on_click_users_button(ActionEvent event) {
-    }
 
     
     
@@ -358,8 +390,9 @@ return  max;
                 stage.show(); 
     }
 
+    @FXML
     private void on_clicki_products(ActionEvent event) throws IOException {
-         root = FXMLLoader.load(getClass().getResource("viewclient.fxml"));  
+         root = FXMLLoader.load(getClass().getResource("Produit_Client.fxml"));  
               stage= (Stage)((Node)event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
@@ -393,10 +426,24 @@ return  max;
     }
 
     @FXML
-    private void on_click_products(ActionEvent event) {
+    private void on_click_games(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Game_Client.fxml"));  
+              stage= (Stage)((Node)event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("iGame");
+                stage.show(); 
     }
 
     @FXML
-    private void on_click_panier(ActionEvent event) {
+    private void on_click_blogs(ActionEvent event) throws IOException {
+         root = FXMLLoader.load(getClass().getResource("Publication_Client.fxml"));  
+              stage= (Stage)((Node)event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("iGame");
+                stage.show();
     }
+
+    
 }

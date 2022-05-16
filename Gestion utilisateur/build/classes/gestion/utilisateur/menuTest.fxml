@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1400.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18">
+   <children>
+      <ImageView fitHeight="192.0" fitWidth="257.0" layoutX="347.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@627d060276ab8.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="264.0" layoutX="713.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@627b86dc7a61e.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="307.0" layoutX="1131.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@episode_thumb04.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="659.0" layoutY="118.0" prefHeight="52.0" prefWidth="420.0" text="Our favorite Games">
+         <font>
+            <Font name="Berlin Sans FB" size="38.0" />
+         </font>
+      </Label>
+      <Label layoutX="574.0" layoutY="447.0" prefHeight="42.0" prefWidth="523.0" text="We provide the best products">
+         <font>
+            <Font name="Berlin Sans FB" size="38.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="150.0" fitWidth="245.0" layoutX="347.0" layoutY="551.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@38ff9fd97ca18a6a290db76061ee3b3b.jpeg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="157.0" fitWidth="234.0" layoutX="734.0" layoutY="557.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@product-3-260x200.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="215.0" layoutX="1123.0" layoutY="563.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@product-1280x820.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

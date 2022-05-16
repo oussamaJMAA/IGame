@@ -40,7 +40,9 @@
       <FontAwesomeIconView fill="#2196f3" glyphName="USER_PLUS" layoutX="1212.0" layoutY="221.0" onMouseClicked="#getAddView" size="30" styleClass="btn" />
       <FontAwesomeIconView fill="#00e676" glyphName="REFRESH" layoutX="1274.0" layoutY="221.0" onMouseClicked="#refreshTable" size="30" styleClass="btn" />
       <FontAwesomeIconView fill="#455a64" glyphName="PRINT" layoutX="1324.0" layoutY="222.0" onMouseClicked="#print" size="30" styleClass="btn" text="" />
-      <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0" style="-fx-background-color: #EBE8F9;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+    
+      
+        <VBox alignment="TOP_CENTER" prefHeight="800.0" prefWidth="256.0" style="-fx-background-color: #EBE8F9;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fx:id="admin_image" fitHeight="113.0" fitWidth="124.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -54,7 +56,8 @@
                   <Insets bottom="20.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="test" text="Label" />
+           
+            <Label fx:id="nshalah" text="Label" />
             <Button fx:id="btnOverview" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#on_click_dashboard_button" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Dashboard" textFill="#e7e5e5">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
@@ -73,7 +76,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Messages">
+            <Button fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#on_click_messages" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Messages">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -97,6 +100,30 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
+            <Button fx:id="btnCustomers1" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="424.0" mnemonicParsing="false" onAction="#on_click_games" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Games">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8_Person_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnCustomers11" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="467.0" mnemonicParsing="false" onAction="#on_click_categories" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Categories">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8_Person_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
             <Button fx:id="btnMenus" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#on_click_tournaments" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Tournaments">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
@@ -109,7 +136,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#on_click_teams" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Teams">
+            <Button fx:id="btnPackages" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#on_click_teams" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Teams">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -121,7 +148,19 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnSettings" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Settings">
+            <Button fx:id="btnOrders1" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="379.0" mnemonicParsing="false" onAction="#on_click_participation" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Participation">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8_Open_Envelope_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnSettings" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#on_click_products" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Products">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -133,11 +172,35 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnPackages1" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="509.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Packages">
+            <Button fx:id="btn_promotion" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="552.0" mnemonicParsing="false" onAction="#on_click_promotion" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Promotions">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/icons8_Box_32px.png" />
+                        <Image url="@images/icons8_Slider__32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnMenus1" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="467.0" mnemonicParsing="false" onAction="#on_click_blog" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Blog">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8_Xbox_Menu_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnMenus11" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="594.0" mnemonicParsing="false" onAction="#on_click_commande" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Commandes">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8_Xbox_Menu_32px.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -159,6 +222,8 @@
             </Button>
          </children>
       </VBox>
+      
+      
       <Label fx:id="total_coachs" layoutX="887.0" layoutY="100.0" prefHeight="42.0" prefWidth="34.0" textFill="#fa5f7e">
          <font>
             <Font name="System Bold" size="26.0" />

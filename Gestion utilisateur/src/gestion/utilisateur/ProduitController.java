@@ -4,8 +4,6 @@
  */
 package gestion.utilisateur;
 
-import javafx.scene.image.Image;
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import javax.mail.Authenticator;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -13,7 +11,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.naming.spi.DirStateFactory.Result;
+
 import gestion.utilisateur.entities.Produit;
 import gestion.utilisateur.entities.Promotion;
 import java.awt.HeadlessException;
@@ -40,8 +38,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import gestion.utilisateur.service.ProduitServices;
+import java.sql.DriverManager;
 import toolsp.MaConnexion;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.util.ArrayList;
 import static java.util.Collections.list;
 import java.util.List;
@@ -60,6 +60,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -76,8 +77,6 @@ private TextField id1;
 private Label idd;
 @FXML
     private TextField id_nom;
-@FXML
-    private TextField id_ref;
 @FXML
     private TextField id_prix;
 @FXML
@@ -103,9 +102,7 @@ private Button ajouter ;
   
     private PreparedStatement pst = null ;
   static ResultSet rs;
-
-  @FXML
-    private Label reference;
+String imageName="";
     @FXML
     private Label nom;
     @FXML
@@ -134,11 +131,7 @@ private Button ajouter ;
     @FXML
     private TableColumn<?, ?> eimage;
     @FXML
-    private Button st;
-    @FXML
     private ImageView admin_image;
-    @FXML
-    private Label test;
     @FXML
     private Button btnOverview;
     @FXML
@@ -150,71 +143,193 @@ private Button ajouter ;
     @FXML
     private Button btnSettings;
     @FXML
-    private Button btnPackages1;
-    @FXML
     private Button btnSignout;
-  
-   
-
+    @FXML
+    private TableColumn<?, ?> reduction;
+  PreparedStatement insert = null;
+    @FXML
+    private Label idp;
+    @FXML
+    private ComboBox<String> promotion;
+    @FXML
+    private Label label_promo;
+    @FXML
+    private Button annuler;
+    FileChooser fc = new FileChooser();
+String image_path="";
+    @FXML
+    private Label nshalah;
+    @FXML
+    private Button btnCustomers1;
+    @FXML
+    private Button btnCustomers11;
+    @FXML
+    private Button btnPackages;
+    @FXML
+    private Button btnOrders1;
+    @FXML
+    private Button btn_promotion;
+    @FXML
+    private Button btnMenus1;
+    @FXML
+    private Button btnMenus11;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       try { 
-            initialiserlist();
-            
-
-        } catch (SQLException ex)
+        idp.setVisible(false);
+        Afficher();
+        promotion.setVisible(false);
+        label_promo.setVisible(false);
+       try {
+           
+           Connection cnx = MaConnexion.getInstance().getCnx();
+           ResultSet rs = cnx.createStatement().executeQuery("SELECT prix_pro FROM promotion");
+           while(rs.next())
+               
+               
+               promotion.getItems().addAll(rs.getString("prix_pro"));
+           
+           
+          
+               initialiserlist();
+               
+ } catch (SQLException ex)
  {
      
             Logger.getLogger(ProduitController.class.getName()).log(Level.SEVERE, null, ex);
-        }Afficher();
-        
+        }
         
 
     }   
  
+    public Connection getConnection() {
+        Connection conn;
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/projet_java", "root", "");
+            System.out.println("Connection done ! ");
+            return conn;
+        } catch (SQLException ex) {
+            System.out.println("Error : " + ex.getMessage());
+            return null;
+        }
+    }
+
+    private void executeQuery(String query) {
+        Connection conn = getConnection();
+        //To change body of generated methods, choose Tools | Templates.
+        Statement st;
+        try {
+            st = conn.createStatement();
+            st.executeUpdate(query);
+
+           Afficher();
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+   public int get_id_by_prix(int p) throws SQLException{
+  
+        String query = "select id from promotion where prix_pro = '"+p+"' ";
+Connection conn = getConnection();
+
+      Statement st;
+        st = conn.createStatement();
+   ResultSet rs= st.executeQuery(query);
+     int max=0;
+      if(rs.next()){
+          max+=rs.getInt("id");
+      }
+  
+        
+return  max;
+   } 
+      public void insertTournois() throws ParseException, SQLException {
+        Connection conn = getConnection();
+     
+     insert = conn.prepareStatement("insert into produit(nom,prix,quantite,image) values(?,?,?,?)");
+        insert.setString(1, id_nom.getText());
+        int prix = Integer.parseInt(id_prix.getText());
+        int qte = Integer.parseInt(id_qte.getText());
+        
+        insert.setInt(2,prix);
+        insert.setInt(3,qte);
+       
+      insert.setString(4,imageName);
+     
+     insert.executeUpdate();
+ 
+      } 
+      
+       public void updateTournois() throws ParseException, SQLException {
+     
+       /* String c = promotion.getSelectionModel().getSelectedItem().toString();
+        int vv = Integer.parseInt(c);
+        int category_id = get_id_by_prix(vv);*/
+      int  new_p = Integer.parseInt(id_prix.getText());
+        String nom = id_nom.getText();
+            String desc =file_path.getText();
+           
+           int prix= Integer.parseInt(id_prix.getText());
+           int qte = Integer.parseInt(id_qte.getText());
+           
+            int id = Integer.parseInt(idp.getText());
+         
+            String query = "update produit set nom = '"+nom+"',image= '"+imageName+"', prix = "+new_p+", quantite= "+qte+"  where id="+id+"";
+            executeQuery(query);
+           Afficher();
+        
+      
+    }
+
+    public void deleteTournois() { 
+        int id = Integer.parseInt(idp.getText());
+        String query = "delete from produit where id="+id+"";
+
+        executeQuery(query);
+        Afficher();
+    }
+    
+    
+    
 @FXML
-public void ajoutproduit(ActionEvent event) throws SQLException{
-int p = JOptionPane.showConfirmDialog(null,"Do you really want to add","add",JOptionPane.YES_NO_OPTION);
- if(p==0){
+public void ajoutproduit(ActionEvent event) throws SQLException, ParseException{
+//int p = JOptionPane.showConfirmDialog(null,"Do you really want to add","add",JOptionPane.YES_NO_OPTION);
+ //if(p==0){
      if(controleDeSaisi())
 { 
 ProduitServices ps = new ProduitServices();
+/*
 int r = Integer.parseInt(id_prix.getText());
 int f = Integer.parseInt(id_qte.getText());
- 
-ps.ajouterProduit(new Produit(id_nom.getText(),r,f,id_ref.getText(),file_path.getText()));
-
+*/
+ //int qte, int prix, int reduction, String nom, String image
+//ps.ajouterProduit(new Produit(f,r,red,id_nom.getText(),file_path.getText()));
+insertTournois();
 list.clear();
 initialiserlist();
 
 Afficher();
 viewProduit.refresh();
 
-} 
+//}
 }}
 private boolean controleDeSaisi() {  
 
         if (id_nom.getText().isEmpty() || id_prix.getText().isEmpty()
-                || id_qte.getText().isEmpty()|| id_ref.getText().isEmpty()||file_path.getText().isEmpty()) {
+                || id_qte.getText().isEmpty()) {
           JOptionPane.showMessageDialog(null, "verifier les champs");
             return false;
         } else {
 
-           
-
-           if (!Pattern.matches("[A-z]*", id_nom.getText())) {
-                  JOptionPane.showMessageDialog(null, "verifier le nom");
-                id_nom.requestFocus();
-                id_nom.selectEnd();
-                return false;
-            }
-            if (!Pattern.matches("[0-9]*", id_prix.getText())) {
+      if (!Pattern.matches("[0-9]*", id_prix.getText())) {
                
                   JOptionPane.showMessageDialog(null, "verifier les prix");
                   id_prix.requestFocus();
                 id_prix.selectEnd();
                 return false;
             }
+           
             if (!Pattern.matches("[0-9]*", id_qte.getText())) {
                
                   JOptionPane.showMessageDialog(null, "verifier  quantite ");
@@ -232,6 +347,7 @@ public void Afficher(){
           pr.setCellValueFactory(new PropertyValueFactory<>("prix"));
           qt.setCellValueFactory(new PropertyValueFactory<>("qte"));
            re.setCellValueFactory(new PropertyValueFactory<>("reference"));
+           reduction.setCellValueFactory(new PropertyValueFactory<>("reduction"));
            eimage.setCellValueFactory(new PropertyValueFactory<>("image"));
         viewProduit.setItems(list);
 }
@@ -242,7 +358,8 @@ public void Afficher(){
             Connection cnx = MaConnexion.getInstance().getCnx();
             ResultSet ps = cnx.createStatement().executeQuery("SELECT * FROM produit");
             while(ps.next()){
-            list.add(new Produit(ps.getInt(1),ps.getString(2),ps.getInt(3),ps.getInt(4),ps.getString(5),ps.getString(6)));
+                //(int qte, int prix, int reduction, String nom, String image)
+            list.add(new Produit(ps.getInt("id"),ps.getInt("quantite"),ps.getInt("prix"),ps.getInt("reduction"),ps.getString("nom"),ps.getString("image")));
         }
             } catch (SQLException ex) {
             Logger.getLogger(ProduitController.class.getName()).log(Level.SEVERE, null, ex);
@@ -250,12 +367,36 @@ public void Afficher(){
       
 
     }
+      
+   public int get_id_by_name(String name) throws SQLException{
+  
+        String query = "select id from produit where nom = '"+name+"' ";
+Connection conn = getConnection();
+
+      Statement st;
+        st = conn.createStatement();
+   ResultSet rs= st.executeQuery(query);
+     int max=0;
+      if(rs.next()){
+          max+=rs.getInt("id");
+      }
+  
+        
+return  max;
+   } 
+       
    
     @FXML
-    private void getSelected(javafx.scene.input.MouseEvent event) throws SQLException {
-        
+    private void getSelected(MouseEvent event) throws SQLException {
+        promotion.setVisible(true);
+        label_promo.setVisible(true);
+        ajouter.setVisible(false);
+         Produit t = viewProduit.getSelectionModel().getSelectedItem();
+       
+        idp.setText(""+t.getId());
+      
          Produit e = viewProduit.getSelectionModel().getSelectedItem();
-        
+       
         int index = viewProduit.getSelectionModel().getSelectedIndex();
     if (index <= -1){
     
@@ -263,12 +404,12 @@ public void Afficher(){
     }
     
             Connection cnx = MaConnexion.getInstance().getCnx();
-     
+     // idp.setText(id.getCellData(index).toString());
     id1.setText(id.getCellData(index).toString());
     id_nom.setText(d.getCellData(index).toString());
     id_prix.setText(pr.getCellData(index).toString());
     id_qte.setText(qt.getCellData(index).toString());
-     id_ref.setText(re.getCellData(index).toString());
+    
 //    tfphoto.setText(im.getCellData(index).toString());
     //eimage.setText(eimage.getCellData(index).toString());
     
@@ -297,28 +438,30 @@ public void Afficher(){
     }
 
      @FXML
-    public void Edit () throws SQLException{   
+    public void Edit () throws SQLException, ParseException{   
+        
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 alert.setTitle("Confirmation Dialog");
 alert.setHeaderText("Look, a Confirmation Dialog");
 alert.setContentText("Are you ok with this?");
 
 Optional<ButtonType> result = alert.showAndWait();
-if (result.get() == ButtonType.OK){try {
-            cnx = MaConnexion.getInstance().getCnx();
+if (result.get() == ButtonType.OK){
+         /*   cnx = MaConnexion.getInstance().getCnx();
             String value0 = id1.getText();
             String value2 = id_nom.getText();
             
             String value3 = id_prix.getText();
             
             String value4 = id_qte.getText();
-             String value5 = id_ref.getText();
+            
             String value6 = file_path.getText();
-            String sql = "update produit set nom= '"+value2+"',qte= '"+value4+"',reference= '"+value5+"',image= '"+value6+"',prix= '"+
-                    value3+"' where id='"+value0+"' ";
+            String sql = "update produit set nom= '"+value2+"',quantite= '"+value4+"',reduction= '"+value5+"',image= '"+value6+"',prix= '"+
+                    value3+"' where id="+value0+"";
             pst= cnx.prepareStatement(sql);
             pst.execute();
-              
+              */
+         updateTournois();
             JOptionPane.showMessageDialog(null, "Update");
           
 
@@ -326,13 +469,10 @@ if (result.get() == ButtonType.OK){try {
     id_prix.setText("");
     
     id_qte.setText("");
-        id_ref.setText("");
+      promotion.setVisible(false);
+      label_promo.setVisible(false);
       //   tfphoto.setText("");
-    
-            
-        } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }}
+   }
          list.clear();
                 initialiserlist(); 
                 Afficher();
@@ -358,8 +498,9 @@ alert.setContentText("Are you ok with this?");
 
 Optional<ButtonType> result = alert.showAndWait();
 if (result.get() == ButtonType.OK){
-            int s = cat.supprimerproduit(i);
-            if (s == 1) {
+          //  int s = cat.supprimerproduit(i);
+          deleteTournois();
+         //   if (s == 1) {
                 alert.setTitle("Information");
                 alert.setHeaderText(null);
                 alert.setContentText("produit supprimé");
@@ -373,20 +514,20 @@ if (result.get() == ButtonType.OK){
     id_nom.setText("");
     id_prix.setText("");
     id_qte.setText("");
-     id_ref.setText("");
+  
 //      tfphoto.setText("");
-            }
+          //  }
 
-        } } else {
+        } /*} else {
     
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information");
             alert.setHeaderText(null);
             alert.setContentText("Selection un champ SVP");
             alert.showAndWait();
-        }
+        }*/
 }
-
+ }
     
    @FXML
      public void chercher(){
@@ -410,6 +551,9 @@ if (result.get() == ButtonType.OK){
 				if (produit.getNom().toLowerCase().indexOf(lowerCaseFilter) != -1 ) {
 					return true; // Filter matches first name.
 				} else if (String.valueOf(r.getPrix()).indexOf(lowerCaseFilter) != -1) {
+					return true; // Filter matches last name.
+				}
+                                else if (String.valueOf(r.getReduction()).indexOf(lowerCaseFilter) != -1) {
 					return true; // Filter matches last name.
 				}
 				else if (String.valueOf(r.getQte()).indexOf(lowerCaseFilter)!=-1)
@@ -511,7 +655,7 @@ if (result.get() == ButtonType.OK){
 
     @FXML
     private void insertImage(ActionEvent event) {
-        
+        /*
         FileChooser open = new FileChooser();
 
         Stage stage = (Stage) recpane.getScene().getWindow();
@@ -535,18 +679,25 @@ if (result.get() == ButtonType.OK){
             System.out.println("NO DATA EXIST!");
 
         }
+*/
+           fc.setTitle("Choose an image");
+       fc.setInitialDirectory(new File("C:\\Users\\oussa\\PhpstormProjects\\gaming_app\\public\\uploads\\photos"));
+        fc.getExtensionFilters().clear();
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+        File file = fc.showOpenDialog(null);
+        if (file != null) {
+            //image_path= file.getName();
+            imageName=file.getName();
+            image_path = file.getAbsolutePath();
+            image_view.setImage(new Image(file.toURI().toString()));
+
+        } else {
+
+            System.out.println("Invalid file");
+        }
     }
 
-    @FXML
-    private void stat(ActionEvent event) throws IOException {
-         AnchorPane pane = FXMLLoader.load(getClass().getResource("chart.fxml"));
-           recpane.getChildren().setAll(pane);
-    }
-
-    private void viewlist(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/GUI/viewclient.fxml"));
-           recpane.getChildren().setAll(pane);
-    }
+ 
 
  @FXML
     private void on_click_dashboard_button(ActionEvent event) throws IOException {
@@ -557,9 +708,6 @@ if (result.get() == ButtonType.OK){
         stage.show();
     }
 
-    @FXML
-    private void handleClicks(ActionEvent event) {
-    }
 
     @FXML
     private void on_click_users_button(ActionEvent event) throws IOException {
@@ -605,15 +753,146 @@ if (result.get() == ButtonType.OK){
             stage.setScene(scene);
             stage.show(); 
     }
+    
+    
+   public int get_id_pro(int p) throws SQLException{
+  
+        String query = "select id from promotion where prix_pro = "+p+"";
+Connection conn = getConnection();
+
+      Statement st;
+        st = conn.createStatement();
+   ResultSet rs= st.executeQuery(query);
+     int max=0;
+      if(rs.next()){
+          max+=rs.getInt("id");
+      }
+  
+        
+return  max;
+   } 
 
     @FXML
-    private void on_click_promotion(ActionEvent event) throws IOException {
-             root = FXMLLoader.load(getClass().getResource("Promotion.fxml")); 
+    private void on_click_promotion(ActionEvent event) throws IOException, SQLException {
+          /*    String c = promotion.getSelectionModel().getSelectedItem().toString();
+        int vv = Integer.parseInt(c);
+               int prom_id = get_id_pro(vv);
+            int  new_pp = Integer.parseInt(id_prix.getText()) * vv/100;
+          
+            int id = Integer.parseInt(idp.getText());
+         
+            String query = "update produit set promotion_id="+prom_id+",prix ="+new_pp+" where id="+id+"";
+            executeQuery(query);
+           root = FXMLLoader.load(getClass().getResource("Produit.fxml")); //khali hedhi pour le moment
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show(); */
+        
+    }
+
+    @FXML
+    private void annuler(ActionEvent event) {
+        promotion.setVisible(false);
+        label_promo.setVisible(false);
+        id_nom.setText("");
+        id_prix.setText("");
+        id_qte.setText("");
+    }
+
+ @FXML
+    private void on_click_messages(ActionEvent event) throws IOException {
+        /*
+           root = FXMLLoader.load(getClass().getResource("Chat.fxml")); 
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show(); */
+        root = FXMLLoader.load(getClass().getResource("Chat.fxml"));
+
+        stage = new Stage();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Chat");
+        stage.show();
+    }
+
+   @FXML
+    private void on_click_blog(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Publication.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void on_click_products(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Produit.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    @FXML
+    private void on_click_commande(ActionEvent event) throws IOException {
+
+        root = FXMLLoader.load(getClass().getResource("ListCommandeAdmin.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+ 
+
+    @FXML
+    private void on_click_games(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Game_Admin.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show(); 
+    }
+
+    @FXML
+    private void on_click_categories(ActionEvent event) throws IOException {
+         root = FXMLLoader.load(getClass().getResource("Categorie.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show(); 
+    }
+
+    @FXML
+    private void on_click_participation(ActionEvent event) throws IOException {
+         root = FXMLLoader.load(getClass().getResource("participation.fxml"));  
+            stage = new Stage();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("Participations");
+                stage.show(); 
+    }
+
+    @FXML
+    private void on_click_p(ActionEvent event) throws SQLException, IOException {
+        String c = promotion.getSelectionModel().getSelectedItem().toString();
+        int vv = Integer.parseInt(c);
+               int prom_id = get_id_pro(vv);
+            int  new_pp = Integer.parseInt(id_prix.getText()) * vv/100;
+          
+            int id = Integer.parseInt(idp.getText());
+         
+            String query = "update produit set promotion_id="+prom_id+",prix ="+new_pp+" where id="+id+"";
+            executeQuery(query);
+            
+           root = FXMLLoader.load(getClass().getResource("Produit.fxml")); //khali hedhi pour le moment
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        
     }
 
 }

@@ -36,6 +36,27 @@ public String getSeason( Date date ) {
    return seasons[ date.getMonth() ];
 }
      
+    public void Confirmer(int idP){
+        
+         retrievedata a = retrievedata.getInstance("", "",0);
+        java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+         Random rand = new Random();
+        int n = rand.nextInt(50);
+        n += 1;
+        try {
+            String requete= "insert into commande_produit(commande_id,produit_id) values ((select max(id) from commande),?)";
+            PreparedStatement pst = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requete);
+     
+        pst.setInt(1, idP);
+            pst.executeUpdate();
+            System.out.println("Commande inserée");
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+    }
     public void ajouterCommande(Commande c){
         
          retrievedata a = retrievedata.getInstance("", "",0);
@@ -44,21 +65,49 @@ public String getSeason( Date date ) {
         int n = rand.nextInt(50);
         n += 1;
         try {
-            String requete= "INSERT INTO commande(user_id,date,modePaiment,etat,id)"
-                    + "VALUES (?,?,?,?,?)";
+            String requete= "INSERT INTO commande(user_id,date,methodedepaiement,etat,nbproduit,prixtotale)"
+                    + "VALUES (?,?,?,?,?,?)";
             PreparedStatement pst = MyConnection.getInstance().getCnx()
                     .prepareStatement(requete);
          
             pst.setLong(1,a.getId());
-            pst.setDate(2,date);
+            pst.setDate(2,c.getDate());
             pst.setString(3,c.getModePaiment());
      
-            pst.setString(4, "en attend");
-            pst.setInt(5, n);
-        
+            pst.setString(4, c.getEtat());
+            pst.setInt(5, c.getNbproduit());
+         pst.setDouble(6, c.getPrix_tot());
             pst.executeUpdate();
             System.out.println("Commande inserée");
             
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+    }
+    
+    public void suppCommande1(int c){
+         try {
+            String requete = "DELETE FROM commande where id=?";
+            PreparedStatement pst = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requete);
+            pst.setLong(1, c);
+            pst.executeUpdate();
+            System.out.println("Commande supprimée");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+    }
+    
+    public void suppCommande_commande_produit(int c){
+         try {
+            String requete = "DELETE FROM commande_produit where commande_id=?";
+            PreparedStatement pst = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requete);
+            pst.setLong(1, c);
+            pst.executeUpdate();
+            System.out.println("Commande supprimée");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -78,18 +127,34 @@ public String getSeason( Date date ) {
         }
         
     }
-    public void updateCommande(Commande c){
-         retrievedata a = retrievedata.getInstance("", "",0);
+    
+    
+    public void suppCommande_id(int c){
          try {
-            String requete = "UPDATE commande SET user_id=?,date=?,methodedepaiement=?"
-                    + " WHERE id=?";
+            String requete = "DELETE FROM commande where id=?";
             PreparedStatement pst = MyConnection.getInstance().getCnx()
                     .prepareStatement(requete);
-            pst.setDate(2, c.getDate());
-            pst.setLong(1, a.getId());
+            pst.setInt(1, c);
+            pst.executeUpdate();
+            System.out.println("Commande supprimée");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+    }
+    
+    public void updateCommande2(String m,int id){
+        
+         try {
+            String requete = "UPDATE commande SET methodedepaiement=?"
+                    + " WHERE user_id=?";
+            PreparedStatement pst = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requete);
+      
+            pst.setLong(2, id);
          
-            pst.setString(3, c.getModePaiment());
-            pst.setInt(4, c.getId_cmd());
+            pst.setString(1,m);
+          
         
 
             pst.executeUpdate();
@@ -99,6 +164,42 @@ public String getSeason( Date date ) {
         }
     }
     
+    public void updateCommande(Commande c){
+         retrievedata a = retrievedata.getInstance("", "",0);
+         try {
+            String requete = "UPDATE commande SET methodedepaiement=?"
+                    + " WHERE user_id=?";
+            PreparedStatement pst = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requete);
+      
+            pst.setLong(2, a.getId());
+         
+            pst.setString(1, c.getModePaiment());
+          
+        
+
+            pst.executeUpdate();
+            System.out.println("Commande modifiée");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }/*
+      public void confirmer(int c,int p){
+         retrievedata a = retrievedata.getInstance("", "",0);
+         try {
+            String requete = "insert into commande_panier(commande_id,produit_id) values(?,?)";
+            PreparedStatement pst = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requete);
+         
+            pst.setInt(1, c);
+         pst.setInt(2,p);
+
+            pst.executeUpdate();
+            System.out.println("Commande Confirmer");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }*/
     public List<Commande> displayCommmande() {
          List<Commande> list = new ArrayList<>();
         try {

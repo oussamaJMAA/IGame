@@ -67,6 +67,7 @@ public class RegisterController implements Initializable {
     @FXML
     private ImageView imageview;
     String image_path = "";
+    String imageName="";
     Connection cnx = null;
     PreparedStatement insert = null;
     PreparedStatement exist = null;
@@ -279,7 +280,7 @@ public class RegisterController implements Initializable {
                 alert.show();
             } else {
                 ok = true;
-                insert = cnx.prepareStatement("INSERT INTO user(firstname,lastname,username,email,password,gender,role,phone,address,nationality,image,java_password) values(?,?,?,?,?,?,?,?,?,?,?,?)");
+                insert = cnx.prepareStatement("INSERT INTO user(firstname,lastname,username,email,password,gender,role,phone,address,nationality,image,java_password,is_verified) values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
                 insert.setString(1, firstname);
                 insert.setString(2, lastname);
                 insert.setString(3, username);
@@ -290,8 +291,9 @@ public class RegisterController implements Initializable {
                 insert.setString(8, phone);
                 insert.setString(9, address);
                 insert.setString(10, nationality);
-                insert.setString(11, image_path);
+                insert.setString(11, imageName);
                 insert.setString(12, password);
+                insert.setBoolean(13,false);
                 insert.executeUpdate();
 
             }
@@ -335,12 +337,13 @@ public class RegisterController implements Initializable {
     private void on_click_import_image(ActionEvent event) {
 
         fc.setTitle("Choose an image");
-        fc.setInitialDirectory(new File(System.getProperty("user.home")));
+       fc.setInitialDirectory(new File("C:\\Users\\oussa\\PhpstormProjects\\gaming_app\\public\\uploads\\photos"));
         fc.getExtensionFilters().clear();
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
         File file = fc.showOpenDialog(null);
         if (file != null) {
             //image_path= file.getName();
+            imageName=file.getName();
             image_path = file.getAbsolutePath();
             imageview.setImage(new Image(file.toURI().toString()));
 
@@ -362,7 +365,7 @@ public class RegisterController implements Initializable {
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("jemaaoussama64@gmail.com", "");
+                return new PasswordAuthentication("jemaaoussama64@gmail.com", "sousourourou9899@");
             }
         });
         Message message = new MimeMessage(session);

@@ -3,10 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/oussa/Documents/NetBeansProjects/Gestion%20utilisateur/src/gestion/utilisateur/LoggedinController.java</file>
-            <file>file:/C:/Users/oussa/Documents/NetBeansProjects/Gestion%20utilisateur/src/gestion/utilisateur/RegisterController.java</file>
-            <file>file:/C:/Users/oussa/Documents/NetBeansProjects/Gestion%20utilisateur/src/gestion/utilisateur/NewpasswordController.java</file>
-            <file>file:/C:/Users/oussa/Documents/NetBeansProjects/Gestion%20utilisateur/src/gestion/utilisateur/LoginController.java</file>
+            <file>file:/C:/Users/oussa/Documents/NetBeansProjects/Gestion%20utilisateur/src/gestion/utilisateur/Publication.fxml</file>
+            <file>file:/C:/Users/oussa/Documents/NetBeansProjects/Gestion%20utilisateur/src/gestion/utilisateur/dashboard.fxml</file>
+            <file>file:/C:/Users/oussa/Documents/NetBeansProjects/Gestion%20utilisateur/src/gestion/utilisateur/menuTest.fxml</file>
+            <file>file:/C:/Users/oussa/Documents/NetBeansProjects/Gestion%20utilisateur/src/gestion/utilisateur/Loggedin.fxml</file>
+            <file>file:/C:/Users/oussa/Documents/NetBeansProjects/Gestion%20utilisateur/src/gestion/utilisateur/PublicationController.java</file>
+            <file>file:/C:/Users/oussa/Documents/NetBeansProjects/Gestion%20utilisateur/src/gestion/utilisateur/ListCommandeAdminController.java</file>
         </group>
     </open-files>
 </project-private>

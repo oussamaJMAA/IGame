@@ -29,7 +29,7 @@ public class PromotionServices {
         cnx=MaConnexion.getInstance().getCnx();
     }
     public void ajouterPromotion(Promotion r){
-        String sql="INSERT INTO `Promotion`(`id`, `nom`, `date`,`prixPro`,`datef`) VALUES ('"+r.getId()+"','"+r.getNom()+"','"+r.getDate()+"','"+r.getPrixPro()+"','"+r.getDatef()+"')";
+        String sql="INSERT INTO `Promotion`( `nom`, `date`,`prix_pro`,`datef`) VALUES ('"+r.getNom()+"','"+r.getDate()+"','"+r.getPrixPro()+"','"+r.getDatef()+"')";
         try {
             Statement ste= cnx.createStatement();
             ste.executeUpdate(sql);
@@ -54,7 +54,7 @@ public class PromotionServices {
         return i;
     }
     public void ajouterPromotion2(Promotion r){
-        String sql="insert into promotion(nom,date,prixPro,datef) values(?,?,?,?)";
+        String sql="insert into promotion(nom,date,prix_pro,datef) values(?,?,?,?)";
         try {
             PreparedStatement ste= cnx.prepareStatement(sql);
             ste.setString(1, r.getNom());
@@ -104,7 +104,7 @@ public class PromotionServices {
     }
 public void modifierPromotion(Promotion r) {
       try {
-            String sql = "UPDATE promotion SET nom=?, date=? ,prixPro=?,datef=?  WHERE `id`=?";
+            String sql = "UPDATE promotion SET nom=?, date=? ,prix_pro=?,datef=?  WHERE `id`=?";
             PreparedStatement pre = cnx.prepareStatement(sql);
             pre.setString(1, r.getNom());
             pre.setString(2, r.getDate());

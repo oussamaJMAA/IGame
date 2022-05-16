@@ -57,8 +57,6 @@ Scene scene ;
 Stage stage ;
 
     @FXML
-    private ListView<Commande> listview;
-    @FXML
     private ComboBox<String> combo;
  CommandeCRUD service= new CommandeCRUD();
      private ObservableList<Commande> CommandeData = FXCollections.observableArrayList();
@@ -66,8 +64,6 @@ Stage stage ;
     private Button btn_etat;
     @FXML
     private ImageView admin_image;
-    @FXML
-    private Label test;
     @FXML
     private Button btnOverview;
     @FXML
@@ -79,13 +75,9 @@ Stage stage ;
     @FXML
     private Button btnSettings;
     @FXML
-    private Button btnPackages1;
-    @FXML
     private Button btnSignout;
     @FXML
     private Button on_click_pdf;
-    @FXML
-    private Button btnPackages11;
     @FXML
     private TableColumn<Commande, Integer> col_nb_prod;
     @FXML
@@ -98,6 +90,22 @@ Stage stage ;
     private TableColumn<Commande, Double> col_prix;
     @FXML
     private TableView<Commande> tab;
+    @FXML
+    private Label nshalah;
+    @FXML
+    private Button btnCustomers1;
+    @FXML
+    private Button btnCustomers11;
+    @FXML
+    private Button btnPackages;
+    @FXML
+    private Button btnOrders1;
+    @FXML
+    private Button btn_promotion;
+    @FXML
+    private Button btnMenus1;
+    @FXML
+    private Button btnMenus11;
     /**
      * Initializes the controller class.
      */
@@ -179,7 +187,6 @@ Stage stage ;
 
     }
 
-    @FXML
     private void charger(MouseEvent event) {
         
          Commande c = tab.getSelectionModel().getSelectedItem();
@@ -197,7 +204,7 @@ ObservableList<Commande> list1 = getTournoisList();
     private void setEtat(ActionEvent event) throws SQLException {
                  Commande c = tab.getSelectionModel().getSelectedItem();
                  service.setEtat(c, combo.getSelectionModel().getSelectedItem());
-                 resetTableData();
+                 showTournois();
     }
 
     @FXML
@@ -261,7 +268,7 @@ ObservableList<Commande> list1 = getTournoisList();
 
     @FXML
     private void on_click_blog(ActionEvent event) throws IOException {
-           root = FXMLLoader.load(getClass().getResource("PubCom.fxml")); 
+           root = FXMLLoader.load(getClass().getResource("Publication.fxml")); 
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -275,6 +282,54 @@ ObservableList<Commande> list1 = getTournoisList();
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show(); 
+    }
+
+     @FXML
+    private void on_click_messages(ActionEvent event) throws IOException {
+        /*
+           root = FXMLLoader.load(getClass().getResource("Chat.fxml")); 
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show(); */
+        root = FXMLLoader.load(getClass().getResource("Chat.fxml"));
+
+        stage = new Stage();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Chat");
+        stage.show();
+    }
+   
+    @FXML
+    private void on_click_games(ActionEvent event) throws IOException {
+          root = FXMLLoader.load(getClass().getResource("Game_Admin.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+    }
+
+     @FXML
+    private void on_click_categories(ActionEvent event) throws IOException {
+          root = FXMLLoader.load(getClass().getResource("Categorie.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        
+    }
+      @FXML
+    private void on_click_participation(ActionEvent event) throws IOException {
+         root = FXMLLoader.load(getClass().getResource("participation.fxml"));
+           stage = new Stage();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("Participation");
+                stage.show();
+    }
+    @FXML
+    private void on_click_promotion(ActionEvent event) {
     }
 
 

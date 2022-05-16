@@ -41,7 +41,9 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import tools.Connexion;
 /**
  * FXML Controller class
  *
@@ -69,6 +71,7 @@ private Scene scene;
     private int seconds, minutes,hours;
     @FXML
     private Button cancel;
+     PreparedStatement insert = null;
 
     /**
      * Initializes the controller class.
@@ -153,7 +156,38 @@ dateT.setText(tournois.getDate().toString());
     }
  @FXML
     private void participe(ActionEvent event) throws SQLException {
+        
+        
+        if(verifParticipation()!=0){
+         Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setContentText("You are Participated!!!");
+            alert.showAndWait();
+        }
+        else if(get_id_equipe()==0&&get_nb_participants()==4){
+          Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setContentText("You are not in a team to participate PLUS the Tournament is full :) ");
+            alert.showAndWait();
+        }
+        else if(get_id_equipe()==0&&get_nb_participants()<4){
+    Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setContentText("You are not in a team to participate!!!");
+            alert.showAndWait();
+  }
   
+  
+  
+  else if(get_nb_participants()==4&&get_id_equipe()!=0){
+    Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setContentText("Tournament Full !!!");
+            alert.showAndWait();
+  
+  }
+
+  else{
         
        add();
        Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -163,12 +197,29 @@ dateT.setText(tournois.getDate().toString());
         participate.setVisible(false);
         cancel.setVisible(true);
         try {
-            mail("YOU HAVE PARTICIPATED IN A TOURNAMENT","PARTICIPATION CONFIRMED","oussama.jmaa@esprit.tn");
+            mail("YOU HAVE PARTICIPATED IN A TOURNAMENT","PARTICIPATION CONFIRMED",get_email_by_id());
         } catch (MessagingException ex) {
             Logger.getLogger(ThumbController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }}
+     public int get_nb_participants() throws SQLException {
+       retrievedata a= retrievedata.getInstance("testtt","",0);
+       int idT = Integer.parseInt(id_t.getText());
+        String query = "select count(*) from participation where id_tournois = '"+idT+"'";
+Connection conn = getConnection();
+
+      Statement st;
+        st = conn.createStatement();
+   ResultSet rs= st.executeQuery(query);
+    int max = 0;
+      if(rs.next()){
+          max=rs.getInt(1);
+      }
+  
+        
+return  max;
     }
-  public int get_id_equipe() throws SQLException {
+     public int get_id_equipe() throws SQLException {
        retrievedata a= retrievedata.getInstance("testtt","",0);
         String query = "select e.id from equipe e inner join user u on u.equipe = e.id where u.username='"+a.getUsername()+"'";
 Connection conn = getConnection();
@@ -184,23 +235,102 @@ Connection conn = getConnection();
         
 return  max;
     }
+  public int verifParticipation() throws SQLException {
+       retrievedata a= retrievedata.getInstance("testtt","",0);
+       int idT = Integer.parseInt(id_t.getText());
+        String query = "select id from participation where id_tournois = '"+idT+"' and id_equipe = '"+get_id_equipe()+"'";
+Connection conn = getConnection();
 
+      Statement st;
+        st = conn.createStatement();
+   ResultSet rs= st.executeQuery(query);
+    int max = 0;
+      if(rs.next()){
+          max=rs.getInt(1);
+      }
+  
+        
+return  max;
+    }
+    public String get_name_equipe(int id) throws SQLException {
+      // retrievedata a= retrievedata.getInstance("testtt","",0);
+        String query = "select nom_equipe from equipe where id = "+id+"";
+Connection conn = getConnection();
+
+      Statement st;
+        st = conn.createStatement();
+   ResultSet rs= st.executeQuery(query);
+    String max = "";
+      if(rs.next()){
+          max=rs.getString("nom_equipe");
+      }
+  
+        
+return  max;
+    }
+    
+    public String get_nom_tournois() throws SQLException {
+       retrievedata a= retrievedata.getInstance("testtt","",0);
+       int id = Integer.parseInt(id_t.getText());
+        String query = "select nom_tournois from tournois where id = '"+id+"'";
+Connection conn = getConnection();
+
+      Statement st;
+        st = conn.createStatement();
+   ResultSet rs= st.executeQuery(query);
+   String max = "";
+      if(rs.next()){
+          max=rs.getString("nom_tournois");
+      }
+  
+        
+return  max;
+    }
+
+    
+    public String get_email_by_id() throws SQLException {
+       retrievedata a= retrievedata.getInstance("testtt","",0);
+       int id = Integer.parseInt(id_t.getText());
+        String query = "select email from user where id ='"+a.getId()+"'";
+Connection conn = getConnection();
+
+      Statement st;
+        st = conn.createStatement();
+   ResultSet rs= st.executeQuery(query);
+   String max = "";
+      if(rs.next()){
+          max=rs.getString("email");
+      }
+  
+        
+return  max;
+    }
+
+    
+    
 
     public void add() throws SQLException{
-           
-    String query = "insert into participation (id_equipe,id_tournois)"
-                + " values("+get_id_equipe()+","
-                + "" + id_t.getText() + ") ";
-        executeQuery(query);
-      
+          String nom_equipe = get_name_equipe(get_id_equipe());
+           String nom_tournois = get_nom_tournois();
+  
+   Connection cnx = null;
+    cnx = Connexion.getInstance().getCnx();
+   insert = cnx.prepareStatement("insert into participation(id_tournois,id_equipe,tournois_nom,equipe_nom)values(?,?,?,?)");
+   insert.setInt(2, get_id_equipe());
+   insert.setInt(1, Integer.parseInt(id_t.getText()));
+   insert.setString(4, nom_equipe);
+   insert.setString(3,nom_tournois);
+      insert.executeUpdate();
+       System.out.println(get_id_equipe());
     }
-public void remove(){
-String query = "delete from participation where id_equipe = 55 and id_tournois = "+id_t.getText()+"";
+    
+public void remove() throws SQLException{
+String query = "delete from participation where id_equipe = '"+get_id_equipe()+"' and id_tournois = "+id_t.getText()+"";
         executeQuery(query);
 }
     
     @FXML
-    private void cancel(ActionEvent event) {
+    private void cancel(ActionEvent event) throws SQLException {
    
       Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setHeaderText(null);
@@ -213,7 +343,8 @@ String query = "delete from participation where id_equipe = 55 and id_tournois =
         cancel.setVisible(false);
           try {
               retrievedata a = retrievedata.getInstance("","",0);
-              mail("YOU HAVE CANCELED YOUR PARTICIPATION","CANCELED PARTICIPATION","oussama.jmaa@esprit.tn");
+              
+              mail("YOU HAVE CANCELED YOUR PARTICIPATION","CANCELED PARTICIPATION",get_email_by_id());
           } catch (MessagingException ex) {
               Logger.getLogger(ThumbController.class.getName()).log(Level.SEVERE, null, ex);
           }
@@ -231,7 +362,7 @@ String query = "delete from participation where id_equipe = 55 and id_tournois =
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("jemaaoussama64@gmail.com", "");
+                return new PasswordAuthentication("jemaaoussama64@gmail.com", "sousourourou9899@");
             }
         });
         Message message = new MimeMessage(session);
